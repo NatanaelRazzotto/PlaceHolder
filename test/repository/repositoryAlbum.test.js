@@ -1,5 +1,6 @@
 const { RepositoryAlbum } = require('../../src/repository/sequelize/repositoryClass/repositoryAlbum');
 const database = require('../../src/repository/sequelize/db/db');
+const { ModelAlbum } = require('../../src/repository/sequelize/models/modelAlbum');
 require('dotenv').config();
 
 describe('Repository Album', () => {
@@ -9,13 +10,13 @@ describe('Repository Album', () => {
         console.log(received);
         expect(received.config.database).toEqual(process.env.DB_NAME);
     });
-    it('create album', async () => {
-        const user = {
+    it('create Album', async () => {
+        const album = {
             userId: 1,
             id: 1,
             title: "quidem molestiae enim"
         };
-        const received = await repositoryAlbum.create(user);
+        const received = await repositoryAlbum.create(album);
         console.log(received);
         expect(received).toEqual({
             userId: 1,

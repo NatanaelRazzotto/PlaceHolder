@@ -51,6 +51,9 @@ const ModelUser = database.define(
 ModelUser.associate = function (models) {
   ModelUser.belongsTo(models.company, { foreignKey: 'companyId', as: 'company' });
   ModelUser.belongsTo(models.address, { foreignKey: 'addressId', as: 'address' });
+  ModelUser.hasMany(models.post);
+  ModelUser.hasMany(models.album);
+  ModelUser.hasMany(models.todos);
 };
 
 module.exports = { ModelUser };
