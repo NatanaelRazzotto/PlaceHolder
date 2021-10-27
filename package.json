@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-C": "jest --coverage"
   },
   "author": "natanael razzotto",
   "license": "ISC",

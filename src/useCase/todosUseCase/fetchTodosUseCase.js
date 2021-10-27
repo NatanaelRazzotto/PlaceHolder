@@ -4,6 +4,9 @@ class FetchTodosUseCase {
     constructor(requestService) {
         this.requestService = requestService;
     }
+    async execute(data) {
+        return await this.fetchRequest(data);
+    }
     async fetchRequest({ urlFecth, indicelimite }) {
         const request = [];
         while (indicelimite > 0) {

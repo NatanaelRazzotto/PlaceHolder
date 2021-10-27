@@ -4,16 +4,22 @@ class FetchCommentsUseCase {
     constructor(reqService) {
         this.requestService = reqService;
     }
-    async fetchDataRequest({ urlFecth, limite }) {
-        const request = [];
-        while (limite > 0) {
-            const urlNew = UrlService.preparURL(urlFecth, limite);
-            const promisesNew = this.requestService.request(urlNew);
-            request.push(promisesNew);
-            limite--;
+    async execute(data) {
+        return await this.fetchRequest(data);
+    }
+
+    async fetchRequest({ urlFecth, indicelimite }) {
+        const requestComments = [];
+        while (indicelimite > 0) {
+            const newURL = UrlService.preparURL(urlFecth, indicelimite);
+            const promisesNew = this.requesService.request(newURL);
+            requestComments.push(promisesNew);
+            indicelimite--;
         }
-        const posts = await Promise.all(request);
-        return posts;
+
+        const Comments = await Promise.all(requestComments);
+
+        return requestComments;
     }
 }
 
