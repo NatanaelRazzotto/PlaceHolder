@@ -1,6 +1,6 @@
 const { RepositoryUser } = require('../../repository/sequelize/repositoryClass/repositoryUser/repositoryUser');
-const { PostAndressUseCase } = require('./postAndressUseCase');
-const { PostCompanyUseCase } = require('./postCompanyUseCase');
+const { PostAndressUseCase } = require('../andressUseCase/postAndressUseCase');
+const { PostCompanyUseCase } = require('../companyUseCase/postCompanyUseCase');
 
 class PostUserUseCase {
     constructor(requestService) {

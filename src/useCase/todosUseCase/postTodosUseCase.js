@@ -16,10 +16,9 @@ class PostTodosUseCase {
     preparObject(dataTodos) {
         const Object = {
             id: dataTodos.id,
-            albumId: dataTodos.albumId,
+            userId: dataTodos.userId,
             title: dataTodos.title,
-            url: dataTodos.url,
-            thumbnailUrl: dataTodos.thumbnailUrl
+            completed: dataTodos.completed,
         }
         return Object;
     }
