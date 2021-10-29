@@ -15,6 +15,13 @@ class UrlService {
       throw new Error('Indice não é um número');
     }
   }
+  static preparURLEspecific(urlFecth, urlIndice, urlFilter) {
+    if (Number.isInteger(indice)) {
+      return `${urlFecth}/${urlIndice}/${urlFilter}`;
+    } else {
+      throw new Error('Indice não é um número');
+    }
+  }
 }
 
 module.exports = { UrlService };
