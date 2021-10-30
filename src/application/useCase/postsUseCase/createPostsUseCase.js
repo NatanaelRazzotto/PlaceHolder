@@ -1,7 +1,7 @@
 const { RepositoryPost } = require('../../../infrastructure/repository/repositoryPost');
 const { Post } = require('../../../domain/post');
 
-class PostPostsUseCase {
+class CreatePostsUseCase {
     constructor() {
         this.repositoryPost = new RepositoryPost();
     }
@@ -27,4 +27,4 @@ class PostPostsUseCase {
     }
 }
 
-module.exports = { PostPostsUseCase };
+module.exports = { CreatePostsUseCase };

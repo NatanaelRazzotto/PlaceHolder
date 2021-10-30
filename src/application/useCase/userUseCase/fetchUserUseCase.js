@@ -1,4 +1,4 @@
-const { UrlService } = require('../../serviceDomain/urlService');
+const { UrlService } = require('../../../serviceDomain/urlService');
 class FetchUserUseCase {
   constructor(requestService) {
     this.requestService = requestService;

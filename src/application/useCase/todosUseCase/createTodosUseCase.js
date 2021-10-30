@@ -1,6 +1,6 @@
 const { RepositoryTodos } = require('../../../infrastructure/repository/repositoryTodos');
 const { Todos } = require('../../../domain/todos');
-class PostTodosUseCase {
+class CreateTodosUseCase {
     constructor() {
         this.repositoryTodos = new RepositoryTodos();
     }
@@ -13,7 +13,7 @@ class PostTodosUseCase {
         return todosPersistido;
     }
 
-    preparObject(dataTodos) {
+    preparObject({ id, userId, title, completed }) {
         const objectTodos = new Todos(id, userId, title, completed)
         /*const Object = {
             id: dataTodos.id,
@@ -25,4 +25,4 @@ class PostTodosUseCase {
     }
 }
 
-module.exports = { PostTodosUseCase };
+module.exports = { CreateTodosUseCase };

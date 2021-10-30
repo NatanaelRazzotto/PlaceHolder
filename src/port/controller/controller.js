@@ -1,6 +1,6 @@
 const { FetchUserUseCase } = require('../../../src/application/useCase/userUseCase/fetchUserUseCase');
 const { FetchPostUseCase } = require('../../../src/application/useCase/postsUseCase/fetchPostsUseCase');
-const { PostUserUseCase } = require('../../../src/application/useCase/userUseCase/postUserUseCase')
+const { PostUserUseCase } = require('../../application/useCase/userUseCase/createUserUseCase')
 const { RequestService } = require('../../servicesApplication/requestService');
 const { RepositoryUser } = require('../../infrastructure/repository/repositoryUser');
 
@@ -16,16 +16,16 @@ class Controller {
         // this.users = this.fetchDataUser(5);
         return await this.FetchCreateDataUsers(maxData);
     }
-    async FetchCreateDataUsers(maxData) {
-        const data = {
-            url: 'https://jsonplaceholder.typicode.com/users',
-            max: maxData,
-        };
-        const fetchUsers = await this.fetchUserUseCase.execute(data);
-        const postUsers = await this.postUserUseCase.execute(fetchUsers);
-        return postUsers;
+    // async FetchCreateDataUsers(maxData) {
+    //     const data = {
+    //         url: 'https://jsonplaceholder.typicode.com/users',
+    //         max: maxData,
+    //     };
+    //     const fetchUsers = await this.fetchUserUseCase.execute(data);
+    //     const postUsers = await this.postUserUseCase.execute(fetchUsers);
+    //     return postUsers;
 
-    }
+    // }
     async FetchCreateDataPosts(idUser) {
         const data = {
             urlFecth: 'https://jsonplaceholder.typicode.com/users',

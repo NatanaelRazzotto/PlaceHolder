@@ -16,7 +16,7 @@ class PostCompanyUseCase {
     }
 
     preparObject({ name, catchPhrase, bs }) {
-        const objectCompany = new Company(name, catchPhrase, bs);
+        const objectCompany = new Company(0, name, catchPhrase, bs);
         /*const Object = {
             name: dataCompany.name,
             catchPhrase: dataCompany.catchPhrase,

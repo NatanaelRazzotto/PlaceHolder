@@ -5,10 +5,10 @@ class FetchPostUseCase {
     this.requesService = requesService;
   }
   async execute(data) {
-    return await this.fetchRequest(data);
+    return await this.fetchRequestForParameter(data);
   }
 
-  async fetchRequest({ urlFecth, urlIndice, urlFilter }) {
+  async fetchRequestForParameter({ urlFecth, urlIndice, urlFilter }) {
     //  const requestPost = [];
     //  while (indicelimite > 0) {
     const newURL = UrlService.preparURLEspecific(urlFecth, urlIndice, urlFilter);

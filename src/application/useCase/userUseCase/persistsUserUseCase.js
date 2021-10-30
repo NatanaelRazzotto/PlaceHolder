@@ -1,0 +1,56 @@
+const { CreateUserUseCase } = require('./createUserUseCase');
+const { FetchUserUseCase } = require('./fetchUserUseCase');
+const { PersistsPostUseCase } = require('../../useCase/postsUseCase/persistsPostUseCase');
+const { PersistsAlbumUseCase } = require('../../useCase/albumsUseCase/persistsAlbumUseCase');
+const { PersistsTodosUseCase } = require('../../useCase/todosUseCase/persistsTodosUseCase');
+
+class PersistsUserUseCase {
+    constructor(requestService) {
+        //this.requestService = requestService;
+        this.createUserUseCase = new CreateUserUseCase(requestService);
+        this.fetchUserUseCase = new FetchUserUseCase(requestService);
+        this.persistsPostUseCase = new PersistsPostUseCase(requestService);
+        this.persistsAlbumUseCase = new PersistsAlbumUseCase(requestService);
+        this.persistsTodosUseCase = new PersistsTodosUseCase(requestService);
+    }
+
+    async execute(maxData) {
+        return await this.persistence(maxData);
+    }
+
+    async persistence(maxData) {
+        const persistenceUsers = [];
+        const data = {
+            url: 'https://jsonplaceholder.typicode.com/users',
+            max: maxData.max,
+        };
+        const fetchUsers = await this.fetchUserUseCase.execute(data);
+        for (const element of fetchUsers) {
+            const populado = await this.persistsUser(element);
+            persistenceUsers.push(populado);
+        }
+
+        return persistenceUsers;
+
+    }
+    async persistsUser(User) {
+        let populado = await this.createUserUseCase.execute(User);
+        populado = await this.persistsDependentes(populado);
+        return populado;
+    }
+
+    async persistsDependentes(User) {
+        const data = {
+            urlFecth: 'https://jsonplaceholder.typicode.com/users',
+            urlIndice: User.id
+        };
+        User.pesistPost = await this.persistsPostUseCase.execute(data);
+        User.pesistAlbum = await this.persistsAlbumUseCase.execute(data);
+        User.pesistTodos = await this.persistsTodosUseCase.execute(data);
+        return User;
+    }
+
+}
+
+module.exports = { PersistsUserUseCase };
+

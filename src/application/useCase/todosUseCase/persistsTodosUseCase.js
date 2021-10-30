@@ -1,0 +1,46 @@
+
+const { CreateTodosUseCase } = require('./createTodosUseCase');
+const { FetchTodosUseCase } = require('./fetchTodosUseCase');
+
+class PersistsTodosUseCase {
+    constructor(requestService) {
+        //this.requestService = requestService;
+        this.createTodosUseCase = new CreateTodosUseCase(requestService);
+        this.fetchTodosUseCase = new FetchTodosUseCase(requestService);
+    }
+
+    async execute(param) {
+        return await this.persistence(param);
+    }
+
+    async persistence({ urlFecth, urlIndice }) {
+        const persistenceTodos = [];
+        const data = {
+            urlFecth: urlFecth,
+            urlIndice: urlIndice,
+            urlFilter: 'todos'
+        };
+        const fetchTodos = await this.fetchTodosUseCase.execute(data);
+        for (const element of fetchTodos) {
+            const populado = await this.persistsTodos(element);
+            persistenceTodos.push(populado);
+        }
+
+        return persistenceTodos;
+
+    }
+    async persistsTodos(Todos) {
+        let populado = await this.createTodosUseCase.execute(Todos);
+        //populado.depentes = await this.persistsDependentes(populado);
+        return populado;
+    }
+
+
+    async persistsDependentes(User) {
+
+    }
+
+}
+
+module.exports = { PersistsTodosUseCase };
+

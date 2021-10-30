@@ -16,7 +16,7 @@ class UrlService {
     }
   }
   static preparURLEspecific(urlFecth, urlIndice, urlFilter) {
-    if (Number.isInteger(indice)) {
+    if (Number.isInteger(urlIndice)) {
       return `${urlFecth}/${urlIndice}/${urlFilter}`;
     } else {
       throw new Error('Indice não é um número');

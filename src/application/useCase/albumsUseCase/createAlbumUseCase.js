@@ -1,6 +1,6 @@
 const { RepositoryAlbum } = require('../../../infrastructure/repository/repositoryAlbum');
 const { Album } = require('../../../domain/album')
-class PostAlbumUseCase {
+class CreateAlbumUseCase {
     constructor() {
         this.repositoryAlbum = new RepositoryAlbum();
     }
@@ -25,4 +25,4 @@ class PostAlbumUseCase {
     }
 }
 
-module.exports = { PostAlbumUseCase };
+module.exports = { CreateAlbumUseCase };
