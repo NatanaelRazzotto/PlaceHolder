@@ -1,12 +1,13 @@
-const { User } = require('../../../domain/user');
 const { CreatePostsUseCase } = require('./createPostsUseCase');
 const { FetchPostUseCase } = require('./fetchPostsUseCase');
+const { PersistsCommentsUseCase } = require('../../useCase/commentsUseCase/persistsCommentsUseCase');
 
 class PersistsPostUseCase {
     constructor(requestService) {
         //this.requestService = requestService;
         this.createPostsUseCase = new CreatePostsUseCase(requestService);
         this.fetchPostsUseCase = new FetchPostUseCase(requestService);
+        this.persistsCommentsUseCase = new PersistsCommentsUseCase(requestService);
     }
 
     async execute(param) {
@@ -32,12 +33,17 @@ class PersistsPostUseCase {
 
     async persistsPost(Post) {
         let populado = await this.createPostsUseCase.execute(Post);
-        //populado.depentes = await this.persistsDependentes(populado);
+        populado.depentes = await this.persistsDependentes(populado);
         return populado;
     }
 
-    async persistsDependentes(User) {
-
+    async persistsDependentes(Post) {
+        const data = {
+            urlFecth: 'https://jsonplaceholder.typicode.com/posts',
+            urlIndice: Post.id
+        };
+        const Comments = await this.persistsCommentsUseCase.execute(data);
+        return Comments;
     }
 
 }

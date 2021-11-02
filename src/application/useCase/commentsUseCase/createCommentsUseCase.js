@@ -1,6 +1,6 @@
 const { RepositoryComment } = require('../../../infrastructure/repository/repositoryComment');
 const { Comment } = require('../../../domain/comment');
-class PostCommentsUseCase {
+class CreateCommentsUseCase {
     constructor() {
         this.repositoryComment = new RepositoryComment();
     }
@@ -27,4 +27,4 @@ class PostCommentsUseCase {
     }
 }
 
-module.exports = { PostCommentsUseCase };
+module.exports = { CreateCommentsUseCase };

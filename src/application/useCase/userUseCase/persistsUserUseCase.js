@@ -35,7 +35,7 @@ class PersistsUserUseCase {
     }
     async persistsUser(User) {
         let populado = await this.createUserUseCase.execute(User);
-        populado = await this.persistsDependentes(populado);
+        populado.dependentes = await this.persistsDependentes(populado);
         return populado;
     }
 
@@ -44,10 +44,13 @@ class PersistsUserUseCase {
             urlFecth: 'https://jsonplaceholder.typicode.com/users',
             urlIndice: User.id
         };
-        User.pesistPost = await this.persistsPostUseCase.execute(data);
-        User.pesistAlbum = await this.persistsAlbumUseCase.execute(data);
-        User.pesistTodos = await this.persistsTodosUseCase.execute(data);
-        return User;
+        const dependentes = {
+            pesistPost: await this.persistsPostUseCase.execute(data),
+            pesistAlbum: await this.persistsAlbumUseCase.execute(data),
+            pesistTodos: await this.persistsTodosUseCase.execute(data),
+        }
+
+        return dependentes;
     }
 
 }

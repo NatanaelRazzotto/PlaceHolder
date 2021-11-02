@@ -31,13 +31,7 @@ class PersistsTodosUseCase {
     }
     async persistsTodos(Todos) {
         let populado = await this.createTodosUseCase.execute(Todos);
-        //populado.depentes = await this.persistsDependentes(populado);
         return populado;
-    }
-
-
-    async persistsDependentes(User) {
-
     }
 
 }

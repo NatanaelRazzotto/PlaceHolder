@@ -1,12 +1,13 @@
-const { User } = require('../../../domain/user');
 const { CreateAlbumUseCase } = require('./createAlbumUseCase');
 const { FetchAlbumsUseCase } = require('./fetchAlbumsUseCase');
+const { PersistsPhotosUseCase } = require('../../useCase/photosUseCase/persistsPhotosUseCase');
 
 class PersistsAlbumUseCase {
     constructor(requestService) {
         //this.requestService = requestService;
         this.createAlbumUseCase = new CreateAlbumUseCase(requestService);
         this.fetchAlbumsUseCase = new FetchAlbumsUseCase(requestService);
+        this.persistsPhotosUseCase = new PersistsPhotosUseCase(requestService);
     }
 
     async execute(param) {
@@ -30,12 +31,17 @@ class PersistsAlbumUseCase {
 
     async persistsAlbum(Album) {
         let populado = await this.createAlbumUseCase.execute(Album);
-        //populado.depentes = await this.persistsDependentes(populado);
+        populado.depentes = await this.persistsDependentes(populado);
         return populado;
     }
 
-    async persistsDependentes(User) {
-
+    async persistsDependentes(Album) {
+        const data = {
+            urlFecth: 'https://jsonplaceholder.typicode.com/albums',
+            urlIndice: Album.id
+        };
+        const pesistPhoto = await this.persistsPhotosUseCase.execute(data);
+        return pesistPhoto;
     }
 
 }

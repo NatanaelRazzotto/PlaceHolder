@@ -1,6 +1,6 @@
 const { RepositoryPhoto } = require('../../../infrastructure/repository/repositoryPhoto');
 const { Photo } = require('../../../domain/photo');
-class PostPhotosUseCase {
+class CreatePhotosUseCase {
     constructor() {
         this.repositoryPhoto = new RepositoryPhoto();
     }
@@ -26,4 +26,4 @@ class PostPhotosUseCase {
     }
 }
 
-module.exports = { PostPhotosUseCase };
+module.exports = { CreatePhotosUseCase };
