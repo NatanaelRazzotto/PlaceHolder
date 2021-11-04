@@ -31,14 +31,14 @@ class PersistsCommentsUseCase {
 
     async persistsComments(Comment) {
         let populado = await this.createCommentsUseCase.execute(Comment);
-        /*const commentDTO = {
+        const commentDTO = {
             commentID: populado.id,
             postId: populado.postId,
             name: populado.name,
             updatedAt: populado.updatedAt,
             createdAt: populado.createdAt
-        };*/
-        return populado;
+        };
+        return commentDTO;
     }
 
 }

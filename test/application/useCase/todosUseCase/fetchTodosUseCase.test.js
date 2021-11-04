@@ -6,6 +6,25 @@ describe('FetchTodosUseCase', () => {
         fetchTodosUseCase = new FetchTodosUseCase(new RequestService());
     });
 
+    it('fetchRequest para o Parametro', async () => {
+        const data = {
+            urlFecth: 'https://jsonplaceholder.typicode.com/users',
+            urlIndice: 1,
+            urlFilter: 'todos'
+        };
+        const received = await fetchTodosUseCase.fetchRequestForParameter(data);
+        console.log(received);
+        expect(received).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    userId: expect.any(Number),
+                    id: expect.any(Number),
+                    title: expect.any(String),
+                    completed: expect.any(Boolean)
+                })
+            ]))
+    });
+
     it('Reguisicao para Todos', async () => {
         const dataConfig = {
             urlFecth: 'https://jsonplaceholder.typicode.com/todos',

@@ -31,7 +31,14 @@ class PersistsPhotosUseCase {
 
     async persistsPhotos(photo) {
         let populado = await this.createPhotosUseCase.execute(photo);
-        return populado;
+        const photoDTO = {
+            photoID: populado.id,
+            albumId: populado.albumId,
+            title: populado.title,
+            updatedAt: populado.updatedAt,
+            createdAt: populado.createdAt
+        };
+        return photoDTO;
     }
 
 }

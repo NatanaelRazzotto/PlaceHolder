@@ -33,8 +33,16 @@ class PersistsPostUseCase {
 
     async persistsPost(Post) {
         let populado = await this.createPostsUseCase.execute(Post);
-        populado.depentes = await this.persistsDependentes(populado);
-        return populado;
+        const postDTO = {
+            postID: populado.id,
+            userId: populado.userId,
+            title: populado.title,
+            dependentes: await this.persistsDependentes(populado),
+            updatedAt: populado.updatedAt,
+            createdAt: populado.createdAt
+        };
+        //populado.depentes = await this.persistsDependentes(populado);
+        return postDTO;
     }
 
     async persistsDependentes(Post) {
@@ -42,8 +50,11 @@ class PersistsPostUseCase {
             urlFecth: 'https://jsonplaceholder.typicode.com/posts',
             urlIndice: Post.id
         };
-        const Comments = await this.persistsCommentsUseCase.execute(data);
-        return Comments;
+        const dependentes = {
+            Comments: await this.persistsCommentsUseCase.execute(data)
+        }
+        //const Comments = await this.persistsCommentsUseCase.execute(data);
+        return dependentes;
     }
 
 }

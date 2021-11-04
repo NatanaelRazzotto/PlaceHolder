@@ -4,14 +4,24 @@ const { PostUserUseCase } = require('../../application/useCase/userUseCase/creat
 const { RequestService } = require('../../servicesApplication/requestService');
 const { RepositoryUser } = require('../../infrastructure/repository/repositoryUser');
 
+const { PersistsUserUseCase } = require('../../application/useCase/userUseCase/persistsUserUseCase');
+
 class Controller {
     constructor() {
-        this.requestService = new RequestService();
-        this.fetchUserUseCase = new FetchUserUseCase(this.requestService);
-        this.fetchPostUseCase = new FetchPostUseCase(this.requestService);
-        this.postUserUseCase = new PostUserUseCase(this.requestService);
-        this.users = [];
+        this.persistsUserUseCase = new PersistsUserUseCase();
     }
+
+    async persistsDataUsersDependences(maxSearch) {
+        const data = {
+            max: maxSearch
+        };
+        const userPersists = await this.persistsUserUseCase.execute(data);
+        return userPersists;
+    }
+
+
+
+
     async persistenceData(maxData) {
         // this.users = this.fetchDataUser(5);
         return await this.FetchCreateDataUsers(maxData);

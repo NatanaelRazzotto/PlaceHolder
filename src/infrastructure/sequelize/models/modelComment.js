@@ -27,7 +27,7 @@ const ModelComment = database.define(
             allowNull: false,
         },
         body: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.STRING(1000),
             allowNull: false,
         },
     },

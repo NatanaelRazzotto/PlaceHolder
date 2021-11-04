@@ -5,8 +5,14 @@ class FetchPhotosUseCase {
         this.requestService = requestService;
     }
     async execute(data) {
-        return await this.fetchRequest(data);
+        return await this.fetchRequestForParameter(data);
     }
+    async fetchRequestForParameter({ urlFecth, urlIndice, urlFilter }) {
+        const newURL = UrlService.preparURLEspecific(urlFecth, urlIndice, urlFilter);
+        const request = await this.requestService.request(newURL);
+        return request;
+    }
+
     async fetchRequest({ urlFecth, indicelimite }) {
         const request = [];
         while (indicelimite > 0) {

@@ -31,7 +31,14 @@ class PersistsTodosUseCase {
     }
     async persistsTodos(Todos) {
         let populado = await this.createTodosUseCase.execute(Todos);
-        return populado;
+        const todosDTO = {
+            photoID: populado.id,
+            userId: populado.userId,
+            title: populado.title,
+            updatedAt: populado.updatedAt,
+            createdAt: populado.createdAt
+        };
+        return todosDTO;
     }
 
 }

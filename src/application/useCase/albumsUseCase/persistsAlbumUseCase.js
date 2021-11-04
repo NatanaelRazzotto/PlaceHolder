@@ -31,8 +31,16 @@ class PersistsAlbumUseCase {
 
     async persistsAlbum(Album) {
         let populado = await this.createAlbumUseCase.execute(Album);
-        populado.depentes = await this.persistsDependentes(populado);
-        return populado;
+        const albumDTO = {
+            albumID: populado.id,
+            userId: populado.userId,
+            title: populado.title,
+            dependentes: await this.persistsDependentes(populado),
+            updatedAt: populado.updatedAt,
+            createdAt: populado.createdAt
+        };
+        //populado.depentes = await this.persistsDependentes(populado);
+        return albumDTO;
     }
 
     async persistsDependentes(Album) {
@@ -40,8 +48,11 @@ class PersistsAlbumUseCase {
             urlFecth: 'https://jsonplaceholder.typicode.com/albums',
             urlIndice: Album.id
         };
-        const pesistPhoto = await this.persistsPhotosUseCase.execute(data);
-        return pesistPhoto;
+        const dependentes = {
+            pesistPhoto: await this.persistsPhotosUseCase.execute(data)
+        }
+        // const pesistPhoto = await this.persistsPhotosUseCase.execute(data);
+        return dependentes;
     }
 
 }

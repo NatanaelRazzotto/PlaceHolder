@@ -37,21 +37,21 @@ describe('PostUserUseCase', () => {
 
     const received = await createUserUseCase.execute(data);
     console.log(received);
-    expect(received).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(Number),
-          name: 'Leanne Graham',
-          email: 'Sincere@april.biz',
-          addressId: expect.any(Number),
-          phone: '1-770-736-8031 x56442',
-          website: 'hildegard.org',
-          companyId: expect.any(Number),
-          updatedAt: expect.any(Date),
-          createdAt: expect.any(Date),
-        })
-      ])
-    )
+    expect(received).toEqual({
+      //expect.arrayContaining([
+      //expect.objectContaining({
+      id: expect.any(Number),
+      name: 'Leanne Graham',
+      email: 'Sincere@april.biz',
+      addressId: expect.any(Number),
+      phone: '1-770-736-8031 x56442',
+      website: 'hildegard.org',
+      companyId: expect.any(Number),
+      updatedAt: expect.any(Date),
+      createdAt: expect.any(Date),
+      //})
+      //])
+    })
   });
 
 });
