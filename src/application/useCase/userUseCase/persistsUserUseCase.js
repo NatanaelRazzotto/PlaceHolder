@@ -35,17 +35,18 @@ class PersistsUserUseCase {
     }
     async persistsUser(User) {
         let populado = await this.createUserUseCase.execute(User);
-        const albumDTO = {
-            albumID: populado.id,
-            userId: populado.userId,
-            title: populado.title,
+        const userDTO = {
+            userId: populado.id,
+            addressId: populado.addressId,
+            companyId: populado.companyId,
+            name: populado.name,
             dependentes: await this.persistsDependentes(populado),
             updatedAt: populado.updatedAt,
             createdAt: populado.createdAt
         };
         //  populado.dependentes = await this.persistsDependentes(populado);
 
-        return populado;
+        return userDTO;
     }
 
     async persistsDependentes(User) {

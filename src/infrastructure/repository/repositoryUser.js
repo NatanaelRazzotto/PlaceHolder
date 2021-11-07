@@ -3,17 +3,17 @@ const { ModelUser } = require('../sequelize/models/modelUser');
 class RepositoryUser {
 
   async create(user) {
-    console.log(user);
+    // console.log(user);
     await ModelUser.sync();
     const validate = await this.findAllWhere(user)
     //console.log(validate[0])
     if ((validate[0] != null)) {
-      console.log("já exite o registro");
+      //console.log("já exite o registro");
       //  console.log(validate);
       return validate[0];
     }
     else {
-      console.log("não exite registro");
+      //console.log("não exite registro");
       const received = await ModelUser.create(user);
       return received.dataValues;
     }
@@ -37,7 +37,7 @@ class RepositoryUser {
       raw: true,
       limit: 1
     }).then(function (result) {
-      console.log(" test + " + result);
+      //  console.log(" test + " + result);
       return result;
     });
     return User;

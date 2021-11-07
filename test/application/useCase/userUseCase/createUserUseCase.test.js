@@ -12,7 +12,7 @@ describe('PostUserUseCase', () => {
   it('Execute - Requisições simultaneas', async () => {
     const data =
     {
-      "id": 2,
+      "id": 1,
       "name": "Leanne Graham",
       "username": "Bret",
       "email": "Sincere@april.biz",
