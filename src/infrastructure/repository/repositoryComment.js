@@ -4,10 +4,10 @@ const { Op } = require("sequelize");
 class RepositoryComment {
     async create(comment) {
         await ModelComment.sync();
-        const validate = await this.findAllWhere(comment);
-        if ((validate[0] != null)) {
+        const validate = await this.findComment(comment);
+        if ((validate != null)) {
             //console.log("já exite o registro");
-            return validate[0];
+            return validate;
         }
         else {
             //console.log("não exite registro");
@@ -15,17 +15,33 @@ class RepositoryComment {
             return received.dataValues;
         }
     }
-
-    async findAllWhere(commentObject) {
-        const Comment = await ModelComment.findAll({
+    async findComment(commentObject) {
+        const Comment = await ModelComment.findOne({
             where: {
                 id: commentObject.id
             },
-            raw: true,
-            limit: 1
+            raw: true
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
+        }).catch(function (errorResult) {
+            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
+            // return result;
+        });
+        return Comment;
+    }
+    async findAlCommentFromPost(searchObject) {
+        const Comment = await ModelComment.findAll({
+            where: {
+                postId: searchObject.postId
+            },
+            raw: true
+        }).then(function (result) {
+            // console.log(" test + " + result);
+            return result;
+        }).catch(function (errorResult) {
+            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
+            // return result;
         });
         return Comment;
     }

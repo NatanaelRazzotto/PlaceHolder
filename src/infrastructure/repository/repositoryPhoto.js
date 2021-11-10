@@ -4,10 +4,10 @@ const { Op } = require("sequelize");
 class RepositoryPhoto {
     async create(photo) {
         await ModelPhoto.sync();
-        const validate = await this.findAllWhere(photo);
-        if ((validate[0] != null)) {
+        const validate = await this.findPhoto(photo);
+        if ((validate != null)) {
             //console.log("já exite o registro");
-            return validate[0];
+            return validate;
         }
         else {
             //console.log("não exite registro");
@@ -16,16 +16,33 @@ class RepositoryPhoto {
         }
     }
 
-    async findAllWhere(photoObject) {
-        const Photo = await ModelPhoto.findAll({
+    async findPhoto(photoObject) {
+        const Photo = await ModelPhoto.findOne({
             where: {
                 id: photoObject.id
             },
-            raw: true,
-            limit: 1
+            raw: true
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
+        }).catch(function (errorResult) {
+            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
+            // return result;
+        });
+        return Photo;
+    }
+    async findAllPhotoFromAlbum(searchObject) {
+        const Photo = await ModelPhoto.findAll({
+            where: {
+                albumId: searchObject.albumId
+            },
+            raw: true
+        }).then(function (result) {
+            // console.log(" test + " + result);
+            return result;
+        }).catch(function (errorResult) {
+            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
+            // return result;
         });
         return Photo;
     }

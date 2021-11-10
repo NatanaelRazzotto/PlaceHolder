@@ -8,7 +8,7 @@ const ModelTodos = database.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            // autoIncrement: true,
         },
         userId: {
             type: DataTypes.INTEGER,

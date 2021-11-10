@@ -5,12 +5,12 @@ class RepositoryUser {
   async create(user) {
     // console.log(user);
     await ModelUser.sync();
-    const validate = await this.findAllWhere(user)
+    const validate = await this.findUser(user)
     //console.log(validate[0])
-    if ((validate[0] != null)) {
+    if ((validate != null)) {
       //console.log("já exite o registro");
       //  console.log(validate);
-      return validate[0];
+      return validate;
     }
     else {
       //console.log("não exite registro");
@@ -18,6 +18,39 @@ class RepositoryUser {
       return received.dataValues;
     }
   }
+
+  async findUser(userObject) {
+    const User = await ModelUser.findOne({
+      where: {
+        id: userObject.id
+      },
+      raw: true
+    }).then(function (result) {
+      // console.log(" test + " + result);
+      return result;
+    }).catch(function (errorResult) {
+      // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
+      // return result;
+    });
+    return User;
+  }
+
+  /* async findAllUserFromName(searchObject) {
+     const User = await ModelUser.findAll({
+       where: {
+         userId: searchObject.userId
+       },
+       raw: true
+     }).then(function (result) {
+       // console.log(" test + " + result);
+       return result;
+     }).catch(function (errorResult) {
+       // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
+       // return result;
+     });
+     return User;
+   }*/
+
   //https://sequelize.org/master/manual/model-querying-finders.html
   async findAll() {
     const users = await ModelUser.findAll();

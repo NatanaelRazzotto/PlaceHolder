@@ -29,4 +29,48 @@ describe('Repository Comment', () => {
             createdAt: expect.any(Date),
         });
     });
+
+    it('Pesquisar - findComment', async () => {
+        const searchObject = {
+            postId: 1,
+            id: 1,
+            name: "id labore ex et quam laborum",
+            email: "Eliseo@gardner.biz",
+            body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+        };
+        const received = await repositoryComment.findComment(searchObject);
+        console.log(received);
+        expect(received).toEqual({
+            postId: 1,
+            id: 1,
+            name: "id labore ex et quam laborum",
+            email: "Eliseo@gardner.biz",
+            body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+        });
+
+    });
+    it('Pesquisar - findAlCommentFromPost', async () => {
+        const searchObject = {
+            postId: 1,
+            id: 1
+        };
+        const received = await repositoryComment.findAlCommentFromPost(searchObject);
+        console.log(received);
+        expect(received).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    postId: 1,
+                    id: 1,
+                    name: "id labore ex et quam laborum",
+                    email: "Eliseo@gardner.biz",
+                    body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+                    updatedAt: expect.any(Date),
+                    createdAt: expect.any(Date),
+                })
+            ])
+        );
+
+    });
 })

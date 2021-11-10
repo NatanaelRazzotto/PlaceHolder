@@ -57,7 +57,7 @@ class View {
             case "3":
                 console.log('***-3-COMMENT-****');
                 const comment = {
-                    id: parseInt(readLineSync.question('Informe o id do Usuário referente ao COMMENT:'))
+                    id: parseInt(readLineSync.question('Informe o id do Post referente ao COMMENT:'))
                 };
                 if (Number.isInteger(comment.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****');
@@ -87,7 +87,7 @@ class View {
             case "5":
                 console.log('***-5-PHOTOS-****');
                 const photos = {
-                    id: parseInt(readLineSync.question('Informe o id do Usuário referente ao PHOTOS:'))
+                    id: parseInt(readLineSync.question('Informe o id do Album referente ao PHOTOS:'))
                 };
                 if (Number.isInteger(photos.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****');
@@ -116,7 +116,6 @@ class View {
                 break;
             case "5":
                 console.log('***-5-SAIR-****');
-                var entidade = readLineSync.question('Informe a entidade: ');
                 break;
             default:
                 console.log("Operação Invalida!");

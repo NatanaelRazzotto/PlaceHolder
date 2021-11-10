@@ -8,7 +8,7 @@ const ModelUser = database.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      //   autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING(255),

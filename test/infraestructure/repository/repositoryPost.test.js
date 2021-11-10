@@ -27,4 +27,44 @@ describe('Repository Post', () => {
             createdAt: expect.any(Date),
         });
     });
+    it('Pesquisar - findPost', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 1,
+            title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        };
+        const received = await repositoryPost.findPost(searchObject);
+        console.log(received);
+        expect(received).toEqual({
+            userId: 1,
+            id: 1,
+            title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+        });
+
+    });
+    it('Pesquisar - findAllPhotoFromAlbum', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 1,
+        };
+        const received = await repositoryPost.findAllPostFromUser(searchObject);
+        console.log(received);
+        expect(received).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    userId: 1,
+                    id: 1,
+                    title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                    body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                    updatedAt: expect.any(Date),
+                    createdAt: expect.any(Date),
+                })
+            ])
+        );
+    })
+
 })

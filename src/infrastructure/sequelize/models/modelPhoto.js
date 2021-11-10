@@ -8,7 +8,7 @@ const ModelPhoto = database.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            //  autoIncrement: true,
         },
         albumId: {
             type: DataTypes.INTEGER,

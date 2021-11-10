@@ -5,9 +5,9 @@ class RepositoryAddress {
     async create(address) {
         await ModelAddress.sync();
         const validate = await this.findAllWhere(address);
-        if ((validate[0] != null)) {
+        if ((validate != null)) {
             //console.log("já exite o registro");
-            return validate[0];
+            return validate;
         }
         else {
             //console.log("não exite registro");

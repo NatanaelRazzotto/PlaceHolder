@@ -26,4 +26,42 @@ describe('Repository Album', () => {
             createdAt: expect.any(Date),
         });
     });
+    it('Pesquisar - findAlbum', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 1,
+            title: "quidem molestiae enim",
+        };
+        const received = await repositoryAlbum.findAlbum(searchObject);
+        console.log(received);
+        expect(received).toEqual({
+            userId: 1,
+            id: 1,
+            title: "quidem molestiae enim",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+        });
+
+    });
+    it('Pesquisar - findAlbumFromUser', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 1
+        };
+        const received = await repositoryAlbum.findAlbumFromUser(searchObject);
+        console.log(received);
+        expect(received).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    userId: 1,
+                    id: 1,
+                    title: "quidem molestiae enim",
+                    updatedAt: expect.any(Date),
+                    createdAt: expect.any(Date),
+                })
+            ])
+        );
+
+    });
+
 })

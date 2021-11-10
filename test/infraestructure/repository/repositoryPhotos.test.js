@@ -29,4 +29,47 @@ describe('Repository Photo', () => {
             createdAt: expect.any(Date),
         });
     });
+
+    it('Pesquisar - findPhoto', async () => {
+        const searchObject = {
+            albumId: 1,
+            id: 1,
+            title: "accusamus beatae ad facilis cum similique qui sunt",
+            url: "https://via.placeholder.com/600/92c952",
+            thumbnailUrl: "https://via.placeholder.com/150/92c952"
+        };
+        const received = await repositoryPhoto.findPhoto(searchObject);
+        console.log(received);
+        expect(received).toEqual({
+            albumId: 1,
+            id: 1,
+            title: "accusamus beatae ad facilis cum similique qui sunt",
+            url: "https://via.placeholder.com/600/92c952",
+            thumbnailUrl: "https://via.placeholder.com/150/92c952",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+        });
+
+    });
+    it('Pesquisar - findAllPhotoFromAlbum', async () => {
+        const searchObject = {
+            albumId: 1,
+            id: 1,
+        };
+        const received = await repositoryPhoto.findAllPhotoFromAlbum(searchObject);
+        console.log(received);
+        expect(received).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    albumId: 1,
+                    id: 1,
+                    title: "accusamus beatae ad facilis cum similique qui sunt",
+                    url: "https://via.placeholder.com/600/92c952",
+                    thumbnailUrl: "https://via.placeholder.com/150/92c952",
+                    updatedAt: expect.any(Date),
+                    createdAt: expect.any(Date),
+                })
+            ])
+        );
+    })
 })

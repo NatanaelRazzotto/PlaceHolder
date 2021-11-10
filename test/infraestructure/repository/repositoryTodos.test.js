@@ -9,7 +9,7 @@ describe('Repository Photo', () => {
         console.log(received);
         expect(received.config.database).toEqual(process.env.DB_NAME);
     });
-    it('create Photo', async () => {
+    it('create Todos', async () => {
         const Todos = {
             userId: 1,
             id: 1,
@@ -22,8 +22,48 @@ describe('Repository Photo', () => {
             userId: 1,
             id: 1,
             title: "delectus aut autem",
+            completed: 0,
             updatedAt: expect.any(Date),
             createdAt: expect.any(Date),
         });
     });
+    it('Pesquisar - findTodos', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 1,
+            title: "delectus aut autem",
+            completed: false
+        };
+        const received = await repositoryTodos.findTodos(searchObject);
+        console.log(received);
+        expect(received).toEqual({
+            userId: 1,
+            id: 1,
+            title: "delectus aut autem",
+            completed: 0,
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+        });
+
+    });
+    it('Pesquisar - findAllTodosFromUser', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 1,
+        };
+        const received = await repositoryTodos.findAllTodosFromUser(searchObject);
+        console.log(received);
+        expect(received).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    userId: 1,
+                    id: 1,
+                    title: "delectus aut autem",
+                    completed: 0,
+                    updatedAt: expect.any(Date),
+                    createdAt: expect.any(Date),
+                })
+            ])
+        );
+    })
 })

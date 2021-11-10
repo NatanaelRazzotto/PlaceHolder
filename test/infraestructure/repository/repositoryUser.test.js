@@ -1,5 +1,6 @@
 const { RepositoryUser } = require('../../../src/infrastructure/repository/repositoryUser');//test\Repository\repositoryUser\repositoryUser.test.js
 const database = require('../../../src/infrastructure/sequelize/db');
+require('dotenv').config();
 
 describe('RepositoryUser', () => {
   const repositoryUser = new RepositoryUser();
@@ -7,99 +8,69 @@ describe('RepositoryUser', () => {
   it('Sync DB', async () => {
     const received = await database.sync();
     console.log(received);
-    expect(received.config.database).toEqual('placeholder');
+    expect(received.config.database).toEqual(process.env.DB_NAME);
   });
 
   it('create user', async () => {
     const user = {
-      name: 'Maria',
-      cpf: '123.456.789-00',
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz",
+      address: {
+        street: "Kulas Light",
+        suite: "Apt. 556",
+        city: "Gwenborough",
+        zipcode: "92998-3874",
+        geo: {
+          lat: "-37.3159",
+          lng: "81.1496"
+        }
+      },
+      phone: "1-770-736-8031 x56442",
+      website: "hildegard.org",
+      company: {
+        name: "Romaguera-Crona",
+        catchPhrase: "Multi-layered client-server neural-net",
+        bs: "harness real-time e-markets"
+      }
     };
     const received = await repositoryUser.create(user);
     console.log(received);
     expect(received).toEqual({
-      idUser: expect.any(Number),
-      name: 'Maria',
-      cpf: '123.456.789-00',
+      id: expect.any(Number),
+      name: 'Leanne Graham',
+      email: 'Sincere@april.biz',
+      addressId: expect.any(Number),
+      phone: '1-770-736-8031 x56442',
+      website: 'hildegard.org',
+      companyId: expect.any(Number),
       updatedAt: expect.any(Date),
       createdAt: expect.any(Date),
     });
   });
 
-  it('FindAll', async () => {
-    const received = await repositoryUser.findAll();
-    console.log(received);
-    expect(received).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          idUser: expect.any(Number),
-          name: 'Maria',
-          cpf: '123.456.789-00',
-          updatedAt: expect.any(Date),
-          createdAt: expect.any(Date),
-        }),
-      ])
-    );
-  });
-
-  it('FindByPk', async () => {
-    const receivedAll = await repositoryUser.findAll();
-    const pk = receivedAll[0].idUser;
-    const received = await repositoryUser.findByPk(pk);
-    console.log(received);
-    expect(received).toEqual(
-      expect.objectContaining({
-        idUser: pk,
-        name: 'Maria',
-        cpf: '123.456.789-00',
-        updatedAt: expect.any(Date),
-        createdAt: expect.any(Date),
-      })
-    );
-  });
-
-  it('UpDateById', async () => {
-    const receivedAll = await repositoryUser.findAll();
-    const pk = receivedAll[0].idUser;
-    const user = {
-      idUser: pk,
-      name: 'Maria Silva',
-      cpf: '000.000.000-11',
+  it('Pesquisar - findUser', async () => {
+    const searchObject = {
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz",
     };
-    const received = await repositoryUser.updateById(user);
+    const received = await repositoryUser.findUser(searchObject);
     console.log(received);
-    expect(received).toEqual(
-      expect.objectContaining({
-        idUser: pk,
-        name: 'Maria Silva',
-        cpf: '000.000.000-11',
-        updatedAt: expect.any(Date),
-        createdAt: expect.any(Date),
-      })
-    );
-  });
-
-  describe('DeleteById', () => {
-    it('DeleteById Where', async () => {
-      const newUser = await repositoryUser.create({
-        name: 'João Silva',
-        cpf: '999.999.999.99',
-      });
-      const received = await repositoryUser.deleteByIdWhere(newUser.idUser);
-      console.log(received);
-      expect(received).toEqual(1);
+    expect(received).toEqual({
+      id: expect.any(Number),
+      name: 'Leanne Graham',
+      email: 'Sincere@april.biz',
+      addressId: expect.any(Number),
+      phone: '1-770-736-8031 x56442',
+      website: 'hildegard.org',
+      companyId: expect.any(Number),
+      updatedAt: expect.any(Date),
+      createdAt: expect.any(Date),
     });
 
-    it('DeleteById Model', async () => {
-      const newUser = await repositoryUser.create({
-        name: 'João Silva',
-        cpf: '999.999.999.99',
-      });
-      const received = await repositoryUser.deleteByIdModel(newUser.idUser);
-      console.log(received);
-      expect(received).toEqual(
-        expect.objectContaining({ name: 'João Silva', cpf: '999.999.999.99' })
-      );
-    });
   });
+
 });
