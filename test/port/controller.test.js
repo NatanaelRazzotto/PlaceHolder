@@ -2,7 +2,6 @@
 const { Controller } = require('../../src/port/controller/controller')
 
 describe('Controller', () => {
-
     let controller;
     beforeAll(() => {
         controller = new Controller();
@@ -26,5 +25,13 @@ describe('Controller', () => {
                  })
              ])
          )*/
-    })
+    });
+    it('Get dados Album', async () => {
+        const data = {
+            id: 1
+        };
+        const received = await controller.getDataAlbumDependences(data);
+        console.log(received);
+    });
+
 })

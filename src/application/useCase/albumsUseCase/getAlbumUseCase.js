@@ -8,10 +8,9 @@ class GetAlbumUseCase {
         return await this.getRegisterInDB(dataAlbum);
     }
     async getRegisterInDB(dataAlbum) {
-        const albumPersistido = await this.repositoryAlbum.findAlbumFromUser(albumObject);
+        const albumPersistido = await this.repositoryAlbum.findAlbumFromUser(dataAlbum);
         return albumPersistido;
     }
-
 }
 
 module.exports = { GetAlbumUseCase };
