@@ -39,5 +39,4 @@ class FetchPostUseCase {
 }
 
 
-
 module.exports = { FetchPostUseCase };

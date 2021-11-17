@@ -23,11 +23,12 @@ class PersistsPostUseCase {
         };
         const fetchPosts = await this.fetchPostsUseCase.execute(data);
         for (const element of fetchPosts) {
-            const populado = await this.persistsPost(element);
+            const populado = this.persistsPost(element);
             persistencePost.push(populado);
         }
 
-        return persistencePost;
+        const Post = await Promise.all(persistencePost);
+        return Post;
 
     }
 

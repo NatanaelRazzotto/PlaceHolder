@@ -30,6 +30,8 @@ class CreateUserUseCase {
     }
     async preparObject({ id, name, address, email, phone, website, company }) {//{ id, name, address: address, email, phone, website, company }
         // console.log("asasas " + dataUsers.address.street)
+        //  console.log('teste');
+        //  console.log(address);
         let andressPopulate = await this.postAndressUseCase.execute(address);
         let companyPopulate = await this.postCompanyUseCase.execute(company)
         const objectUser = new User(id, name, email, andressPopulate.addressId, phone, website, companyPopulate.companyId);

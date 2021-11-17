@@ -10,35 +10,26 @@ describe('persistsUserUseCase', () => {
 
   it('Execute - persistir user', async () => {
     const data = {
-      max: 2,
+      max: 4,
     };
     const received = await persistsUserUseCase.execute(data);
     console.log(received);
+    expect(received).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          userId: expect.any(Number),
+          addressId: expect.any(Number),
+          companyId: expect.any(Number),
+          name: expect.any(String),
+          dependentes: expect.any(Object),
+          updatedAt: expect.any(Date),
+          createdAt: expect.any(Date),
+        })
+      ]))
     expect(received).toBeTruthy();
-  }, 500000);
+  }, 11000);//500000
 
-  /* it('persistence - persistir user ', async () => {
-     const data = {
-       urlFecth: 'https://jsonplaceholder.typicode.com/users',
-       urlIndice: 1
-     };
-     const receivedData = await persistsAlbumUseCase.persistence(data);
-     console.log(receivedData);
-     expect(receivedData).toEqual(
-       expect.arrayContaining([
-         expect.objectContaining({
-           albumID: expect.any(Number),
-           userId: expect.any(Number),
-           title: expect.any(String),
-           updatedAt: expect.any(Date),
-           createdAt: expect.any(Date),
-           dependentes: expect.any(Object),
-           // depentes: expect.arrayContaining(expect.any(a))//[expect.objectContaining({ albumID: expect.any(Object) })]
-         })]));
-     console.log(receivedData.depentes);
- 
-   }, 40000)
-   it('persistsAlbum - Pesiste Album e Fotos', async () => {
+  /* it('persistsAlbum - Pesiste Album e Fotos', async () => {
      const album = {
        userId: 1,
        id: 1,
@@ -79,7 +70,7 @@ describe('persistsUserUseCase', () => {
            updatedAt: expect.any(Date),
            createdAt: expect.any(Date),
          })]));
-   })*/
+})*/
 
 
 

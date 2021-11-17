@@ -5,7 +5,7 @@ class RepositoryAlbum {
     async create(album) {
         await ModelAlbum.sync();
         const validate = await this.findAlbum(album);
-        console.log('aaaa' + validate);
+        //console.log('aaaa' + validate);
         if ((validate != null)) {//validate[0]
             //console.log("já exite o registro");
             return validate;

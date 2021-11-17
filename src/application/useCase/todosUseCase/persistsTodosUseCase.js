@@ -22,11 +22,11 @@ class PersistsTodosUseCase {
         };
         const fetchTodos = await this.fetchTodosUseCase.execute(data);
         for (const element of fetchTodos) {
-            const populado = await this.persistsTodos(element);
+            const populado = this.persistsTodos(element);
             persistenceTodos.push(populado);
         }
-
-        return persistenceTodos;
+        const Todos = await Promise.all(persistenceTodos);
+        return Todos;
 
     }
     async persistsTodos(Todos) {

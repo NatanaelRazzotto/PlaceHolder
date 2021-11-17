@@ -24,7 +24,7 @@ class FetchCommentsUseCase {
 
         const Comments = await Promise.all(requestComments);
 
-        return requestComments;
+        return Comments;
     }
 }
 

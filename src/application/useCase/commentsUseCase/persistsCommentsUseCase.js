@@ -21,11 +21,12 @@ class PersistsCommentsUseCase {
         };
         const fetcComments = await this.fetchCommentsUseCase.execute(data);
         for (const element of fetcComments) {
-            const populado = await this.persistsComments(element);
+            const populado = this.persistsComments(element);
             persistenceComments.push(populado);
         }
 
-        return persistenceComments;
+        const Comments = await Promise.all(persistenceComments);
+        return Comments;
 
     }
 

@@ -2,17 +2,19 @@ const { Company } = require('../../src/domain/company');
 
 describe('Domain model-Company', () => {
     it('create Company', async () => {
-        let userId = 8;
-        let id = 80;
-        let title = 'id nihil reprehenderit';
+        let companyId = 2;
+        let name = 'Deckow-Crist';
+        let catchPhrase = 'Proactive didactic contingency';
+        let bs = 'synergize scalable supply-chains';
 
-        const album = new Album(userId, id, title);
-        console.log(album);
-        expect(album).toEqual(
+        const company = new Company(companyId, name, catchPhrase, bs);
+        console.log(company);
+        expect(company).toEqual(
             expect.objectContaining({
-                id: expect.any(Number),
-                userId: expect.any(Number),
-                title: expect.any(String),
+                companyId: expect.any(Number),
+                name: expect.any(String),
+                catchPhrase: expect.any(String),
+                bs: expect.any(String),
             }));
     });
 })

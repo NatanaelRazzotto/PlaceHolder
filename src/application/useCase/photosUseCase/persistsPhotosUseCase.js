@@ -21,12 +21,11 @@ class PersistsPhotosUseCase {
         };
         const fetchPhotos = await this.fetchPhotosUseCase.execute(data);
         for (const element of fetchPhotos) {
-            const populado = await this.persistsPhotos(element);
+            const populado = this.persistsPhotos(element);
             persistencePhotos.push(populado);
         }
-
-        return persistencePhotos;
-
+        const Photos = await Promise.all(persistencePhotos);
+        return Photos;
     }
 
     async persistsPhotos(photo) {

@@ -30,8 +30,8 @@ describe('FetchPostUseCase', () => {
 
   it('fetchRequest Indexado', async () => {
     const data = {
-      url: 'https://jsonplaceholder.typicode.com/posts',
-      max: 50,
+      urlFecth: 'https://jsonplaceholder.typicode.com/posts',
+      indicelimite: 50,
     };
     const received = await fetchPostUseCase.fetchRequest(data);
     console.log(received);

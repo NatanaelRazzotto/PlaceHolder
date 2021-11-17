@@ -26,11 +26,12 @@ class PersistsUserUseCase {
         };
         const fetchUsers = await this.fetchUserUseCase.execute(data);
         for (const element of fetchUsers) {
-            const populado = await this.persistsUser(element);
+            const populado = this.persistsUser(element);
             persistenceUsers.push(populado);
         }
 
-        return persistenceUsers;
+        const User = await Promise.all(persistenceUsers);
+        return User;
 
     }
     async persistsUser(User) {

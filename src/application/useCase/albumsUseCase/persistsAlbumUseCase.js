@@ -23,10 +23,11 @@ class PersistsAlbumUseCase {
         };
         const fetchAlbum = await this.fetchAlbumsUseCase.execute(data);
         for (const element of fetchAlbum) {
-            const populado = await this.persistsAlbum(element);
+            const populado = this.persistsAlbum(element);
             persistenceAlbum.push(populado);
         }
-        return persistenceAlbum;
+        const Album = await Promise.all(persistenceAlbum);
+        return Album;
     }
 
     async persistsAlbum(Album) {
