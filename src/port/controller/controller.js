@@ -17,6 +17,9 @@ const { GetTodosUseCase } = require('../../application/useCase/todosUseCase/getT
 const { PersistsUserUseCase } = require('../../application/useCase/userUseCase/persistsUserUseCase');
 const { GetUserUseCase } = require('../../application/useCase/userUseCase/getUserUseCase');
 
+const { GetAndressUseCase } = require('../../application/useCase/andressUseCase/getAndressUseCase');
+const { GetCompanyUseCase } = require('../../application/useCase/companyUseCase/getCompanyUseCase');
+
 const { RequestService } = require('../../servicesApplication/requestService');
 
 class Controller {
@@ -39,6 +42,15 @@ class Controller {
         };
         const userPersists = await getUserUseCase.execute(data);
         return userPersists;
+    }
+    async getDataAndressDependences(search) {
+        const getAndressUseCase = new GetAndressUseCase();
+        const data = {
+            lat: search.lat,
+            lng: search.lng,
+        };
+        const andressPersists = await getAndressUseCase.execute(data);
+        return andressPersists;
     }
     // #endregion
     // #region Todos Operacoes

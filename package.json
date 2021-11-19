@@ -10,11 +10,13 @@
   "author": "natanael razzotto",
   "license": "ISC",
   "dependencies": {
+    "cli-table": "^0.3.7",
+    "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "mysql2": "^2.3.0",
     "node-fetch": "^2.6.1",
-    "sequelize": "^6.6.5",
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
     "jest": "^27.3.1"
