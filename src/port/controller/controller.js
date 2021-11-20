@@ -44,15 +44,6 @@ class Controller {
             repositoryPhoto: new RepositoryPhoto(),
             repositoryTodos: new RepositoryTodos(),
         }
-        // this.requestService = new RequestService();
-        // this.repositoryUser = new RepositoryUser();
-        // this.repositoryAddress = new RepositoryAddress();
-        // this.repositoryCompany = new RepositoryCompany();
-        // this.repositoryPost = new RepositoryPost();
-        // this.repositoryComment = new RepositoryComment();
-        // this.repositoryAlbum = new RepositoryAlbum();
-        // this.repositoryPhoto = new RepositoryPhoto();
-        // this.repositoryTodos = new RepositoryTodos();
     }
     // #region User Operacoes 
     async persistsDataUsersDependences(search) {

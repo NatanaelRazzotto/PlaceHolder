@@ -1,7 +1,7 @@
 const readLineSync = require('readline-sync');
 var Table = require('cli-table');
 var colors = require('colors');
-const { Controller } = require('./port/controller/controller');
+const { Controller } = require('../port/controller/controller');
 
 class View {
     constructor() {
@@ -75,7 +75,7 @@ class View {
             { 'CreatedAt': users.createdAt.toString() },
             { 'UpdatedAt': users.updatedAt.toString() },
         );
-        console.log(table.toString());
+        return table;
     }
 
     tablesPostsDTO(operacao, posts) {
@@ -104,22 +104,26 @@ class View {
         // });
 
     }
-    tablePost(posts) {
+    tablesPosts(posts) {
         console.log('\n' + 'GET POSTS'.green);
         posts.forEach(post => {
-            var table = new Table({
-                style: { head: ['green'] }
-            });
-            table.push(
-                { 'ID': post.id.toString() },
-                { 'UserID': post.userId.toString() },
-                { 'Title': post.title.toString() },
-                { 'Body': post.body.toString() },
-                { 'CreatedAt': post.createdAt.toString() },
-                { 'UpdatedAt': post.updatedAt.toString() },
-            );
-            console.log(table.toString());
+            let postElement = this.bindtablePost(post);
+            console.log(postElement.toString());
         });
+    }
+    bindtablePost(post) {
+        var table = new Table({
+            style: { head: ['green'] }
+        });
+        table.push(
+            { 'ID': post.id.toString() },
+            { 'UserID': post.userId.toString() },
+            { 'Title': post.title.toString() },
+            { 'Body': post.body.toString() },
+            { 'CreatedAt': post.createdAt.toString() },
+            { 'UpdatedAt': post.updatedAt.toString() },
+        );
+        return table;
     }
     tableCommentDTO(operacao, comments) {
         var table = new Table({
@@ -160,23 +164,27 @@ class View {
         }
         return table;
     }
-    tableComment(comments) {
+    tablesComments(comments) {
         console.log('\n' + 'GET COMMENTS'.cyan);
         comments.forEach(comment => {
-            var table = new Table({
-                style: { head: ['cyan'] }
-            });
-            table.push(
-                { 'ID': comment.id.toString() },
-                { 'PostID': comment.postId.toString() },
-                { 'Name': comment.name.toString() },
-                { 'Email': comment.email.toString() },
-                { 'Body': comment.body.toString() },
-                { 'CreatedAt': comment.createdAt.toString() },
-                { 'UpdatedAt': comment.updatedAt.toString() },
-            );
-            console.log(table.toString());
+            let commentElement = this.bindTableComment(comment);
+            console.log(commentElement.toString());
         });
+    }
+    bindTableComment(comment) {
+        var table = new Table({
+            style: { head: ['cyan'] }
+        });
+        table.push(
+            { 'ID': comment.id.toString() },
+            { 'PostID': comment.postId.toString() },
+            { 'Name': comment.name.toString() },
+            { 'Email': comment.email.toString() },
+            { 'Body': comment.body.toString() },
+            { 'CreatedAt': comment.createdAt.toString() },
+            { 'UpdatedAt': comment.updatedAt.toString() },
+        );
+        return table;
     }
     tablesAlbumsDTO(operacao, albums) {
         albums.forEach(element => {
@@ -197,21 +205,25 @@ class View {
         table.push(this.formatLineAlbum(album));
         return table;
     }
-    tableAlbum(albums) {
+    tablesAlbums(albums) {
         console.log('\n' + 'GET ALBUMS'.magenta);
         albums.forEach(album => {
-            var table = new Table({
-                style: { head: ['magenta'] }
-            });
-            table.push(
-                { 'ID': album.id.toString() },
-                { 'UserId': album.userId.toString() },
-                { 'Title': album.title.toString() },
-                { 'CreatedAt': album.createdAt.toString() },
-                { 'UpdatedAt': album.updatedAt.toString() },
-            );
-            console.log(table.toString());
+            let albumElement = this.bindTableAlbum(album);
+            console.log(albumElement.toString());
         });
+    }
+    bindTableAlbum(album) {
+        var table = new Table({
+            style: { head: ['magenta'] }
+        });
+        table.push(
+            { 'ID': album.id.toString() },
+            { 'UserId': album.userId.toString() },
+            { 'Title': album.title.toString() },
+            { 'CreatedAt': album.createdAt.toString() },
+            { 'UpdatedAt': album.updatedAt.toString() },
+        );
+        return table;
     }
     tablePhotosDTO(operacao, photos) {
         var table = new Table({
@@ -248,23 +260,27 @@ class View {
         }
         return table;
     }
-    tablePhoto(photos) {
+    tablesPhotos(photos) {
         console.log('\n' + 'GET PHOTOS'.blue);
         photos.forEach(photo => {
-            var table = new Table({
-                style: { head: ['blue'] }
-            });
-            table.push(
-                { 'ID': photo.id.toString() },
-                { 'AlbumId': photo.albumId.toString() },
-                { 'Title': photo.title.toString() },
-                { 'url': photo.url.toString() },
-                { 'ThumbnailUrl': photo.thumbnailUrl.toString() },
-                { 'CreatedAt': photo.createdAt.toString() },
-                { 'UpdatedAt': photo.updatedAt.toString() },
-            );
-            console.log(table.toString());
+            let photoElement = this.bindTablePhoto(photo);
+            console.log(photoElement.toString());
         });
+    }
+    bindTablePhoto(photo) {
+        var table = new Table({
+            style: { head: ['blue'] }
+        });
+        table.push(
+            { 'ID': photo.id.toString() },
+            { 'AlbumId': photo.albumId.toString() },
+            { 'Title': photo.title.toString() },
+            { 'url': photo.url.toString() },
+            { 'ThumbnailUrl': photo.thumbnailUrl.toString() },
+            { 'CreatedAt': photo.createdAt.toString() },
+            { 'UpdatedAt': photo.updatedAt.toString() },
+        );
+        return table;
     }
 
     tableTodosDTO(operacao, todos) {
@@ -281,22 +297,27 @@ class View {
         console.log(table.toString());
 
     }
-    tableTodos(todos) {
+    tablesTodos(todos) {
         console.log('\n' + 'GET PHOTOS'.red);
         todos.forEach(todo => {
-            var table = new Table({
-                style: { head: ['red'] }
-            });
-            table.push(
-                { 'ID': todo.id.toString() },
-                { 'UserId': todo.userId.toString() },
-                { 'Title': todo.title.toString() },
-                { 'Completed': todo.completed.toString() },
-                { 'CreatedAt': todo.createdAt.toString() },
-                { 'UpdatedAt': todo.updatedAt.toString() },
-            );
-            console.log(table.toString());
+            let todoElement = this.bindTableTodos(todo);
+            console.log(todoElement.toString());
         });
+    }
+
+    bindTableTodos(todo) {
+        var table = new Table({
+            style: { head: ['red'] }
+        });
+        table.push(
+            { 'ID': todo.id.toString() },
+            { 'UserId': todo.userId.toString() },
+            { 'Title': todo.title.toString() },
+            { 'Completed': todo.completed.toString() },
+            { 'CreatedAt': todo.createdAt.toString() },
+            { 'UpdatedAt': todo.updatedAt.toString() },
+        );
+        return table;
     }
     formatLineUser(useritem) {
         const UserAtribute = {
@@ -452,8 +473,9 @@ class View {
                 if (Number.isInteger(user.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
                     const result = await this.controller.getDataUserDependences(user);
-                    this.tableUser(result);
-                    console.log(result);
+                    const tableResult = this.tableUser(result);
+                    console.log(tableResult.toString());
+                    //console.log(result);
                     console.log('*****-OK-*****'.black.bgYellow);
                 }
                 else {
@@ -468,8 +490,9 @@ class View {
                 if (Number.isInteger(post.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgGreen);
                     const result = await this.controller.getDataPostsDependences(post);
-                    this.tablePost(result);
-                    console.log(result);
+                    const tableResult = this.tablesPosts(result);
+                    //console.log(tableResult.toString());
+                    //console.log(result);
                     console.log('*****-OK-*****');
                 }
                 else {
@@ -484,8 +507,9 @@ class View {
                 if (Number.isInteger(comment.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgCyan);
                     const result = await this.controller.getDataCommentsDependences(comment);
-                    this.tableComment(result);
-                    console.log(result);
+                    const tableResult = this.tablesComments(result);
+                    //console.log(tableResult.toString());
+                    //console.log(result);
                     console.log('*****-OK-*****'.black.bgCyan);
                 }
                 else {
@@ -500,8 +524,8 @@ class View {
                 if (Number.isInteger(album.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgMagenta);
                     const result = await this.controller.getDataAlbumDependences(album);
-                    this.tableAlbum(result);
-                    console.log(result);
+                    const tableResult = this.tablesAlbums(result);
+                    //console.log(result);
                     console.log('*****-OK-*****'.black.bgMagenta);
                 }
                 else {
@@ -516,8 +540,8 @@ class View {
                 if (Number.isInteger(photos.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgBlue);
                     const result = await this.controller.getDataPhotosDependences(photos);
-                    this.tablePhoto(result);
-                    console.log(result);
+                    const tableResult = this.tablesPhotos(result);
+                    //console.log(result);
                     console.log('*****-OK-*****'.black.bgBlue);
                 }
                 else {
@@ -532,8 +556,8 @@ class View {
                 if (Number.isInteger(todos.id)) {
                     console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgRed);
                     const result = await this.controller.getDataTodosDependences(todos);
-                    this.tableTodos(result);
-                    console.log(result);
+                    const tableResult = this.tablesTodos(result);
+                    //console.log(result);
                     console.log('*****-OK-*****'.black.bgRed);
                 }
                 else {
