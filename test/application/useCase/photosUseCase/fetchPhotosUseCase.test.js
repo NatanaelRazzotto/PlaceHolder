@@ -2,8 +2,12 @@ const { FetchPhotosUseCase } = require('../../../../src/application/useCase/phot
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
 
 describe('FetchAlbumsUseCase', () => {
+    let fetchPhotosUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+    }
     beforeEach(() => {
-        fetchPhotosUseCase = new FetchPhotosUseCase(new RequestService());
+        fetchPhotosUseCase = new FetchPhotosUseCase(Dependencias);
     });
 
     it('fetchRequest para o Parametro', async () => {

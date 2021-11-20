@@ -1,8 +1,8 @@
 const { RepositoryTodos } = require('../../../infrastructure/repository/repositoryTodos');
 const { Todos } = require('../../../domain/todos');
 class CreateTodosUseCase {
-    constructor() {
-        this.repositoryTodos = new RepositoryTodos();
+    constructor({ repositoryTodos }) {
+        this.repositoryTodos = repositoryTodos;
     }
     async execute(dataTodos) {
         return await this.preparCreateRegisterDB(dataTodos);

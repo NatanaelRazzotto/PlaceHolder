@@ -5,13 +5,13 @@ const { PersistsAlbumUseCase } = require('../../useCase/albumsUseCase/persistsAl
 const { PersistsTodosUseCase } = require('../../useCase/todosUseCase/persistsTodosUseCase');
 
 class PersistsUserUseCase {
-    constructor(requestService) {
+    constructor(Dependencias) {
         //this.requestService = requestService;
-        this.createUserUseCase = new CreateUserUseCase(requestService);
-        this.fetchUserUseCase = new FetchUserUseCase(requestService);
-        this.persistsPostUseCase = new PersistsPostUseCase(requestService);
-        this.persistsAlbumUseCase = new PersistsAlbumUseCase(requestService);
-        this.persistsTodosUseCase = new PersistsTodosUseCase(requestService);
+        this.createUserUseCase = new CreateUserUseCase(Dependencias);
+        this.fetchUserUseCase = new FetchUserUseCase(Dependencias)
+        this.persistsPostUseCase = new PersistsPostUseCase(Dependencias);
+        this.persistsAlbumUseCase = new PersistsAlbumUseCase(Dependencias);
+        this.persistsTodosUseCase = new PersistsTodosUseCase(Dependencias);
     }
 
     async execute(maxData) {

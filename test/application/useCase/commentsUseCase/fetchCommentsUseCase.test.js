@@ -2,8 +2,12 @@ const { FetchCommentsUseCase } = require('../../../../src/application/useCase/co
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
 
 describe('FetchCommentsUseCase', () => {
+    let fetchCommentsUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+    }
     beforeEach(() => {
-        fetchCommentsUseCase = new FetchCommentsUseCase(new RequestService());
+        fetchCommentsUseCase = new FetchCommentsUseCase(Dependencias);
     });
 
     it('fetchRequest para o Parametro', async () => {
@@ -29,9 +33,9 @@ describe('FetchCommentsUseCase', () => {
     it('Reguisicao para comments', async () => {
         const dataConfig = {
             urlFecth: 'https://jsonplaceholder.typicode.com/comments',
-            limite: 20,
+            indicelimite: 20,
         };
-        const receivedData = await fetchCommentsUseCase.fetchDataRequest(dataConfig);
+        const receivedData = await fetchCommentsUseCase.fetchRequest(dataConfig);
         console.log(receivedData);
         expect(receivedData.length).toEqual(20);
         expect(receivedData).toEqual(

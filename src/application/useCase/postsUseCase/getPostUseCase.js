@@ -1,8 +1,8 @@
-const { RepositoryPost } = require('../../../infrastructure/repository/repositoryPost');
+//const { RepositoryPost } = require('../../../infrastructure/repository/repositoryPost');
 
 class GetPostUseCase {
-    constructor() {
-        this.repositoryPost = new RepositoryPost();
+    constructor({ repositoryPost }) {
+        this.repositoryPost = repositoryPost;
     }
     async execute(dataPost) {
         return await this.getRegisterInDB(dataPost);

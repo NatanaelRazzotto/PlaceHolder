@@ -2,8 +2,12 @@ const { FetchAlbumsUseCase } = require('../../../../src/application/useCase/albu
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
 
 describe('FetchAlbumsUseCase', () => {
+    let fetchAlbumsUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+    }
     beforeEach(() => {
-        fetchAlbumsUseCase = new FetchAlbumsUseCase(new RequestService());
+        fetchAlbumsUseCase = new FetchAlbumsUseCase(Dependencias);
     });
 
     it('fetchRequestForParameter - Obter album do usuario ', async () => {

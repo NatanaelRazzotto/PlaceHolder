@@ -3,11 +3,11 @@ const { FetchPostUseCase } = require('./fetchPostsUseCase');
 const { PersistsCommentsUseCase } = require('../../useCase/commentsUseCase/persistsCommentsUseCase');
 
 class PersistsPostUseCase {
-    constructor(requestService) {
+    constructor(Dependencias) {
         //this.requestService = requestService;
-        this.createPostsUseCase = new CreatePostsUseCase(requestService);
-        this.fetchPostsUseCase = new FetchPostUseCase(requestService);
-        this.persistsCommentsUseCase = new PersistsCommentsUseCase(requestService);
+        this.createPostsUseCase = new CreatePostsUseCase(Dependencias);
+        this.fetchPostsUseCase = new FetchPostUseCase(Dependencias);
+        this.persistsCommentsUseCase = new PersistsCommentsUseCase(Dependencias);
     }
 
     async execute(param) {

@@ -1,8 +1,8 @@
-const { RepositoryAddress } = require('../../../infrastructure/repository/repositoryAndress');
+//const { RepositoryAddress } = require('../../../infrastructure/repository/repositoryAndress');
 const { Andress } = require('../../../domain/andress')
 class PostAndressUseCase {
-    constructor() {
-        this.repositoryAddress = new RepositoryAddress();
+    constructor({ repositoryAddress }) {
+        this.repositoryAddress = repositoryAddress;
     }
 
     async execute(dataAdress) {

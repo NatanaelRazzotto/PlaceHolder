@@ -1,8 +1,8 @@
-const { RepositoryUser } = require('../../../infrastructure/repository/repositoryUser');
+//const { RepositoryUser } = require('../../../infrastructure/repository/repositoryUser');
 
 class GetUserUseCase {
-    constructor() {
-        this.repositoryUser = new RepositoryUser();
+    constructor({ repositoryUser }) {
+        this.repositoryUser = repositoryUser;
     }
     async execute(dataUser) {
         return await this.getRegisterInDB(dataUser);

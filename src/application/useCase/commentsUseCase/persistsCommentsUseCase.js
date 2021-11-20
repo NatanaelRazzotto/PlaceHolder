@@ -2,10 +2,10 @@ const { CreateCommentsUseCase } = require('./createCommentsUseCase');
 const { FetchCommentsUseCase } = require('./fetchCommentsUseCase');
 
 class PersistsCommentsUseCase {
-    constructor(requestService) {
+    constructor(Dependencias) {
         //this.requestService = requestService;
-        this.createCommentsUseCase = new CreateCommentsUseCase(requestService);
-        this.fetchCommentsUseCase = new FetchCommentsUseCase(requestService);
+        this.createCommentsUseCase = new CreateCommentsUseCase(Dependencias);
+        this.fetchCommentsUseCase = new FetchCommentsUseCase(Dependencias);
     }
 
     async execute(param) {

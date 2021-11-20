@@ -1,7 +1,7 @@
 const { UrlService } = require('../../../serviceDomain/urlService');
 
 class FetchPhotosUseCase {
-    constructor(requestService) {
+    constructor({ requestService }) {
         this.requestService = requestService;
     }
     async execute(data) {

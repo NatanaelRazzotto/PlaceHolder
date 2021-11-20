@@ -1,14 +1,14 @@
-const { RepositoryUser } = require('../../../infrastructure/repository/repositoryUser');
+//const { RepositoryUser } = require('../../../infrastructure/repository/repositoryUser');
 const { User } = require('../../../domain/user');
 const { PostAndressUseCase } = require('../andressUseCase/postAndressUseCase');
 const { PostCompanyUseCase } = require('../companyUseCase/postCompanyUseCase');
 
 class CreateUserUseCase {
-    constructor(requestService) {
-        this.requestService = requestService;
-        this.postAndressUseCase = new PostAndressUseCase();
-        this.postCompanyUseCase = new PostCompanyUseCase();
-        this.repositoryUser = new RepositoryUser();
+    constructor(Dependencias) {
+        this.requestService = Dependencias.requestService;
+        this.postAndressUseCase = new PostAndressUseCase(Dependencias);
+        this.postCompanyUseCase = new PostCompanyUseCase(Dependencias);
+        this.repositoryUser = Dependencias.repositoryUser;
     }
 
     async execute(dataUsers) {

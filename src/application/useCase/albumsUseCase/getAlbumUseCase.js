@@ -1,8 +1,8 @@
-const { RepositoryAlbum } = require('../../../infrastructure/repository/repositoryAlbum');
+//const { RepositoryAlbum } = require('../../../infrastructure/repository/repositoryAlbum');
 const { Album } = require('../../../domain/album')
 class GetAlbumUseCase {
-    constructor() {
-        this.repositoryAlbum = new RepositoryAlbum();
+    constructor({ repositoryAlbum }) {
+        this.repositoryAlbum = repositoryAlbum;
     }
     async execute(dataAlbum) {
         return await this.getRegisterInDB(dataAlbum);

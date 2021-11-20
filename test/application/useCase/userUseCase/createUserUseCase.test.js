@@ -1,12 +1,20 @@
 const { CreateUserUseCase } = require('../../../../src/application/useCase/userUseCase/createUserUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryUser } = require('../../../../src/infrastructure/repository/repositoryUser');
+const { RepositoryAddress } = require('../../../../src/infrastructure/repository/repositoryAndress');
+const { RepositoryCompany } = require('../../../../src/infrastructure/repository/repositoryCompany');
 //require('iconv-lite').encodingExists('foo')
 
 describe('PostUserUseCase', () => {
-  const requestService = new RequestService();
   let createUserUseCase;
+  let Dependencias = {
+    requestService: new RequestService(),
+    repositoryUser: new RepositoryUser(),
+    repositoryAddress: new RepositoryAddress(),
+    repositoryCompany: new RepositoryCompany(),
+  }
   beforeAll(() => {
-    createUserUseCase = new CreateUserUseCase(requestService);
+    createUserUseCase = new CreateUserUseCase(Dependencias);
   });
 
   it('Execute - Requisições simultaneas', async () => {

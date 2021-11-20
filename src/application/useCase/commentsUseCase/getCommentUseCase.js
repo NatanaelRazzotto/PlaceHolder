@@ -1,8 +1,8 @@
-const { RepositoryComment } = require('../../../infrastructure/repository/repositoryComment');
+//const { RepositoryComment } = require('../../../infrastructure/repository/repositoryComment');
 
 class GetCommentUseCase {
-    constructor() {
-        this.repositoryComment = new RepositoryComment();
+    constructor({ repositoryComment }) {
+        this.repositoryComment = repositoryComment;
     }
     async execute(dataComment) {
         return await this.getRegisterInDB(dataComment);

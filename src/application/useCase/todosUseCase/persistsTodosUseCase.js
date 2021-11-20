@@ -3,10 +3,10 @@ const { CreateTodosUseCase } = require('./createTodosUseCase');
 const { FetchTodosUseCase } = require('./fetchTodosUseCase');
 
 class PersistsTodosUseCase {
-    constructor(requestService) {
+    constructor(Dependencias) {
         //this.requestService = requestService;
-        this.createTodosUseCase = new CreateTodosUseCase(requestService);
-        this.fetchTodosUseCase = new FetchTodosUseCase(requestService);
+        this.createTodosUseCase = new CreateTodosUseCase(Dependencias);
+        this.fetchTodosUseCase = new FetchTodosUseCase(Dependencias);
     }
 
     async execute(param) {

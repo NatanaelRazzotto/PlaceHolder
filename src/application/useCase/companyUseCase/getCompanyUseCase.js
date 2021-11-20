@@ -1,8 +1,8 @@
 const { RepositoryCompany } = require('../../../infrastructure/repository/repositoryCompany');
 
 class GetCompanyUseCase {
-    constructor() {
-        this.repositoryCompany = new RepositoryCompany();
+    constructor({ repositoryCompany }) {
+        this.repositoryCompany = repositoryCompany;
     }
     async execute(dataCompany) {
         return await this.getRegisterInDB(dataCompany);

@@ -3,8 +3,11 @@ const { RequestService } = require('../../../../src/servicesApplication/requestS
 
 describe('FetchPostUseCase', () => {
   let fetchPostUseCase;
+  let Dependencias = {
+    requestService: new RequestService(),
+  }
   beforeEach(() => {
-    fetchPostUseCase = new FetchPostUseCase(new RequestService());
+    fetchPostUseCase = new FetchPostUseCase(Dependencias);
   });
 
   it('fetchRequest para o Parametro', async () => {

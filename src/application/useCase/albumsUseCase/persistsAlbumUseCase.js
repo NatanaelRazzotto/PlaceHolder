@@ -3,11 +3,11 @@ const { FetchAlbumsUseCase } = require('./fetchAlbumsUseCase');
 const { PersistsPhotosUseCase } = require('../../useCase/photosUseCase/persistsPhotosUseCase');
 
 class PersistsAlbumUseCase {
-    constructor(requestService) {
+    constructor(Dependencias) {
         //this.requestService = requestService;
-        this.createAlbumUseCase = new CreateAlbumUseCase(requestService);
-        this.fetchAlbumsUseCase = new FetchAlbumsUseCase(requestService);
-        this.persistsPhotosUseCase = new PersistsPhotosUseCase(requestService);
+        this.createAlbumUseCase = new CreateAlbumUseCase(Dependencias);
+        this.fetchAlbumsUseCase = new FetchAlbumsUseCase(Dependencias);
+        this.persistsPhotosUseCase = new PersistsPhotosUseCase(Dependencias);
     }
 
     async execute(param) {

@@ -1,9 +1,15 @@
 const { PersistsTodosUseCase } = require('../../../../src/application/useCase/todosUseCase/persistsTodosUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryTodos } = require('../../../../src/infrastructure/repository/repositoryTodos');
 
 describe('PersistsTodosUseCase', () => {
+    let persistsTodosUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryTodos: new RepositoryTodos(),
+    }
     beforeEach(() => {
-        persistsTodosUseCase = new PersistsTodosUseCase(new RequestService());
+        persistsTodosUseCase = new PersistsTodosUseCase(Dependencias);
     });
     it('persistence - persistir todos ', async () => {
         const data = {

@@ -1,8 +1,8 @@
-const { RepositoryAddress } = require('../../../infrastructure/repository/repositoryAndress');
+//const { RepositoryAddress } = require('../../../infrastructure/repository/repositoryAndress');
 
 class GetAndressUseCase {
-    constructor() {
-        this.repositoryAndress = new RepositoryAddress();
+    constructor({ repositoryAndress }) {
+        this.repositoryAndress = repositoryAndress;
     }
     async execute(dataAdress) {
         return await this.getRegisterInDB(dataAdress);

@@ -1,9 +1,15 @@
 const { CreatePostsUseCase } = require('../../../../src/application/useCase/postsUseCase/createPostsUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryPost } = require('../../../../src/infrastructure/repository/repositoryPost');
 
 describe('CreatePostsUseCase', () => {
+    let createPostsUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryPost: new RepositoryPost(),
+    }
     beforeEach(() => {
-        createPostsUseCase = new CreatePostsUseCase(new RequestService());
+        createPostsUseCase = new CreatePostsUseCase(Dependencias);
     });
 
     it('preparCreateRegisterDB - create Post', async () => {

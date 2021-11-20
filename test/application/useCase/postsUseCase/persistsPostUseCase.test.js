@@ -1,9 +1,17 @@
 const { PersistsPostUseCase } = require('../../../../src/application/useCase/postsUseCase/persistsPostUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryPost } = require('../../../../src/infrastructure/repository/repositoryPost');
+const { RepositoryComment } = require('../../../../src/infrastructure/repository/repositoryComment');
 
 describe('persistsAlbumUseCase', () => {
+    let persistsPostUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryPost: new RepositoryPost(),
+        repositoryComment: new RepositoryComment(),
+    }
     beforeEach(() => {
-        persistsPostUseCase = new PersistsPostUseCase(new RequestService());
+        persistsPostUseCase = new PersistsPostUseCase(Dependencias);
     });
     it('persistence - persistir album ', async () => {
         const data = {

@@ -2,8 +2,12 @@ const { FetchTodosUseCase } = require('../../../../src/application/useCase/todos
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
 
 describe('FetchTodosUseCase', () => {
+    let fetchTodosUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+    }
     beforeEach(() => {
-        fetchTodosUseCase = new FetchTodosUseCase(new RequestService());
+        fetchTodosUseCase = new FetchTodosUseCase(Dependencias);
     });
 
     it('fetchRequest para o Parametro', async () => {

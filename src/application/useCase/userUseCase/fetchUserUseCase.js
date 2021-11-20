@@ -1,6 +1,6 @@
 const { UrlService } = require('../../../serviceDomain/urlService');
 class FetchUserUseCase {
-  constructor(requestService) {
+  constructor({ requestService }) {
     this.requestService = requestService;
   }
 

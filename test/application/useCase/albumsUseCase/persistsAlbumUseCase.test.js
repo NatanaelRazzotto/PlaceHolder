@@ -1,9 +1,17 @@
 const { PersistsAlbumUseCase } = require('../../../../src/application/useCase/albumsUseCase/persistsAlbumUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryAlbum } = require('../../../../src/infrastructure/repository/repositoryAlbum');
+const { RepositoryPhoto } = require('../../../../src/infrastructure/repository/repositoryPhoto');
 
 describe('persistsAlbumUseCase', () => {
+    let persistsAlbumUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryAlbum: new RepositoryAlbum(),
+        repositoryPhoto: new RepositoryPhoto(),
+    }
     beforeEach(() => {
-        persistsAlbumUseCase = new PersistsAlbumUseCase(new RequestService());
+        persistsAlbumUseCase = new PersistsAlbumUseCase(Dependencias);
     });
     it('persistence - persistir album ', async () => {
         const data = {

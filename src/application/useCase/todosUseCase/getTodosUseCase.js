@@ -1,8 +1,8 @@
-const { RepositoryTodos } = require('../../../infrastructure/repository/repositoryTodos');
+//const { RepositoryTodos } = require('../../../infrastructure/repository/repositoryTodos');
 
 class GetTodosUseCase {
-    constructor() {
-        this.repositoryTodos = new RepositoryTodos();
+    constructor({ repositoryTodos }) {
+        this.repositoryTodos = repositoryTodos;
     }
     async execute(dataTodos) {
         return await this.getRegisterInDB(dataTodos);

@@ -1,9 +1,15 @@
 const { PersistsPhotosUseCase } = require('../../../../src/application/useCase/photosUseCase/persistsPhotosUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryPhoto } = require('../../../../src/infrastructure/repository/repositoryPhoto');
 
 describe('PersistsPhotosUseCase', () => {
+    let persistsPhotosUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryPhoto: new RepositoryPhoto(),
+    }
     beforeEach(() => {
-        persistsPhotosUseCase = new PersistsPhotosUseCase(new RequestService());
+        persistsPhotosUseCase = new PersistsPhotosUseCase(Dependencias);
     });
     it('persistence - persistir album ', async () => {
         const data = {

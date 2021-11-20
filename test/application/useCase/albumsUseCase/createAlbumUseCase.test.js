@@ -1,9 +1,15 @@
 const { CreateAlbumUseCase } = require('../../../../src/application/useCase/albumsUseCase/createAlbumUseCase');
+const { RepositoryAlbum } = require('../../../../src/infrastructure/repository/repositoryAlbum');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
 
 describe('CreateAlbumUseCase', () => {
+    let createAlbumUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryAlbum: new RepositoryAlbum(),
+    }
     beforeEach(() => {
-        createAlbumUseCase = new CreateAlbumUseCase(new RequestService());
+        createAlbumUseCase = new CreateAlbumUseCase(Dependencias);
     });
 
     it('preparCreateRegisterDB - create Album', async () => {

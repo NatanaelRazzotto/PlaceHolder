@@ -1,8 +1,8 @@
 const { UrlService } = require('../../../serviceDomain/urlService');
 
 class FetchPostUseCase {
-  constructor(requesService) {
-    this.requesService = requesService;
+  constructor({ requestService }) {
+    this.requestService = requestService;
   }
   async execute(data) {
     return await this.fetchRequestForParameter(data);
@@ -12,7 +12,7 @@ class FetchPostUseCase {
     //  const requestPost = [];
     //  while (indicelimite > 0) {
     const newURL = UrlService.preparURLEspecific(urlFecth, urlIndice, urlFilter);
-    const request = await this.requesService.request(newURL);
+    const request = await this.requestService.request(newURL);
     //   requestPost.push(promisesNew);
     //     indicelimite--;
     //}
@@ -26,7 +26,7 @@ class FetchPostUseCase {
     const requestPost = [];
     while (indicelimite > 0) {
       const newURL = UrlService.preparURL(urlFecth, indicelimite);
-      const promisesNew = this.requesService.request(newURL);
+      const promisesNew = this.requestService.request(newURL);
       requestPost.push(promisesNew);
       indicelimite--;
     }

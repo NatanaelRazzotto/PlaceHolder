@@ -1,8 +1,8 @@
-const { RepositoryComment } = require('../../../infrastructure/repository/repositoryComment');
+//const { RepositoryComment } = require('../../../infrastructure/repository/repositoryComment');
 const { Comment } = require('../../../domain/comment');
 class CreateCommentsUseCase {
-    constructor() {
-        this.repositoryComment = new RepositoryComment();
+    constructor({ repositoryComment }) {
+        this.repositoryComment = repositoryComment;
     }
 
     async execute(dataComment) {

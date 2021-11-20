@@ -1,8 +1,8 @@
-const { RepositoryPhoto } = require('../../../infrastructure/repository/repositoryPhoto');
+//const { RepositoryPhoto } = require('../../../infrastructure/repository/repositoryPhoto');
 
 class GetPhotoUseCase {
-    constructor() {
-        this.repositoryPhoto = new RepositoryPhoto();
+    constructor({ repositoryPhoto }) {
+        this.repositoryPhoto = repositoryPhoto;
     }
     async execute(dataPhoto) {
         return await this.getRegisterInDB(dataPhoto);

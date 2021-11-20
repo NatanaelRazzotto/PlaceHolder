@@ -1,9 +1,15 @@
 const { PersistsCommentsUseCase } = require('../../../../src/application/useCase/commentsUseCase/persistsCommentsUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryComment } = require('../../../../src/infrastructure/repository/repositoryComment');
 
 describe('PersistsCommentsUseCase', () => {
+    let persistsCommentsUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryComment: new RepositoryComment(),
+    }
     beforeEach(() => {
-        persistsCommentsUseCase = new PersistsCommentsUseCase(new RequestService());
+        persistsCommentsUseCase = new PersistsCommentsUseCase(Dependencias);
     });
     it('persistence - persistir album ', async () => {
         const data = {

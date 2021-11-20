@@ -1,9 +1,9 @@
-const { RepositoryCompany } = require('../../../infrastructure/repository/repositoryCompany');
+//const { RepositoryCompany } = require('../../../infrastructure/repository/repositoryCompany');
 const { Company } = require('../../../domain/company');
 
 class PostCompanyUseCase {
-    constructor() {
-        this.repositoryCompany = new RepositoryCompany();
+    constructor({ repositoryCompany }) {
+        this.repositoryCompany = repositoryCompany;
     }
 
     async execute(dataCompany) {

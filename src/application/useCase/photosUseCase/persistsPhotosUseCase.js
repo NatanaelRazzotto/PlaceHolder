@@ -2,10 +2,10 @@ const { CreatePhotosUseCase } = require('./createPhotosUseCase');
 const { FetchPhotosUseCase } = require('./fetchPhotosUseCase');
 
 class PersistsPhotosUseCase {
-    constructor(requestService) {
+    constructor(Dependencias) {
         //this.requestService = requestService;
-        this.createPhotosUseCase = new CreatePhotosUseCase(requestService);
-        this.fetchPhotosUseCase = new FetchPhotosUseCase(requestService);
+        this.createPhotosUseCase = new CreatePhotosUseCase(Dependencias);
+        this.fetchPhotosUseCase = new FetchPhotosUseCase(Dependencias);
     }
 
     async execute(param) {

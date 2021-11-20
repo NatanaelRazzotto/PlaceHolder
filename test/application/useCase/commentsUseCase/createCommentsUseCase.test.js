@@ -1,9 +1,15 @@
 const { CreateCommentsUseCase } = require('../../../../src/application/useCase/commentsUseCase/createCommentsUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryComment } = require('../../../../src/infrastructure/repository/repositoryComment');
 
 describe('CreateCommentsUseCase', () => {
+    let createCommentsUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryComment: new RepositoryComment(),
+    }
     beforeEach(() => {
-        createCommentsUseCase = new CreateCommentsUseCase(new RequestService());
+        createCommentsUseCase = new CreateCommentsUseCase(Dependencias);
     });
 
     it('preparCreateRegisterDB - create Post', async () => {

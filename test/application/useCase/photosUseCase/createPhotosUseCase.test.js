@@ -1,9 +1,15 @@
 const { CreatePhotosUseCase } = require('../../../../src/application/useCase/photosUseCase/createPhotosUseCase');
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
+const { RepositoryPhoto } = require('../../../../src/infrastructure/repository/repositoryPhoto');
 
 describe('CreatePhotosUseCase', () => {
+    let createPhotosUseCase;
+    let Dependencias = {
+        requestService: new RequestService(),
+        repositoryPhoto: new RepositoryPhoto(),
+    }
     beforeEach(() => {
-        createPhotosUseCase = new CreatePhotosUseCase(new RequestService());
+        createPhotosUseCase = new CreatePhotosUseCase(Dependencias);
     });
 
     it('preparCreateRegisterDB - create photo', async () => {

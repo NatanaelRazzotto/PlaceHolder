@@ -2,10 +2,12 @@ const { FetchUserUseCase } = require('../../../../src/application/useCase/userUs
 const { RequestService } = require('../../../../src/servicesApplication/requestService');
 
 describe('FetchUserUseCase', () => {
-  const requestService = new RequestService();
   let fetchUserUseCase;
+  let Dependencias = {
+    requestService: new RequestService(),
+  }
   beforeAll(() => {
-    fetchUserUseCase = new FetchUserUseCase(requestService);
+    fetchUserUseCase = new FetchUserUseCase(Dependencias);
   });
 
   it('Execute - Requisições simultaneas', () => {
