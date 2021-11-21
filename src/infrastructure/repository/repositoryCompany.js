@@ -16,19 +16,6 @@ class RepositoryCompany {
         }
     }
 
-    async findAllWhere(companyObject) {
-        const Company = await ModelCompany.findAll({
-            where: {
-                name: companyObject.name
-            },
-            raw: true,
-            limit: 1
-        }).then(function (result) {
-            // console.log(" test + " + result);
-            return result;
-        });
-        return Company;
-    }
     async findCompany(companyObject) {
         const Company = await ModelCompany.findOne({
             where: {
@@ -38,17 +25,12 @@ class RepositoryCompany {
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
-        }).catch(function (errorResult) {
-            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-            // return result;
-        });
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findCompany', err.stack);//
+        })
         return Company;
     }
 
-    async findAll() {
-        const company = await ModelCompany.findAll();
-        return company;
-    }
 }
 
 module.exports = { RepositoryCompany };

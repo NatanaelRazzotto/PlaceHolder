@@ -25,7 +25,8 @@ class RepositoryPhoto {
             }
         }
         else {
-            throw new Error('O Album Associado não foi encontrado');//
+            // throw new Error('O Album Associado não foi encontrado');//
+            return null;
         }
     }
 
@@ -38,10 +39,9 @@ class RepositoryPhoto {
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
-        }).catch(function (errorResult) {
-            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-            // return result;
-        });
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findPhoto', err.stack);//
+        })
         return Photo;
     }
     async findAllPhotoFromAlbum(searchObject) {
@@ -53,16 +53,10 @@ class RepositoryPhoto {
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
-        }).catch(function (errorResult) {
-            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-            // return result;
-        });
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findAllPhotoFromAlbum', err.stack);//
+        })
         return Photo;
-    }
-
-    async findAll() {
-        const photo = await ModelPhoto.findAll();
-        return photo;
     }
 }
 

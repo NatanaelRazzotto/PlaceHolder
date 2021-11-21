@@ -98,18 +98,6 @@ describe('Repository Andress', () => {
         };
         try {
             await repositoryAddress.findAndress(Andress);
-            console.log(received);
-            expect(received).toEqual({
-                addressId: 1,
-                street: "Kulas Light",
-                suite: "Apt. 556",
-                city: "Gwenborough",
-                zipcode: "92998-3874",
-                lat: "-37.3159",
-                lng: "81.1496",
-                updatedAt: expect.any(Date),
-                createdAt: expect.any(Date),
-            });
         } catch (error) {
             expect(error.message).toBe('Um erro na consulta findAndress');
         }
