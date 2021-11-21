@@ -2,23 +2,24 @@ const { User } = require('../../src/domain/user');
 
 describe('Domain model-User', () => {
     it('create User', async () => {
-        let userId = 8;
         let id = 80;
-        let title = 'id nihil reprehenderit';
-
-        const user = new User(userId, id, title);
+        let name = 'Natanael Test';
+        let email = 'natanael@gmail.com';
+        let addressId = 1;
+        let phone = '(41)3589-7988';
+        let website = 'natanael.com';
+        let companyId = 1;
+        const user = new User(id, name, email, addressId, phone, website, companyId);
         console.log(user);
-        expect(album).toEqual(
+        expect(user).toEqual(
             expect.objectContaining({
+                id: expect.any(Number),
                 name: expect.any(String),
                 email: expect.any(String),
                 addressId: expect.any(Number),
                 phone: expect.any(String),
                 website: expect.any(String),
-                companyId =  expect.any(Number),
-                id: expect.any(Number),
-                userId: expect.any(Number),
-                title: expect.any(String),
+                companyId: expect.any(Number)
             }));
     });
 })

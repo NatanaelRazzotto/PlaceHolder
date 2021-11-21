@@ -1,18 +1,33 @@
 const { ModelPost } = require('../sequelize/models/modelPost');
+const { RepositoryUser } = require('../../../src/infrastructure/repository/repositoryUser');
 const { Op } = require("sequelize");
 
 class RepositoryPost {
+    constructor() {
+        this.repositoryUser = new RepositoryUser();
+    }
     async create(post) {
         await ModelPost.sync();
-        const validate = await this.findPost(post);
-        if ((validate != null)) {
-            //console.log("já exite o registro");
-            return validate;
+        const searchUser = {
+            id: post.userId,
+        }
+        const user = await this.repositoryUser.findUser(searchUser);
+        if ((user != null)) {
+
+            const validate = await this.findPost(post);
+            if ((validate != null)) {
+                //console.log("já exite o registro");
+                return validate;
+            }
+            else {
+                //console.log("não exite registro");
+                const received = await ModelPost.create(post);
+                return received.dataValues;
+            }
         }
         else {
-            //console.log("não exite registro");
-            const received = await ModelPost.create(post);
-            return received.dataValues;
+            return null
+            //throw new Error('O User Associado não foi encontrado');//
         }
     }
 
@@ -25,10 +40,9 @@ class RepositoryPost {
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
-        }).catch(function (errorResult) {
-            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-            // return result;
-        });
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findPost', err.stack);//
+        })
         return Post;
     }
     async findAllPostFromUser(searchObject) {
@@ -40,17 +54,12 @@ class RepositoryPost {
         }).then(function (result) {
             // console.log(" test + " + result);
             return result;
-        }).catch(function (errorResult) {
-            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-            // return result;
-        });
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findAllPostFromUser', err.stack);//
+        })
         return Post;
     }
 
-    async findAll() {
-        const post = await ModelPost.findAll();
-        return post;
-    }
 }
 
 module.exports = { RepositoryPost };

@@ -19,7 +19,7 @@ class RepositoryUser {
     }
   }
 
-  async findUser(userObject) {
+  async findUser(userObject) {//findByPk
     const User = await ModelUser.findOne({
       where: {
         id: userObject.id
@@ -28,72 +28,10 @@ class RepositoryUser {
     }).then(function (result) {
       // console.log(" test + " + result);
       return result;
-    }).catch(function (errorResult) {
-      // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-      // return result;
-    });
+    }).catch(function (err) {
+      throw new Error('Um erro na consulta findUser', err.stack);//
+    })
     return User;
-  }
-
-  /* async findAllUserFromName(searchObject) {
-     const User = await ModelUser.findAll({
-       where: {
-         userId: searchObject.userId
-       },
-       raw: true
-     }).then(function (result) {
-       // console.log(" test + " + result);
-       return result;
-     }).catch(function (errorResult) {
-       // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-       // return result;
-     });
-     return User;
-   }*/
-
-  //https://sequelize.org/master/manual/model-querying-finders.html
-  async findAll() {
-    const users = await ModelUser.findAll();
-    return users;
-  }
-
-  async findByPk(pk) {
-    const user = await ModelUser.findByPk(pk);
-    return user;
-  }
-
-  async findAllWhere(user) {
-    const User = await ModelUser.findAll({
-      where: {
-        id: user.id
-      },
-      raw: true,
-      limit: 1
-    }).then(function (result) {
-      //  console.log(" test + " + result);
-      return result;
-    });
-    return User;
-  }
-
-  async updateById(user) {
-    const userToChange = await this.findByPk(user.id);
-    Object.entries(user).forEach(([key, value]) => {
-      userToChange[key] = value;
-    });
-
-    const result = await userToChange.save();
-    return result;
-  }
-
-  async deleteByIdWhere(idUser) {
-    const received = await ModelUser.destroy({ where: { idUser } });
-    return received;
-  }
-  async deleteByIdModel(idUser) {
-    const userModel = await this.findByPk(idUser);
-    const received = userModel.destroy();
-    return received;
   }
 }
 

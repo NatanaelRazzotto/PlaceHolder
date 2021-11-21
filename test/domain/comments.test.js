@@ -14,7 +14,7 @@ describe('Domain model-Comment', () => {
         expect(comment).toEqual(
             expect.objectContaining({
                 id: expect.any(Number),
-                userId: expect.any(Number),
+                postId: expect.any(Number),
                 name: expect.any(String),
                 email: expect.any(String),
                 body: expect.any(String),

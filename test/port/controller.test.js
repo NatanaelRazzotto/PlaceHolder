@@ -8,8 +8,8 @@ describe('Controller', () => {
     });
     it('Persistencia de Dados Usuário', async () => {
         const maxData = 10;
-        const received = await controller.FetchCreateDataUsers(maxData);
-        console.log(received);
+        // const received = await controller.FetchCreateDataUsers(maxData);
+        // console.log(received);
         /* expect(received).toEqual(
              expect.arrayContaining([
                  expect.objectContaining({

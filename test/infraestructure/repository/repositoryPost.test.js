@@ -16,16 +16,62 @@ describe('Repository Post', () => {
             title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
             body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
         };
-        const received = await repositoryPost.create(post);
-        console.log(received);
-        expect(received).toEqual({
+        try {
+            const received = await repositoryPost.create(post);
+            console.log(received);
+            expect(received).toEqual({
+                userId: 1,
+                id: 1,
+                title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                updatedAt: expect.any(Date),
+                createdAt: expect.any(Date),
+            });
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    });
+
+    it('create Post - NEW', async () => {
+        const post = {
             userId: 1,
+            id: 60,
+            title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        };
+        try {
+            const received = await repositoryPost.create(post);
+            console.log(received);
+            expect(received).toEqual({
+                userId: 1,
+                id: 60,
+                title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                updatedAt: expect.any(Date),
+                createdAt: expect.any(Date),
+            });
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    });
+
+    it('create Post - ERROR', async () => {
+        const post = {
+            userId: 60,
             id: 1,
             title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-            updatedAt: expect.any(Date),
-            createdAt: expect.any(Date),
-        });
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        };
+        try {
+            const received = await repositoryPost.create(post);
+            console.log(received);
+            expect(received).toEqual(null);
+
+        } catch (error) {
+            console.error(error.message);
+        }
     });
     it('Pesquisar - findPost', async () => {
         const searchObject = {
@@ -34,16 +80,34 @@ describe('Repository Post', () => {
             title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
             body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
         };
-        const received = await repositoryPost.findPost(searchObject);
-        console.log(received);
-        expect(received).toEqual({
+        try {
+            const received = await repositoryPost.findPost(searchObject);
+            console.log(received);
+            expect(received).toEqual({
+                userId: 1,
+                id: 1,
+                title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                updatedAt: expect.any(Date),
+                createdAt: expect.any(Date),
+            });
+        } catch (error) {
+            console.error(error.message);
+        }
+
+    });
+    it('Pesquisar - findPost - ERROS', async () => {
+        const searchObject = {
             userId: 1,
             id: 1,
             title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-            updatedAt: expect.any(Date),
-            createdAt: expect.any(Date),
-        });
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        };
+        try {
+            await repositoryPost.findPost(searchObject);
+        } catch (error) {
+            expect(error.message).toBe('Um erro na consulta findPost');
+        }
 
     });
     it('Pesquisar - findAllPhotoFromAlbum', async () => {
@@ -51,20 +115,35 @@ describe('Repository Post', () => {
             userId: 1,
             id: 1,
         };
-        const received = await repositoryPost.findAllPostFromUser(searchObject);
-        console.log(received);
-        expect(received).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({
-                    userId: 1,
-                    id: 1,
-                    title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                    body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-                    updatedAt: expect.any(Date),
-                    createdAt: expect.any(Date),
-                })
-            ])
-        );
+        try {
+            const received = await repositoryPost.findAllPostFromUser(searchObject);
+            console.log(received);
+            expect(received).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        userId: 1,
+                        id: 1,
+                        title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                        body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                        updatedAt: expect.any(Date),
+                        createdAt: expect.any(Date),
+                    })
+                ])
+            );
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+    it('Pesquisar - findAllPhotoFromAlbum - ERROR', async () => {
+        const searchObject = {
+            userId: 'UM',
+            id: 1,
+        };
+        try {
+            await repositoryPost.findAllPostFromUser(searchObject);
+        } catch (error) {
+            expect(error.message).toBe('Um erro na consulta findAllPostFromUser');
+        }
     })
 
 })

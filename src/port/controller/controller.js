@@ -38,11 +38,11 @@ class Controller {
             repositoryUser: new RepositoryUser(),
             repositoryAddress: new RepositoryAddress(),
             repositoryCompany: new RepositoryCompany(),
-            repositoryPost: new RepositoryPost(),
+            repositoryPost: new RepositoryPost(),//this.repositoryUser
             repositoryComment: new RepositoryComment(),
-            repositoryAlbum: new RepositoryAlbum(),
-            repositoryPhoto: new RepositoryPhoto(),
-            repositoryTodos: new RepositoryTodos(),
+            repositoryAlbum: new RepositoryAlbum(),//this.repositoryUser
+            repositoryPhoto: new RepositoryPhoto(),//this.repositoryAlbum
+            repositoryTodos: new RepositoryTodos(),//this.repositoryUser
         }
     }
     // #region User Operacoes 

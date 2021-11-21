@@ -11,26 +11,10 @@ class RepositoryAddress {
         }
         else {
             //console.log("não exite registro");
+            console.log(address);
             const received = await ModelAddress.create(address);
             return received.dataValues;
         }
-    }
-
-    async findAllWhere(addressObject) {
-        const Address = await ModelAddress.findAll({
-            where: {
-                [Op.and]: [
-                    { lat: addressObject.lat },
-                    { lng: addressObject.lng }
-                ]
-            },
-            raw: true,
-            limit: 1
-        }).then(function (result) {
-            //  console.log(" test + " + result);
-            return result;
-        });
-        return Address;
     }
 
     async findAndress(addressObject) {
@@ -43,19 +27,13 @@ class RepositoryAddress {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
-        }).catch(function (errorResult) {
-            // console.error("ocorreu um erro com o findAlbumFromUser", errorResult);
-            // return result;
-        });
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findAndress', err.stack);//
+        })
         return Address;
     }
 
-    async findAll() {
-        const results = await ModelAddress.findAll();
-        return results;
-    }
 }
 
 module.exports = { RepositoryAddress };
