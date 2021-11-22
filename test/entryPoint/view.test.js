@@ -854,6 +854,356 @@ describe('VIEW - Entry Point APP', () => {
     });
 
 
+    it('persistenciaUsersDependences', async () => {
+        try {
+            const user = {
+                maxIndice: 2
+            };
+            let result = await view.persistenciaUsersDependences(user);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 11000);
+
+    it('persistenciaUsersDependences - Valida Numero', async () => {
+        try {
+            const user = {
+                maxIndice: 'dois'
+            };
+            let result = await view.persistenciaUsersDependences(user);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    //
+    it('persistenciaPostsDependences', async () => {
+        try {
+            const post = {
+                id: 1
+            };
+            let result = await view.persistenciaPostsDependences(post);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    it('persistenciaPostsDependences - Valida Numero', async () => {
+        try {
+            const post = {
+                id: 'um'
+            };
+            let result = await view.persistenciaPostsDependences(post);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    //
+    it('persistenciaCommentsDependences', async () => {
+        try {
+            const comment = {
+                id: 1
+            };
+            let result = await view.persistenciaCommentsDependences(comment);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    it('persistenciaCommentsDependences - Valida Numero', async () => {
+        try {
+            const comment = {
+                id: 'um'
+            };
+            let result = await view.persistenciaCommentsDependences(comment);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    //
+    it('persistenciaAlbumDependences', async () => {
+        try {
+            const album = {
+                id: 1
+            };
+            let result = await view.persistenciaAlbumDependences(album);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('persistenciaAlbumDependences - Valida Numero', async () => {
+        try {
+            const album = {
+                id: 'um'
+            };
+            let result = await view.persistenciaAlbumDependences(album);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    //
+    it('persistenciaPhotosDependences', async () => {
+        try {
+            const photos = {
+                id: 1
+            };
+            let result = await view.persistenciaPhotosDependences(photos);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('persistenciaPhotosDependences - Valida Numero', async () => {
+        try {
+            const photos = {
+                id: 'um'
+            };
+            let result = await view.persistenciaPhotosDependences(photos);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    //
+    it('persistenciaTodosDependences', async () => {
+        try {
+            const todos = {
+                id: 1
+            };
+            let result = await view.persistenciaTodosDependences(todos);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('persistenciaTodosDependences - Valida Numero', async () => {
+        try {
+            const todos = {
+                id: 'um'
+            };
+            let result = await view.persistenciaTodosDependences(todos);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    ///
+    //
+    it('getDataUserDependences', async () => {
+        try {
+            const user = {
+                id: 1
+            };
+            let result = await view.getDataUserDependences(user);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataUserDependences - Valida Numero', async () => {
+        try {
+            const user = {
+                id: 'dois'
+            };
+            let result = await view.getDataUserDependences(user);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    //
+    it('getDataPostsDependences', async () => {
+        try {
+            const post = {
+                id: 1
+            };
+            let result = await view.getDataPostsDependences(post);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataPostsDependences - Valida Numero', async () => {
+        try {
+            const post = {
+                id: 'um'
+            };
+            let result = await view.getDataPostsDependences(post);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    //
+    it('getDataCommentsDependences', async () => {
+        try {
+            const comment = {
+                id: 1
+            };
+            let result = await view.getDataCommentsDependences(comment);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    it('getDataCommentsDependences - Valida Numero', async () => {
+        try {
+            const comment = {
+                id: 'um'
+            };
+            let result = await view.getDataCommentsDependences(comment);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    //
+    it('getDataAlbumDependences', async () => {
+        try {
+            const album = {
+                id: 1
+            };
+            let result = await view.getDataAlbumDependences(album);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataAlbumDependences - Valida Numero', async () => {
+        try {
+            const album = {
+                id: 'um'
+            };
+            let result = await view.getDataAlbumDependences(album);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    //
+    it('getDataPhotosDependences', async () => {
+        try {
+            const photos = {
+                id: 1
+            };
+            let result = await view.getDataPhotosDependences(photos);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataPhotosDependences - Valida Numero', async () => {
+        try {
+            const photos = {
+                id: 'um'
+            };
+            let result = await view.getDataPhotosDependences(photos);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+    //
+    it('getDataTodosDependences', async () => {
+        try {
+            const todos = {
+                id: 1
+            };
+            let result = await view.getDataTodosDependences(todos);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataTodosDependences - Valida Numero', async () => {
+        try {
+            const todos = {
+                id: 'um'
+            };
+            let result = await view.getDataTodosDependences(todos);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 1000);
+
+
+
 
 
 

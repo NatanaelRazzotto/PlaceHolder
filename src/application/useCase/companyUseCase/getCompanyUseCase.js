@@ -1,4 +1,4 @@
-const { RepositoryCompany } = require('../../../infrastructure/repository/repositoryCompany');
+//const { RepositoryCompany } = require('../../../infrastructure/repository/repositoryCompany');
 
 class GetCompanyUseCase {
     constructor({ repositoryCompany }) {

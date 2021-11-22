@@ -541,7 +541,7 @@ class View {
         }
     }
 
-    async persistenciaTodosDependences(user) {
+    async persistenciaTodosDependences(todos) {
 
         if (Number.isInteger(todos.id)) {
             console.log('*****-REALIZANDO PRECESSAMENTO-*****');

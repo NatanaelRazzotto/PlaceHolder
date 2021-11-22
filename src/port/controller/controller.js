@@ -47,79 +47,127 @@ class Controller {
     }
     // #region User Operacoes 
     async persistsDataUsersDependences(search) {
-        const persistsUserUseCase = new PersistsUserUseCase(this.Dependencias);
+        try {
+            const persistsUserUseCase = new PersistsUserUseCase(this.Dependencias);
 
-        const data = {
-            max: search.maxIndice
-        };
-        const userPersists = await persistsUserUseCase.execute(data);
-        return userPersists;
+            const data = {
+                max: search.maxIndice
+            };
+            const userPersists = await persistsUserUseCase.execute(data);
+            return userPersists;
+        }
+        catch (e) {
+            throw new Error('Um erro na persistencia (persistsDataUsersDependences)', e.stack);//
+        }
     }
     async getDataUserDependences(search) {
-        const getUserUseCase = new GetUserUseCase(this.Dependencias);
-        const data = {
-            id: search.id
-        };
-        const userPersists = await getUserUseCase.execute(data);
-        return userPersists;
+        try {
+            const getUserUseCase = new GetUserUseCase(this.Dependencias);
+            const data = {
+                id: search.id
+            };
+            const userPersists = await getUserUseCase.execute(data);
+            return userPersists;
+        }
+        catch (e) {
+            throw new Error('Um erro no GET (getDataUserDependences)', e.stack);//
+        }
     }
     async getDataAndressDependences(search) {
-        const getAndressUseCase = new GetAndressUseCase(this.Dependencias);
-        const data = {
-            lat: search.lat,
-            lng: search.lng,
-        };
-        const andressPersists = await getAndressUseCase.execute(data);
-        return andressPersists;
+        try {
+            const getAndressUseCase = new GetAndressUseCase(this.Dependencias);
+            const data = {
+                lat: search.lat,
+                lng: search.lng,
+            };
+            const andressPersists = await getAndressUseCase.execute(data);
+            return andressPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getDataAndressDependences)', e.stack);//
+        }
+    }
+    async getCompanyDependences(search) {
+        try {
+            const getCompanyUseCase = new GetCompanyUseCase(this.Dependencias);
+            const data = {
+                name: search.name,
+            };
+            const companyPersists = await getCompanyUseCase.execute(data);
+            return companyPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getCompanyDependences)', e.stack);//
+        }
     }
     // #endregion
     // #region Todos Operacoes
     async persistsDataTodosDependences(search) {
-        const persistsTodosUseCase = new PersistsTodosUseCase(this.Dependencias);
-        const data = {
-            urlFecth: 'https://jsonplaceholder.typicode.com/users',
-            urlIndice: search.id
-        };
-        const todosPersists = await persistsTodosUseCase.execute(data);
-        return todosPersists;
+        try {
+            const persistsTodosUseCase = new PersistsTodosUseCase(this.Dependencias);
+            const data = {
+                urlFecth: 'https://jsonplaceholder.typicode.com/users',
+                urlIndice: search.id
+            };
+            const todosPersists = await persistsTodosUseCase.execute(data);
+            return todosPersists;
+        } catch (e) {
+            throw new Error('Um erro na persistencia (persistsDataTodosDependences)', e.stack);//
+        }
     }
     async getDataTodosDependences(search) {
-        const getTodosUseCase = new GetTodosUseCase(this.Dependencias);
-        const data = {
-            userId: search.id
-        };
-        const todosPersists = await getTodosUseCase.execute(data);
-        return todosPersists;
+        try {
+            const getTodosUseCase = new GetTodosUseCase(this.Dependencias);
+            const data = {
+                userId: search.id
+            };
+            const todosPersists = await getTodosUseCase.execute(data);
+            return todosPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getDataTodosDependences)', e.stack);//
+        }
     }
     // #endregion
     // #region Photos Operacoes 
     async persistsDataPostsDependences(search) {
-        const persistsPostUseCase = new PersistsPostUseCase(this.Dependencias);
-        const data = {
-            urlFecth: 'https://jsonplaceholder.typicode.com/users',
-            urlIndice: search.id
-        };
-        const postPersists = await persistsPostUseCase.execute(data);
-        return postPersists;
+        try {
+            const persistsPostUseCase = new PersistsPostUseCase(this.Dependencias);
+            const data = {
+                urlFecth: 'https://jsonplaceholder.typicode.com/users',
+                urlIndice: search.id
+            };
+            const postPersists = await persistsPostUseCase.execute(data);
+            return postPersists;
+
+        } catch (e) {
+            throw new Error('Um erro na persistencia (persistsDataPostsDependences)', e.stack);//
+        }
     }
     async getDataPostsDependences(search) {
-        const getPostUseCase = new GetPostUseCase(this.Dependencias);
-        const data = {
-            userId: search.id
-        };
-        const postsPersists = await getPostUseCase.execute(data);
-        return postsPersists;
+        try {
+            const getPostUseCase = new GetPostUseCase(this.Dependencias);
+            const data = {
+                userId: search.id
+            };
+            const postsPersists = await getPostUseCase.execute(data);
+            return postsPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getDataPostsDependences)', e.stack);//
+        }
     }
     // #endregion
     // #region Photos Operacoes 
     async persistsDataPhotosDependences(search) {
-        const persistsPhotosUseCase = new PersistsPhotosUseCase(this.Dependencias);
-        const data = {
-            urlFecth: 'https://jsonplaceholder.typicode.com/albums',
-            urlIndice: search.id
-        };
-        const photoPersists = await persistsPhotosUseCase.execute(data);
-        return photoPersists;
+        try {
+            const persistsPhotosUseCase = new PersistsPhotosUseCase(this.Dependencias);
+            const data = {
+                urlFecth: 'https://jsonplaceholder.typicode.com/albums',
+                urlIndice: search.id
+            };
+            const photoPersists = await persistsPhotosUseCase.execute(data);
+            return photoPersists;
+        } catch (e) {
+            throw new Error('Um erro na persistencia (persistsDataPhotosDependences)', e.stack);//
+        }
+
     }
     async getDataPhotosDependences(search) {
         const getPhotoUseCase = new GetPhotoUseCase(this.Dependencias);
@@ -132,13 +180,17 @@ class Controller {
     // #endregion
     // #region Album Operacoes 
     async persistsDataCommentsDependences(search) {
-        const persistsCommentsUseCase = new PersistsCommentsUseCase(this.Dependencias);
-        const data = {
-            urlFecth: 'https://jsonplaceholder.typicode.com/posts',
-            urlIndice: search.id
-        };
-        const commentsPersists = await persistsCommentsUseCase.execute(data);
-        return commentsPersists;
+        try {
+            const persistsCommentsUseCase = new PersistsCommentsUseCase(this.Dependencias);
+            const data = {
+                urlFecth: 'https://jsonplaceholder.typicode.com/posts',
+                urlIndice: search.id
+            };
+            const commentsPersists = await persistsCommentsUseCase.execute(data);
+            return commentsPersists;
+        } catch (e) {
+            throw new Error('Um erro na persistencia (persistsDataCommentsDependences)', e.stack);//
+        }
     }
     async getDataCommentsDependences(search) {
         const getCommentUseCase = new GetCommentUseCase(this.Dependencias);
@@ -151,13 +203,17 @@ class Controller {
     // #endregion
     // #region Album Operacoes 
     async persistsDataAlbumDependences(search) {
-        const persistsAlbumUseCase = new PersistsAlbumUseCase(this.Dependencias);
-        const data = {
-            urlFecth: 'https://jsonplaceholder.typicode.com/users',
-            urlIndice: search.id
-        };
-        const albumPersists = await persistsAlbumUseCase.execute(data);
-        return albumPersists;
+        try {
+            const persistsAlbumUseCase = new PersistsAlbumUseCase(this.Dependencias);
+            const data = {
+                urlFecth: 'https://jsonplaceholder.typicode.com/users',
+                urlIndice: search.id
+            };
+            const albumPersists = await persistsAlbumUseCase.execute(data);
+            return albumPersists;
+        } catch (e) {
+            throw new Error('Um erro na persistencia (persistsDataAlbumDependences)', e.stack);//
+        }
     }
     async getDataAlbumDependences(search) {
         const getAlbumUseCase = new GetAlbumUseCase(this.Dependencias);
