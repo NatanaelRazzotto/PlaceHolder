@@ -185,6 +185,39 @@ describe('VIEW - Entry Point APP', () => {
 
     });
 
+    it('tablesComments', async () => {
+        const comment = [{
+            id: 7,
+            postId: 2,
+            name: 'repellat consequatur praesentium vel minus molestias voluptatum',
+            email: 'Dallas@ole.me',
+            body: 'maiores sed dolores similique labore et inventore et\n' +
+                'quasi temporibus esse sunt id et\n' +
+                'eos voluptatem aliquam\n' +
+                'aliquid ratione corporis molestiae mollitia quia et magnam dolor',
+            createdAt: '2021-11-16T15:06:03.000Z',
+            updatedAt: '2021-11-16T15:06:03.000Z'
+        }];
+        let result = view.tablesComments(comment);
+        console.log(result);
+        expect(result).toEqual(true);
+    });
+
+    it('tablesComments NOT IsArray', async () => {
+        const comment = {
+            id: 7,
+            postId: 2,
+            name: 'repellat consequatur praesentium vel minus molestias voluptatum',
+            email: 'Dallas@ole.me',
+            body: 'maiores sed dolores similique labore et inventore et\n',
+            createdAt: '2021-11-16T15:06:03.000Z',
+            updatedAt: '2021-11-16T15:06:03.000Z'
+        };
+        let result = view.tablesComments(comment);
+        console.log(result);
+        expect(result).toEqual(false);
+    });
+
     it('bindTableAlbum', async () => {
         const album = {
             id: 17,
@@ -200,6 +233,20 @@ describe('VIEW - Entry Point APP', () => {
         expect(result[2].Title).toEqual(album.title);
         expect(result[3].CreatedAt).toEqual(album.createdAt.toString());
         expect(result[4].UpdatedAt).toEqual(album.updatedAt.toString());
+
+    });
+
+    it('tablesAlbums', async () => {
+        const album = [{
+            id: 17,
+            userId: 2,
+            title: 'aut minima voluptatem ut velit',
+            createdAt: '2021-11-17T00:46:54.000Z',
+            updatedAt: '2021-11-17T00:46:54.000Z'
+        }];
+        let result = view.tablesAlbums(album);
+        console.log(result);
+        expect(result).toEqual(true);
 
     });
 
@@ -225,6 +272,35 @@ describe('VIEW - Entry Point APP', () => {
 
     });
 
+    it('tablesPhotos', async () => {
+        const photo = [{
+            id: 99,
+            albumId: 2,
+            title: 'magnam dolor sed enim vel optio consequuntur',
+            url: 'https://via.placeholder.com/600/b04f2e',
+            thumbnailUrl: 'https://via.placeholder.com/150/b04f2e',
+            createdAt: '2021-11-10T02:47:09.000Z',
+            updatedAt: '2021-11-10T02:47:09.000Z'
+        }];
+        let result = view.tablesPhotos(photo);
+        console.log(result);
+        expect(result).toEqual(true);
+    });
+    it('tablesPhotos - ERROR IsArray', async () => {
+        const photo = {
+            id: 99,
+            albumId: 2,
+            title: 'magnam dolor sed enim vel optio consequuntur',
+            url: 'https://via.placeholder.com/600/b04f2e',
+            thumbnailUrl: 'https://via.placeholder.com/150/b04f2e',
+            createdAt: '2021-11-10T02:47:09.000Z',
+            updatedAt: '2021-11-10T02:47:09.000Z'
+        };
+        let result = view.tablesPhotos(photo);
+        console.log(result);
+        expect(result).toEqual(false);
+    });
+
     it('bindTableTodos', async () => {
         const todo = {
             id: 38,
@@ -242,6 +318,34 @@ describe('VIEW - Entry Point APP', () => {
         expect(result[3].Completed).toEqual(todo.completed.toString());
         expect(result[4].CreatedAt).toEqual(todo.createdAt.toString());
         expect(result[5].UpdatedAt).toEqual(todo.updatedAt.toString());
+    });
+
+    it('tablesTodos - NOT - IsArray', async () => {
+        const todo = {
+            id: 38,
+            userId: 2,
+            title: 'totam quia non',
+            completed: 0,
+            createdAt: '2021-11-17T00:46:58.000Z',
+            updatedAt: '2021-11-17T00:46:58.000Z'
+        };
+        let result = view.tablesTodos(todo);
+        console.log(result);
+        expect(result).toEqual(false);
+    });
+
+    it('tablesTodos', async () => {
+        const todo = [{
+            id: 38,
+            userId: 2,
+            title: 'totam quia non',
+            completed: 0,
+            createdAt: '2021-11-17T00:46:58.000Z',
+            updatedAt: '2021-11-17T00:46:58.000Z'
+        }];
+        let result = view.tablesTodos(todo);
+        console.log(result);
+        expect(result).toEqual(true);
     });
 
     it('bindTablePostDTO', async () => {
@@ -263,6 +367,79 @@ describe('VIEW - Entry Point APP', () => {
         expect(arrayDTO[3]).toEqual(postItem.updatedAt);
         expect(arrayDTO[4]).toEqual(postItem.createdAt);
     });
+
+    it('tablesPosts', async () => {
+        const postItem = [{
+            postID: 13,
+            userId: 2,
+            title: 'dolorum ut in voluptas mollitia et saepe quo animi',
+            dependentes: { Comments: [Array] },
+            updatedAt: '2021-11-17T00:46:52.000Z',
+            createdAt: '2021-11-17T00:46:52.000Z'
+        },]
+
+        let result = view.tablesPosts('Test', postItem);
+        console.log(result)
+        expect(result).toEqual(false);
+
+    });
+
+    it('tablesPosts - NEW IsArray', async () => {
+        const postItem = {
+            postID: 13,
+            userId: 2,
+            title: 'dolorum ut in voluptas mollitia et saepe quo animi',
+            dependentes: { Comments: [Array] },
+            updatedAt: '2021-11-17T00:46:52.000Z',
+            createdAt: '2021-11-17T00:46:52.000Z'
+        }
+
+        let result = view.tablesPosts('Test', postItem);
+        console.log(result)
+        expect(result).toEqual(false);
+
+    });
+    it('bindTableAlbumDTO', async () => {
+        const albumItem = {
+            albumID: 20,
+            userId: 2,
+            title: 'voluptas rerum iure ut enim',
+            dependentes: { pesistPhoto: [Array] },
+            updatedAt: '2021-11-17T00:46:54.000Z',
+            createdAt: '2021-11-17T00:46:54.000Z'
+        }
+
+        let result = view.bindTableAlbumDTO('Test', albumItem);
+        console.log(result);
+        let arrayDTO = result[0].Album;
+        expect(arrayDTO[0]).toEqual(albumItem.albumID);
+        expect(arrayDTO[1]).toEqual(albumItem.userId);
+        expect(arrayDTO[2]).toEqual(albumItem.title);
+        expect(arrayDTO[3]).toEqual(albumItem.updatedAt);
+        expect(arrayDTO[4]).toEqual(albumItem.createdAt);
+    });
+    it('bindTableUserDTO', async () => {
+        const useritem = {
+            userId: 1,
+            addressId: 1,
+            companyId: 1,
+            name: 'Leanne Graham',
+            dependentes: { pesistPost: [Array], pesistAlbum: [Array], pesistTodos: [Array] },
+            updatedAt: '2021-11-10T01:48:47.000Z',
+            createdAt: '2021--10T01:48:47.000Z'
+        }
+        let result = view.bindTableUserDTO('Test ', useritem);
+        console.log(result);
+        let arrayDTO = result[0].User;
+        expect(arrayDTO[0]).toEqual(useritem.userId);
+        expect(arrayDTO[1]).toEqual(useritem.name);
+        expect(arrayDTO[2]).toEqual(useritem.addressId);
+        expect(arrayDTO[3]).toEqual(useritem.companyId);
+        expect(arrayDTO[4]).toEqual(useritem.updatedAt);
+        expect(arrayDTO[5]).toEqual(useritem.createdAt);
+
+    });
+
     it('tableCommentDTO', async () => {
         const commentItem = [{
             commentID: 7,
@@ -284,15 +461,400 @@ describe('VIEW - Entry Point APP', () => {
         for (let index = 0; index < commentItem.length; index++) {
 
             let arrayDTO = result[index].Comment;
-            //        console.log(result[0].Comment);
             expect(arrayDTO[0]).toEqual(commentItem[index].commentID);
             expect(arrayDTO[1]).toEqual(commentItem[index].postId);
             expect(arrayDTO[2]).toEqual(commentItem[index].name);
             expect(arrayDTO[3]).toEqual(commentItem[index].updatedAt);
             expect(arrayDTO[4]).toEqual(commentItem[index].createdAt);
-
         }
-
-
     });
+    it('tablePhotosDTO', async () => {
+        const photoItem = [{
+            photoID: 96,
+            albumId: 2,
+            title: 'dolore esse a in eos sed',
+            updatedAt: '2021-11-10T02:47:09.000Z',
+            createdAt: '2021-11-10T02:47:09.000Z'
+        },
+        {
+            photoID: 97,
+            albumId: 2,
+            title: 'labore magnam officiis nemo et',
+            updatedAt: '2021-11-10T02:47:09.000Z',
+            createdAt: '2021-11-10T02:47:09.000Z'
+        }];
+        let result = view.tablePhotosDTO('Test', photoItem);
+        console.log(result);
+
+        for (let index = 0; index < photoItem.length; index++) {
+            let arrayDTO = result[index].Photo;
+            console.log(arrayDTO)
+            expect(arrayDTO[0]).toEqual(photoItem[index].photoID);
+            expect(arrayDTO[1]).toEqual(photoItem[index].albumId);
+            expect(arrayDTO[2]).toEqual(photoItem[index].title);
+            expect(arrayDTO[3]).toEqual(photoItem[index].updatedAt);
+            expect(arrayDTO[4]).toEqual(photoItem[index].createdAt);
+        }
+    });
+    it('tableTodosDTO', async () => {
+        const todosItem = [{
+            photoID: 34,
+            userId: 2,
+            title: 'porro aut necessitatibus eaque distinctio',
+            updatedAt: '2021-11-17T00:46:58.000Z',
+            createdAt: '2021-11-17T00:46:58.000Z'
+        },
+        {
+            photoID: 35,
+            userId: 2,
+            title: 'repellendus veritatis molestias dicta incidunt',
+            updatedAt: '2021-11-17T00:46:58.000Z',
+            createdAt: '2021-11-17T00:46:58.000Z'
+        }];
+        let result = view.tableTodosDTO('Test', todosItem);
+        console.log(result);
+
+        for (let index = 0; index < todosItem.length; index++) {
+            let arrayDTO = result[index].Todo;
+            // console.log(arrayDTO)
+            expect(arrayDTO[0]).toEqual(todosItem[index].photoID);
+            expect(arrayDTO[1]).toEqual(todosItem[index].userId);
+            expect(arrayDTO[2]).toEqual(todosItem[index].title);
+            expect(arrayDTO[3]).toEqual(todosItem[index].updatedAt);
+            expect(arrayDTO[4]).toEqual(todosItem[index].createdAt);
+        }
+    });
+
+
+    /*it('tablesUsersDTO', async () => {
+        const useritem = {
+            userId: 1,
+            addressId: 1,
+            companyId: 1,
+            name: 'Leanne Graham',
+            dependentes: { pesistPost: [Array], pesistAlbum: [Array], pesistTodos: [Array] },
+            updatedAt: '2021-11-10T01:48:47.000Z',
+            createdAt: '2021--10T01:48:47.000Z'
+        }
+        let result = view.tablesUsersDTO('Test ', useritem);
+        console.log(result);
+        let arrayDTO = result[0].User;
+        expect(arrayDTO[0]).toEqual(useritem.userId);
+        expect(arrayDTO[1]).toEqual(useritem.name);
+        expect(arrayDTO[2]).toEqual(useritem.addressId);
+        expect(arrayDTO[3]).toEqual(useritem.companyId);
+        expect(arrayDTO[4]).toEqual(useritem.updatedAt);
+        expect(arrayDTO[5]).toEqual(useritem.createdAt);
+
+    });*/
+
+    it('tablesAlbumsDTO', async () => {
+        try {
+            const albumItem = [{
+                albumID: 2,
+                userId: 2,
+                title: 'album test',
+                dependentes: {
+                    pesistPhoto: [{
+                        photoID: 96,
+                        albumId: 2,
+                        title: 'dolore esse a in eos sed',
+                        updatedAt: '2021-11-10T02:47:09.000Z',
+                        createdAt: '2021-11-10T02:47:09.000Z'
+                    },
+                    {
+                        photoID: 97,
+                        albumId: 2,
+                        title: 'labore magnam officiis nemo et',
+                        updatedAt: '2021-11-10T02:47:09.000Z',
+                        createdAt: '2021-11-10T02:47:09.000Z'
+                    }]
+                },
+                updatedAt: '2021-11-17T00:46:54.000Z',
+                createdAt: '2021-11-17T00:46:54.000Z'
+            }]
+
+            let result = view.tablesAlbumsDTO('Test', albumItem);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+    it('tablesAlbumsDTO - Valide IsArray', async () => {
+        try {
+            const albumItem = {
+                albumID: 2,
+                userId: 2,
+                title: 'album test',
+                dependentes: { Comments: [Array] },
+                updatedAt: '2021-11-17T00:46:52.000Z',
+                createdAt: '2021-11-17T00:46:52.000Z'
+            };
+
+            let result = view.tablesAlbumsDTO('Test', albumItem);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('tablesPostsDTO - Valide Comments IsArray', async () => {
+        try {
+            const albumItem = [{
+                albumID: 2,
+                userId: 2,
+                title: 'album test',
+                dependentes: {
+                    pesistPhoto: {
+                        photoID: 96,
+                        albumId: 2,
+                        title: 'dolore esse a in eos sed',
+                        updatedAt: '2021-11-10T02:47:09.000Z',
+                        createdAt: '2021-11-10T02:47:09.000Z'
+                    },
+
+                },
+                updatedAt: '2021-11-17T00:46:54.000Z',
+                createdAt: '2021-11-17T00:46:54.000Z'
+            }]
+
+
+            let result = view.tablesAlbumsDTO('Test', albumItem);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('tablesAlbumsDTO - Valide Error', async () => {
+        try {
+            const albumItem = {
+                postID: 2,
+                userId: 2,
+                title: 'test',
+                dependentes: { Comments: [Array] },
+                updatedAt: '2021-11-17T00:46:52.000Z',
+                createdAt: '2021-11-17T00:46:52.000Z'
+            }
+
+            view.tablesAlbumsDTO('Test', albumItem);
+        }
+        catch (e) {
+            expect(e.message).toBe('Um erro no populamento tablesAlbumsDTO');
+        }
+    });
+
+
+    it('tablesPostsDTO', async () => {
+        try {
+            const postItem = [{
+                postID: 2,
+                userId: 2,
+                title: 'test',
+                dependentes: {
+                    Comments: [{
+                        commentID: 7,
+                        postId: 2,
+                        name: 'repellat consequatur praesentium vel minus molestias voluptatum',
+                        updatedAt: '2021-11-16T15:06:03.000Z',
+                        createdAt: '2021-11-16T15:06:03.000Z'
+                    },
+                    {
+                        commentID: 10,
+                        postId: 2,
+                        name: 'eaque et deleniti atque tenetur ut quo ut',
+                        updatedAt: '2021-11-16T15:06:03.000Z',
+                        createdAt: '2021-11-16T15:06:03.000Z'
+                    }]
+                },
+                updatedAt: '2021-11-17T00:46:52.000Z',
+                createdAt: '2021-11-17T00:46:52.000Z'
+            }]
+
+            let result = view.tablesPostsDTO('Test', postItem);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+    it('tablesPostsDTO - Valide IsArray', async () => {
+        try {
+            const postItem = {
+                postID: 2,
+                userId: 2,
+                title: 'test',
+                dependentes: { Comments: [Array] },
+                updatedAt: '2021-11-17T00:46:52.000Z',
+                createdAt: '2021-11-17T00:46:52.000Z'
+            }
+
+            let result = view.tablesPostsDTO('Test', postItem);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+    it('tablesPostsDTO - Valide Comments IsArray', async () => {
+        try {
+            const postItem = [{
+                postID: 2,
+                userId: 2,
+                title: 'test',
+                dependentes: {
+                    Comments: {
+                        commentID: 7,
+                        postId: 2,
+                        name: 'repellat consequatur praesentium vel minus molestias voluptatum',
+                        updatedAt: '2021-11-16T15:06:03.000Z',
+                        createdAt: '2021-11-16T15:06:03.000Z'
+                    }
+                },
+                updatedAt: '2021-11-17T00:46:52.000Z',
+                createdAt: '2021-11-17T00:46:52.000Z'
+            }]
+
+
+            let result = view.tablesPostsDTO('Test', postItem);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+    it('tablesPostsDTO - Valide Error', async () => {
+        try {
+            const postItem = {
+                postID: undefined,
+                userId: undefined,
+                title: 'test',
+                dependentes: { Comments: [Array] },
+                updatedAt: '2021-11-17T00:46:52.000Z',
+                createdAt: '2021-11-17T00:46:52.000Z'
+            }
+
+            view.tablesPostsDTO('Test', postItem);
+        }
+        catch (e) {
+            expect(e.message).toBe('Um erro no populamento tablesPostsDTO');
+        }
+    });
+
+    it('tablesUsersDTO', async () => {
+        try {
+            const useritem = [{
+                userId: 1,
+                addressId: 1,
+                companyId: 1,
+                name: 'Leanne Graham',
+                dependentes: {
+                    pesistPost: [{
+                        postID: 13,
+                        userId: 1,
+                        title: 'dolorum ut in voluptas mollitia et saepe quo animi',
+                        dependentes: {
+                            Comments: [{
+                                commentID: 7,
+                                postId: 13,
+                                name: 'repellat consequatur praesentium vel minus molestias voluptatum',
+                                updatedAt: '2021-11-16T15:06:03.000Z',
+                                createdAt: '2021-11-16T15:06:03.000Z'
+                            }]
+                        },
+                        updatedAt: '2021-11-17T00:46:52.000Z',
+                        createdAt: '2021-11-17T00:46:52.000Z'
+                    }], pesistAlbum: [{
+                        albumID: 20,
+                        userId: 1,
+                        title: 'voluptas rerum iure ut enim',
+                        dependentes: {
+                            pesistPhoto: [{
+                                photoID: 96,
+                                albumId: 2,
+                                title: 'dolore esse a in eos sed',
+                                updatedAt: '2021-11-10T02:47:09.000Z',
+                                createdAt: '2021-11-10T02:47:09.000Z'
+                            }]
+                        },
+                        updatedAt: '2021-11-17T00:46:54.000Z',
+                        createdAt: '2021-11-17T00:46:54.000Z'
+                    }], pesistTodos: [{
+                        id: 38,
+                        userId: 1,
+                        title: 'totam quia non',
+                        completed: 0,
+                        createdAt: '2021-11-17T00:46:58.000Z',
+                        updatedAt: '2021-11-17T00:46:58.000Z'
+                    }]
+                },
+                updatedAt: '2021-11-10T01:48:47.000Z',
+                createdAt: '2021--10T01:48:47.000Z'
+            }]
+            let result = view.tablesUsersDTO('Test ', useritem);
+            console.log(result);
+            expect(result).toEqual(true);
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('tablesUsersDTO - Not ARRAY', async () => {
+        try {
+            const useritem = {
+                userId: 1,
+                addressId: 1,
+                companyId: 1,
+                name: 'Leanne Graham',
+                dependentes: { pesistPost: [Array], pesistAlbum: [Array], pesistTodos: [Array] },
+                updatedAt: '2021-11-10T01:48:47.000Z',
+                createdAt: '2021--10T01:48:47.000Z'
+            }
+            let result = view.tablesUsersDTO('Test ', useritem);
+            console.log(result);
+            expect(result).toEqual(false);
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('tableCommentsDependentes', async () => {
+        try {
+            const Comments = [{
+                commentID: 7,
+            },
+            {
+                commentID: 10,
+            },
+            {
+                commentID: 1,
+            },
+            {
+                commentID: 12,
+            },
+            {
+                commentID: 20,
+            }];
+            let result = view.tableCommentsDependentes(Comments);
+            console.log(result)
+            expect(result[0].CommentsIDs).toEqual(expect.any(String));
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+
+
+
+
+
 })
