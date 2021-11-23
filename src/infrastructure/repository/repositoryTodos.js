@@ -84,6 +84,8 @@ class RepositoryTodos {
 
     async updateByIdTodo(todoObject,todoToChange) {       
 
+        console.log(todoObject)
+        console.log(todoToChange)
         Object.entries(todoObject).forEach(([key, value]) => {
             todoToChange[key] = value;
         });

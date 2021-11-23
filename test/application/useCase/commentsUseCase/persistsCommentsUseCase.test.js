@@ -28,7 +28,7 @@ describe('PersistsCommentsUseCase', () => {
                     createdAt: expect.any(Date),
                 })]));
 
-    }, 40000)
+    }, 4000)
     it('persistsComments - persistir post ', async () => {
         const postConfig = {
             postId: 1,

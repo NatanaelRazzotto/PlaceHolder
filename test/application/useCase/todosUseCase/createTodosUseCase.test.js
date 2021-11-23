@@ -24,7 +24,7 @@ describe('CreateTodosUseCase', () => {
         expect(received).toEqual({
             userId: 1,
             id: 1,
-            completed: 0,
+            completed: false,
             title: "delectus aut autem",
             updatedAt: expect.any(Date),
             createdAt: expect.any(Date),

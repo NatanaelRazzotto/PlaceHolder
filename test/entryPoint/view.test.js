@@ -913,7 +913,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 11000);
+    }, 20000);
     it('persistenciaUsersDependences Sequencial', async () => {
         try {
             const user = {
@@ -927,7 +927,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 11000);
+    }, 20000);
 
     it('persistenciaUsersDependences - Valida Numero', async () => {
         try {
@@ -957,7 +957,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 2000);
+    }, 10000);
 
     it('persistenciaPostsDependences - Valida Numero', async () => {
         try {
@@ -986,7 +986,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 1000);
+    }, 5000);
 
     it('persistenciaCommentsDependences - Valida Numero', async () => {
         try {
@@ -1015,7 +1015,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 3000);
+    }, 10000);
 
     it('persistenciaAlbumDependences - Valida Numero', async () => {
         try {
@@ -1044,7 +1044,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 3000);
+    }, 10000);
 
     it('persistenciaPhotosDependences - Valida Numero', async () => {
         try {
@@ -1073,7 +1073,7 @@ describe('VIEW - Entry Point APP', () => {
         catch (e) {
             console.error(e);
         }
-    }, 3000);
+    }, 10000);
 
     it('persistenciaTodosDependences - Valida Numero', async () => {
         try {

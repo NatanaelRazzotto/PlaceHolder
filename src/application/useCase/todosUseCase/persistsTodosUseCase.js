@@ -35,6 +35,7 @@ class PersistsTodosUseCase {
             photoID: populado.id,
             userId: populado.userId,
             title: populado.title,
+            completed: populado.completed,
             updatedAt: populado.updatedAt,
             createdAt: populado.createdAt
         };

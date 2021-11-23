@@ -61,7 +61,7 @@ describe('Repository Photo', () => {
     });
     it('create Photo - ERROR', async () => {
         const photo = {
-            albumId: 60,
+            albumId: 60000,
             id: 10050,
             title: "accusamus beatae ad facilis cum similique qui sunt",
             url: "https://via.placeholder.com/600/92c952",

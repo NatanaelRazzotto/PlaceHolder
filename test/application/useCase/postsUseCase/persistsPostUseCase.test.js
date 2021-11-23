@@ -32,7 +32,7 @@ describe('persistsAlbumUseCase', () => {
 
                 })]));
 
-    }, 40000)
+    }, 4000)
     it('persistsAlbum - persistir post ', async () => {
         const postConfig = {
             userId: 1,

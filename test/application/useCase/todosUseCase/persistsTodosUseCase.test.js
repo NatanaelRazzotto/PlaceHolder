@@ -28,11 +28,12 @@ describe('PersistsTodosUseCase', () => {
                     createdAt: expect.any(Date),
                 })]));
 
-    }, 40000)
+    }, 4000)
     it('persistsTodos - persistir todos ', async () => {
         const photoConfig = {
             userId: 1,
             id: 1,
+            completed: false,
             title: "delectus aut autem",
             updatedAt: expect.any(Date),
             createdAt: expect.any(Date),
@@ -44,6 +45,7 @@ describe('PersistsTodosUseCase', () => {
                 photoID: expect.any(Number),
                 userId: expect.any(Number),
                 title: expect.any(String),
+                completed: expect.any(Boolean),
                 updatedAt: expect.any(Date),
                 createdAt: expect.any(Date),
             }));

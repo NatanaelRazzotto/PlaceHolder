@@ -28,7 +28,7 @@ describe('PersistsPhotosUseCase', () => {
                     createdAt: expect.any(Date),
                 })]));
 
-    }, 40000)
+    }, 4000)
     it('persistsPhotos - persistir post ', async () => {
         const photoConfig = {
             albumId: 1,
