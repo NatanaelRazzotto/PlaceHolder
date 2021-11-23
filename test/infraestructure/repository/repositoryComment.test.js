@@ -40,8 +40,8 @@ describe('Repository Comment', () => {
     it('create Comment - NEW', async () => {
         try {
             const comment = {
-                postId: 2000,
-                id: 1,
+                postId: 1,
+                id: 2000,
                 name: "id labore ex et quam laborum",
                 email: "Eliseo@gardner.biz",
                 body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
@@ -49,8 +49,8 @@ describe('Repository Comment', () => {
             const received = await repositoryComment.create(comment);
             console.log(received);
             expect(received).toEqual({
-                postId: 2000,
-                id: 1,
+                postId: 1,
+                id: 2000,
                 name: "id labore ex et quam laborum",
                 email: "Eliseo@gardner.biz",
                 body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
@@ -61,6 +61,45 @@ describe('Repository Comment', () => {
             console.error(error.message);
         }
     });
+
+    it('deleteByIdComment', async () => {
+        const searchObject = {
+            id: 2000,
+        };
+        try {
+          const received = await repositoryComment.deleteByIdComment(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            postId: 1,
+            id: 2000,
+            name: "id labore ex et quam laborum",
+            email: "Eliseo@gardner.biz",
+            body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+    
+      it('deleteByIdComment Validate', async () => {
+        const searchObject = {
+            id: 2000,
+        };
+        try {
+          const received = await repositoryComment.deleteByIdComment(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+
     it('create Comment - Find Error', async () => {
         try {
             const comment = {

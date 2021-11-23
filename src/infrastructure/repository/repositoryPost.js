@@ -60,6 +60,16 @@ class RepositoryPost {
         return Post;
     }
 
+    async deleteByIdPost(postObject) {
+        const post = await ModelPost.findByPk(postObject.id);
+        //console.log(user)
+        if (post != null) {
+            const received = post.destroy();
+            return received;
+        }
+        return null;
+    }
+
 }
 
 module.exports = { RepositoryPost };

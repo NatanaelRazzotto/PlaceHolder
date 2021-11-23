@@ -76,6 +76,44 @@ describe('Repository Photo', () => {
         }
     });
 
+    it('deleteByIdPhoto', async () => {
+        const searchObject = {
+          id: 10050,
+        };
+        try {
+          const received = await repositoryPhoto.deleteByIdPhoto(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            albumId: 1,
+            id: 10050,
+            title: "accusamus beatae ad facilis cum similique qui sunt",
+            url: "https://via.placeholder.com/600/92c952",
+            thumbnailUrl: "https://via.placeholder.com/150/92c952",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+    
+      it('deleteByIdPhoto Validate', async () => {
+        const searchObject = {
+          id: 10050,
+        };
+        try {
+          const received = await repositoryPhoto.deleteByIdPhoto(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+
     it('Pesquisar - findPhoto', async () => {
         const searchObject = {
             albumId: 1,

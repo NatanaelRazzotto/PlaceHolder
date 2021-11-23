@@ -43,24 +43,24 @@ describe('Repository Andress', () => {
     it('create Andress - NEW', async () => {
         try {
             const Andress = {
-                addressId: 1,
+                addressId: 5000,
                 street: "Kulas Light",
                 suite: "Apt. 556",
                 city: "Gwenborough",
                 zipcode: "92998-3874",
-                lat: "-58.2035",
-                lng: "21.3354",
+                lat: "-99.2035",
+                lng: "99.3354",
             };
             const received = await repositoryAddress.create(Andress);
             console.log(received);
             expect(received).toEqual({
-                addressId: 1,
+                addressId: 5000,
                 street: "Kulas Light",
                 suite: "Apt. 556",
                 city: "Gwenborough",
                 zipcode: "92998-3874",
-                lat: "-37.3159",
-                lng: "81.1496",
+                lat: "-99.2035",
+                lng: "99.3354",
                 updatedAt: expect.any(Date),
                 createdAt: expect.any(Date),
             });
@@ -68,6 +68,47 @@ describe('Repository Andress', () => {
             console.error(error.message);
         }
     });
+
+    it('deleteByIdAddress', async () => {
+        const searchObject = {
+            addressId: 5000,
+        };
+        try {
+          const received = await repositoryAddress.deleteByIdAddress(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            addressId: 5000,
+            street: "Kulas Light",
+            suite: "Apt. 556",
+            city: "Gwenborough",
+            zipcode: "92998-3874",
+            lat: "-99.2035",
+            lng: "99.3354",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+    
+    it('deleteByIdAddress Validate', async () => {
+        const searchObject = {
+            addressId: 5000,
+        };
+        try {
+          const received = await repositoryAddress.deleteByIdAddress(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+
     it('findAndress', async () => {
         const Andress = {
             lat: "-37.3159",

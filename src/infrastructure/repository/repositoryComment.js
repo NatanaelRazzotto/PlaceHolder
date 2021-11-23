@@ -57,6 +57,16 @@ class RepositoryComment {
         })
         return Comment;
     }
+
+    async deleteByIdComment(commentObject) {
+        const comment = await ModelComment.findByPk(commentObject.id);
+        //console.log(user)
+        if (comment != null) {
+            const received = comment.destroy();
+            return received;
+        }
+        return null;
+    }
 }
 
 module.exports = { RepositoryComment };

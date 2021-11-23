@@ -46,6 +46,16 @@ class RepositoryCompany {
         return Company;
     }
 
+    async deleteByIdCompany(companyObject) {
+        const company = await ModelCompany.findByPk(companyObject.companyId);
+        //console.log(user)
+        if (company != null) {
+            const received = company.destroy();
+            return received;
+        }
+        return null;
+    }
+
 }
 
 module.exports = { RepositoryCompany };

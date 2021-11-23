@@ -60,7 +60,7 @@ class RepositoryTodos {
     }
 
     async deleteByIdTodo(todoObject) {
-        const todo = await ModelUser.findByPk(todoObject.id);
+        const todo = await ModelTodos.findByPk(todoObject.id);
         //console.log(user)
         if (todo != null) {
             const received = todo.destroy();

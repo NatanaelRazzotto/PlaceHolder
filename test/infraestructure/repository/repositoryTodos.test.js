@@ -36,7 +36,7 @@ describe('Repository Photo', () => {
             userId: 1,
             id: 600,
             title: "delectus aut autem",
-            completed: false
+            completed: 0
         };
         try {
             const received = await repositoryTodos.create(Todos);
@@ -45,7 +45,7 @@ describe('Repository Photo', () => {
                 userId: 1,
                 id: 600,
                 title: "delectus aut autem",
-                completed: 0,
+                completed: expect.any(Boolean),
                 updatedAt: expect.any(Date),
                 createdAt: expect.any(Date),
             });
@@ -67,6 +67,44 @@ describe('Repository Photo', () => {
             console.error(error.message);
         }
     });
+
+    it('deleteByIdTodo', async () => {
+        const searchObject = {
+          id: 600,
+        };
+        try {
+          const received = await repositoryTodos.deleteByIdTodo(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            userId: 1,
+            id: 600,
+            title: "delectus aut autem",
+            completed: expect.any(Boolean),
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+    
+      it('deleteByIdTodo Validate', async () => {
+        const searchObject = {
+          id: 6001,
+        };
+        try {
+          const received = await repositoryTodos.deleteByIdTodo(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+
     it('Pesquisar - findTodos', async () => {
         const searchObject = {
             userId: 1,

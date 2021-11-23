@@ -36,7 +36,7 @@ describe('Repository Post', () => {
     it('create Post - NEW', async () => {
         const post = {
             userId: 1,
-            id: 60,
+            id: 6000,
             title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
             body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
         };
@@ -45,7 +45,7 @@ describe('Repository Post', () => {
             console.log(received);
             expect(received).toEqual({
                 userId: 1,
-                id: 60,
+                id: 6000,
                 title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
                 body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
                 updatedAt: expect.any(Date),
@@ -73,6 +73,43 @@ describe('Repository Post', () => {
             console.error(error.message);
         }
     });
+
+    it('deleteByIdPost', async () => {
+        const searchObject = {
+          id: 6000,
+        };
+        try {
+          const received = await repositoryPost.deleteByIdPost(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            userId: 1,
+            id: 6000,
+            title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+    
+      it('deleteByIdPost Validate', async () => {
+        const searchObject = {
+          id: 6000,
+        };
+        try {
+          const received = await repositoryPost.deleteByIdPost(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
     it('Pesquisar - findPost', async () => {
         const searchObject = {
             userId: 1,

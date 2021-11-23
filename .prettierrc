@@ -1,0 +1,26 @@
+{
+     "trailingComma": "all",
+     "tabWidth": 5,
+     "semi": true,
+     "singleQuote": false,
+     "arrowParens": "always",
+     "bracketSpacing": false,
+     "overrides": [
+          {
+               "files": "*.test.js",
+               "options": {
+                    "tabWidth": 5,
+                    "singleQuote": true,
+                    "trailingComma": "es5",
+                    "bracketSpacing": true,
+                    "arrowParens": "avoid"
+               }
+          },
+          {
+               "files": ".prettierrc",
+               "options": {
+                    "parser": "json"
+               }
+          }
+     ]
+}

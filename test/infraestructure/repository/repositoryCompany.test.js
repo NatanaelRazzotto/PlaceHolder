@@ -38,7 +38,7 @@ describe('Repository Andress', () => {
         try {
             const Company = {
                 companyId: 302,
-                name: 'Deckow-Crist',
+                name: 'Comapany Test',
                 catchPhrase: 'Proactive didactic contingency',
                 bs: 'synergize scalable supply-chains',
             };
@@ -56,6 +56,49 @@ describe('Repository Andress', () => {
             console.error(error.message);
         }
     });
+
+    it('deleteByIdCompany', async () => {
+        const Company = {
+            companyId: 302,
+            name: 'Comapany Test',
+            catchPhrase: 'Proactive didactic contingency',
+            bs: 'synergize scalable supply-chains',
+        };
+        const searchObject = {
+            companyId: 302,
+        };
+        try {
+          const received = await repositoryCompany.deleteByIdCompany(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            companyId: Company.companyId,
+            name: Company.name,
+            catchPhrase: Company.catchPhrase,
+            bs: Company.bs,
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+    
+      it('deleteByIdCompany Validate', async () => {
+        const searchObject = {
+            companyId: 302,
+        };
+        try {
+          const received = await repositoryCompany.deleteByIdCompany(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
 
     it('findCompany', async () => {
         const Company = {

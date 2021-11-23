@@ -58,6 +58,16 @@ class RepositoryPhoto {
         })
         return Photo;
     }
+
+    async deleteByIdPhoto(photoObject) {
+        const photo = await ModelPhoto.findByPk(photoObject.id);
+        //console.log(user)
+        if (photo != null) {
+            const received = photo.destroy();
+            return received;
+        }
+        return null;
+    }
 }
 
 module.exports = { RepositoryPhoto };

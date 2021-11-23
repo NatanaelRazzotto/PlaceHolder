@@ -71,6 +71,16 @@ class RepositoryAlbum {
         });
         return Album;
     }
+
+    async deleteByIdAlbum(albumObject) {
+        const album = await ModelAlbum.findByPk(albumObject.id);
+        //console.log(user)
+        if (album != null) {
+            const received = album.destroy();
+            return received;
+        }
+        return null;
+    }
 }
 
 module.exports = { RepositoryAlbum };

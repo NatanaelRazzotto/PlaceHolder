@@ -56,7 +56,7 @@ describe('Repository Album', () => {
         try {
             const album = {
                 userId: 1,
-                id: 99,
+                id: 9999,
                 title: "Album Teste"
             };
             const received = await repositoryAlbum.create(album);
@@ -72,6 +72,47 @@ describe('Repository Album', () => {
             console.error(error.message);
         }
     });
+    it('deleteByIdAlbum', async () => {
+        const album = {
+            userId: 1,
+            id: 9999,
+            title: "Album Teste"
+        };
+        const searchObject = {
+            id: 9999,
+        };
+        try {
+          const received = await repositoryAlbum.deleteByIdAlbum(searchObject);
+          console.log(received);
+          console.log(received.dataValues);
+          expect(received.dataValues).toEqual({
+            userId: album.userId,
+            id: album.id,
+            title: album.title,
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+    
+    it('deleteByIdAlbum Validate', async () => {
+        const searchObject = {
+            id: 9999,
+        };
+        try {
+          const received = await repositoryAlbum.deleteByIdAlbum(searchObject);
+          console.log(received);
+    
+          expect(received).toEqual(null);
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+
     it('Pesquisar - findAlbum', async () => {
         try {
             const searchObject = {
