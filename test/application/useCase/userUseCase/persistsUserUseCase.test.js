@@ -46,7 +46,7 @@ describe('persistsUserUseCase', () => {
         })
       ]))
     expect(received).toBeTruthy();
-  }, 11000);//500000
+  }, 500000);//500000
 
   /* it('persistsAlbum - Pesiste Album e Fotos', async () => {
      const album = {

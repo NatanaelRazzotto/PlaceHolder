@@ -62,6 +62,32 @@ describe('Repository Comment', () => {
         }
     });
 
+    it('updateByIdComment', async () => {
+        const searchObject = {
+            postId: 1,
+            id: 2000,
+            name: "teste",
+            email: "Eliseo@gardner.biz",
+            body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+        };
+        try {
+          const received = await repositoryComment.searchForUpdateByIdComment(searchObject);
+          console.log(received);         
+          expect(received).toEqual({
+            postId: 1,
+            id: 2000,
+            name: "teste",
+            email: "Eliseo@gardner.biz",
+            body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+      });
+
     it('deleteByIdComment', async () => {
         const searchObject = {
             id: 2000,
@@ -83,9 +109,9 @@ describe('Repository Comment', () => {
           console.error(error.message);
         }
     
-      });
+    }); 
     
-      it('deleteByIdComment Validate', async () => {
+    it('deleteByIdComment Validate', async () => {
         const searchObject = {
             id: 2000,
         };

@@ -13,13 +13,16 @@ class RepositoryComment {
         }
         const post = await this.repositoryPost.findPost(searchPost);
         if ((post != null)) {
-            const validate = await this.findComment(comment);
+            const validate = await this.findByPkComment(comment);
+           // const validate = await this.findComment(comment);
             if ((validate != null)) {
-                //console.log("já exite o registro");
-                return validate;
+               // console.log("já exite o registro");
+                const update =  await this.updateByIdComment(comment,validate);
+                return update;
             }
             else {
                 //console.log("não exite registro");
+                
                 const received = await ModelComment.create(comment);
                 return received.dataValues;
             }
@@ -29,6 +32,12 @@ class RepositoryComment {
             //throw new Error('O Post Associado não foi encontrado');//
         }
     }
+
+    async findByPkComment(commentObject) {
+        const comment = await ModelComment.findByPk(commentObject.id);
+        return comment;
+    }
+
     async findComment(commentObject) {
         const Comment = await ModelComment.findOne({
             where: {
@@ -59,7 +68,8 @@ class RepositoryComment {
     }
 
     async deleteByIdComment(commentObject) {
-        const comment = await ModelComment.findByPk(commentObject.id);
+        const comment = await this.findByPkComment(commentObject);
+       // const comment = await ModelComment.findByPk(commentObject.id);
         //console.log(user)
         if (comment != null) {
             const received = comment.destroy();
@@ -67,6 +77,23 @@ class RepositoryComment {
         }
         return null;
     }
+
+    async searchForUpdateByIdComment(commentObject) {
+        const commentToChange = await this.findByPkComment(commentObject);
+        const update =  await this.updateByIdComment(commentObject,commentToChange);
+        return update;
+    }
+
+    async updateByIdComment(commentObject,commentToChange) {       
+
+        Object.entries(commentObject).forEach(([key, value]) => {
+            commentToChange[key] = value;
+        });
+    
+        const result = await commentToChange.save();
+        return result.dataValues;
+      }
+    
 }
 
 module.exports = { RepositoryComment };

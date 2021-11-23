@@ -13,10 +13,12 @@ class RepositoryTodos {
         }
         const user = await this.repositoryUser.findUser(searchUser);
         if ((user != null)) {
-            const validate = await this.findTodos(todos);
+            const validate = await this.findByPkTodo(todos);
+          //  const validate = await this.findTodos(todos);
             if ((validate != null)) {
                 //console.log("já exite o registro");
-                return validate;
+                const update =  await this.updateByIdTodo(todos,validate);
+                return update;
             }
             else {
                 //console.log("não exite registro");
@@ -28,6 +30,11 @@ class RepositoryTodos {
             return null;
             //throw new Error('O User Associado não foi encontrado');//
         }
+    }
+
+    async findByPkTodo(todoObject) {
+        const todo = await ModelTodos.findByPk(todoObject.id);
+        return todo;
     }
 
     async findTodos(todosObject) {
@@ -68,6 +75,22 @@ class RepositoryTodos {
         }
         return null;
     }
+
+    async searchForUpdateByIdTodo(todoObject) {
+        const todoToChange = await this.findByPkTodo(todoObject);
+        const update =  await this.updateByIdTodo(todoObject,todoToChange);
+        return update;
+    }
+
+    async updateByIdTodo(todoObject,todoToChange) {       
+
+        Object.entries(todoObject).forEach(([key, value]) => {
+            todoToChange[key] = value;
+        });
+    
+        const result = await todoToChange.save();
+        return result.dataValues;
+    }   
 
 
 }

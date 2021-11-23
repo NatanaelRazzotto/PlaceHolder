@@ -13,10 +13,11 @@ class RepositoryAlbum {
         }
         const user = await this.repositoryUser.findUser(searchUser);
         if ((user != null)) {
-            const validate = await this.findAlbum(album);
+            const validate = await this.findByPkAlbum(album);
             if ((validate != null)) {//validate[0]
                 //console.log("já exite o registro");
-                return validate;
+                const update =  await this.updateByIdAlbum(album,validate);
+                return update;
             }
             else {
                 //console.log("não exite registro");
@@ -28,19 +29,11 @@ class RepositoryAlbum {
             //throw new Error('O User Associado não foi encontrado');//
         }
     }
-    /*async findAllWhere(albumObject) {
-        const Album = await ModelAlbum.findAll({
-            where: {
-                id: albumObject.id
-            },
-            raw: true,
-            limit: 1
-        }).then(function (result) {
-            //  console.log(" test + " + result);
-            return result;
-        });
+
+    async findByPkAlbum(albumObject) {
+        const Album = await ModelAlbum.findByPk(albumObject.id);
         return Album;
-    }*/
+    }
 
     async findAlbum(albumObject) {
         const Album = await ModelAlbum.findOne({
@@ -81,6 +74,22 @@ class RepositoryAlbum {
         }
         return null;
     }
+
+    async searchForUpdateByIdAlbum(albumObject) {
+        const albumToChange = await this.findByPkAlbum(albumObject);
+        const update =  await this.updateByIdAlbum(albumObject,albumToChange);
+        return update;
+    }
+
+    async updateByIdAlbum(albumObject,albumToChange) {       
+
+        Object.entries(albumObject).forEach(([key, value]) => {
+            albumToChange[key] = value;
+        });
+    
+        const result = await albumToChange.save();
+        return result.dataValues;
+    }  
 }
 
 module.exports = { RepositoryAlbum };

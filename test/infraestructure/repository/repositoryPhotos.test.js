@@ -76,6 +76,32 @@ describe('Repository Photo', () => {
         }
     });
 
+    it('updateByIdPhoto', async () => {
+        const searchObject = {
+            albumId: 1,
+            id: 10050,
+            title: "teste",
+            url: "https://via.placeholder.com/600/92c952",
+            thumbnailUrl: "https://via.placeholder.com/150/92c952"
+        };
+        try {
+          const received = await repositoryPhoto.searchForUpdateByIdPhoto(searchObject);
+          console.log(received);         
+          expect(received).toEqual({
+            albumId: 1,
+            id: 10050,
+            title:  "teste",
+            url: "https://via.placeholder.com/600/92c952",
+            thumbnailUrl: "https://via.placeholder.com/150/92c952",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+
     it('deleteByIdPhoto', async () => {
         const searchObject = {
           id: 10050,

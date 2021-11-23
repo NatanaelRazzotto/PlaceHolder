@@ -68,6 +68,30 @@ describe('Repository Photo', () => {
         }
     });
 
+    it('updateByIdTodo', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 600,
+            title: "delectus aut autem",
+            completed: 0
+        };
+        try {
+          const received = await repositoryTodos.searchForUpdateByIdTodo(searchObject);
+          console.log(received);         
+          expect(received).toEqual({
+            userId: 1,
+            id: 600,
+            title: "delectus aut autem",
+            completed: expect.any(Boolean),
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+
     it('deleteByIdTodo', async () => {
         const searchObject = {
           id: 600,

@@ -54,8 +54,9 @@ class View {
                     var table = this.bindTableUserDTO(operacao, element);
                     console.log(table.toString());
                     this.tablesPostsDTO('Dependente', element.dependentes.pesistPost);
-                    /*this.tablesAlbumsDTO('Dependente', users[0].dependentes.pesistAlbum);
-                    this.tableTodosDTO('Dependente', users[0].dependentes.pesistTodos);*/
+                    this.tablesAlbumsDTO('Dependente', element.dependentes.pesistAlbum);
+                    var tableTodos = this.tableTodosDTO('Dependente', element.dependentes.pesistTodos);
+                    console.log(tableTodos.toString());
                 });
                 return true;
             }

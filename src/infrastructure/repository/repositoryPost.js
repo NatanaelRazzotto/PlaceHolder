@@ -13,11 +13,11 @@ class RepositoryPost {
         }
         const user = await this.repositoryUser.findUser(searchUser);
         if ((user != null)) {
-
-            const validate = await this.findPost(post);
-            if ((validate != null)) {
+            const validate = await this.findByPkPost(post);
+            if ((validate != null)) {                
                 //console.log("já exite o registro");
-                return validate;
+                const update =  await this.updateByIdPost(post,validate);
+                return update;
             }
             else {
                 //console.log("não exite registro");
@@ -29,6 +29,11 @@ class RepositoryPost {
             return null
             //throw new Error('O User Associado não foi encontrado');//
         }
+    }
+
+    async findByPkPost(postObject) {
+        const Post = await ModelPost.findByPk(postObject.id);
+        return Post;
     }
 
     async findPost(postObject) {
@@ -69,6 +74,22 @@ class RepositoryPost {
         }
         return null;
     }
+
+    async searchForUpdateByIdPost(postObject) {
+        const postToChange = await this.findByPkPost(postObject);
+        const update =  await this.updateByIdPost(postObject,postToChange);
+        return update;
+    }
+
+    async updateByIdPost(postObject,postToChange) {       
+
+        Object.entries(postObject).forEach(([key, value]) => {
+            postToChange[key] = value;
+        });
+    
+        const result = await postToChange.save();
+        return result.dataValues;
+    }   
 
 }
 

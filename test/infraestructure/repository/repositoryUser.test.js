@@ -74,6 +74,36 @@ describe('RepositoryUser', () => {
     }
   });
 
+  it('updateByIdUser', async () => {
+    const searchObject = {
+      id: 6000,
+      name: "Test",
+      username: "Bret",
+      email: "Sincere@april.biz",
+      addressId: 1,
+      companyId: 1,
+      phone: "1-770-736-8031 x56442",
+      website: "hildegard.org",
+    };
+    try {
+      const received = await repositoryUser.searchForUpdateByIdUser(searchObject);
+      console.log(received);         
+      expect(received).toEqual({
+        id: expect.any(Number),
+        name: 'Test',
+        email: 'Sincere@april.biz',
+        addressId: expect.any(Number),
+        phone: '1-770-736-8031 x56442',
+        website: 'hildegard.org',
+        companyId: expect.any(Number),
+        updatedAt: expect.any(Date),
+        createdAt: expect.any(Date),
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+});
+
   it('deleteByIdUser', async () => {
     const searchObject = {
       id: 6000,

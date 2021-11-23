@@ -5,12 +5,13 @@ class RepositoryUser {
   async create(user) {
     // console.log(user);
     await ModelUser.sync();
-    const validate = await this.findUser(user)
+    const validate = await this.findByPkUser(user);    
     //console.log(validate[0])
     if ((validate != null)) {
       //console.log("já exite o registro");
-      //  console.log(validate);
-      return validate;
+      const update =  await this.updateByIdUser(user,validate);
+      return update;
+
     }
     else {
       //console.log("não exite registro");
@@ -18,6 +19,11 @@ class RepositoryUser {
       return received.dataValues;
     }
   }
+
+  async findByPkUser(userObject) {
+    const User = await ModelUser.findByPk(userObject.id);
+    return User;
+}
 
   async findUser(userObject) {//findByPk
     const User = await ModelUser.findOne({
@@ -43,6 +49,25 @@ class RepositoryUser {
     }
     return null;
   }
+
+  async searchForUpdateByIdUser(userObject) {
+    const userToChange = await this.findByPkUser(userObject);
+    const update =  await this.updateByIdUser(userObject,userToChange);
+    return update;
+  }
+
+  async updateByIdUser(userObject,userToChange) {       
+
+    Object.entries(userObject).forEach(([key, value]) => {
+      userToChange[key] = value;
+    });
+
+    const result = await userToChange.save();
+    return result.dataValues;
+  } 
+  
+
+  
 }
 
 module.exports = { RepositoryUser };

@@ -74,6 +74,31 @@ describe('Repository Post', () => {
         }
     });
 
+    it('updateByIdPost', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 6000,
+            title: "Teste",
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        };
+        try {
+          const received = await repositoryPost.searchForUpdateByIdPost(searchObject);
+          console.log(received);         
+          expect(received).toEqual({
+            userId: 1,
+            id: 6000,
+            title: "Teste",
+            body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
+
+
     it('deleteByIdPost', async () => {
         const searchObject = {
           id: 6000,

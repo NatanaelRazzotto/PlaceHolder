@@ -72,6 +72,27 @@ describe('Repository Album', () => {
             console.error(error.message);
         }
     });
+    it('updateByIdAlbum', async () => {
+        const searchObject = {
+            userId: 1,
+            id: 9999,
+            title: "Teste"
+        };
+        try {
+          const received = await repositoryAlbum.searchForUpdateByIdAlbum(searchObject);
+          console.log(received);         
+          expect(received).toEqual({
+            userId: searchObject.userId,
+            id: searchObject.id,
+            title: searchObject.title,
+            updatedAt: expect.any(Date),
+            createdAt: expect.any(Date),
+          });
+        } catch (error) {
+          console.error(error.message);
+        }
+    
+    });
     it('deleteByIdAlbum', async () => {
         const album = {
             userId: 1,

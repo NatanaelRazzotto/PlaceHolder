@@ -11,12 +11,14 @@ class RepositoryPhoto {
         const searchAlbum = {
             id: photo.albumId,
         }
+
         const album = await this.repositoryAlbum.findAlbum(searchAlbum);
         if ((album != null)) {
-            const validate = await this.findPhoto(photo);
+            const validate = await this.findByPkPhoto(photo);
             if ((validate != null)) {
                 //console.log("já exite o registro");
-                return validate;
+                const update =  await this.updateByIdPhoto(photo,validate);
+                return update;
             }
             else {
                 //console.log("não exite registro");
@@ -28,6 +30,11 @@ class RepositoryPhoto {
             // throw new Error('O Album Associado não foi encontrado');//
             return null;
         }
+    }
+
+    async findByPkPhoto(photoObject) {
+        const Photo = await ModelPhoto.findByPk(photoObject.id);
+        return Photo;
     }
 
     async findPhoto(photoObject) {
@@ -68,6 +75,22 @@ class RepositoryPhoto {
         }
         return null;
     }
+
+    async searchForUpdateByIdPhoto(photoObject) {
+        const photoToChange = await this.findByPkPhoto(photoObject);
+        const update =  await this.updateByIdPhoto(photoObject,photoToChange);
+        return update;
+    }
+
+    async updateByIdPhoto(photoObject,photoToChange) {       
+
+        Object.entries(photoObject).forEach(([key, value]) => {
+            photoToChange[key] = value;
+        });
+    
+        const result = await photoToChange.save();
+        return result.dataValues;
+    }   
 }
 
 module.exports = { RepositoryPhoto };
