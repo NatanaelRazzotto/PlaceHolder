@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 
 class RepositoryTodos {
     constructor() {
+      //  await ModelTodos.sync();
         this.repositoryUser = new RepositoryUser();
     }
     async create(todos) {

@@ -38,8 +38,8 @@ describe('FetchUserUseCase', () => {
   it('FetchRequest 2 sequencial', async () => {
     const data = {
       url: 'https://jsonplaceholder.typicode.com/users',
-      max: 2,
-      generate: false
+      max: 3,
+      generate: true
     };
     const received = await fetchUserUseCase.fetchRequest(data);
     console.log(received);

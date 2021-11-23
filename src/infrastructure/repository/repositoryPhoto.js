@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 
 class RepositoryPhoto {
     constructor() {
+      //  await ModelPhoto.sync();
         this.repositoryAlbum = new RepositoryAlbum();
     }
     async create(photo) {

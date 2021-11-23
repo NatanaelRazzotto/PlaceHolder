@@ -2,6 +2,9 @@ const { ModelCompany } = require('../sequelize/models/modelCompany');
 const { Op } = require("sequelize");
 
 class RepositoryCompany {
+    constructor(){
+      //  await ModelCompany.sync();
+    }
     async create(company) {
         await ModelCompany.sync();
         const validate = await this.findCompany(company);

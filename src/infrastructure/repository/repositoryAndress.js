@@ -2,16 +2,16 @@ const { ModelAddress } = require('../sequelize/models/modelAddress');
 const { Op } = require("sequelize");
 
 class RepositoryAddress {
+    constructor(){
+        //await ModelAddress.sync();
+    }
     async create(address) {
         await ModelAddress.sync();
         const validate = await this.findAndress(address);
         if ((validate != null)) {
-            //console.log("já exite o registro");
             return validate;
         }
         else {
-            //console.log("não exite registro");
-            console.log(address);
             const received = await ModelAddress.create(address);
             return received.dataValues;
         }

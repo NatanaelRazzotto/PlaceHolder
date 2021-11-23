@@ -10,19 +10,22 @@ const readLineSync = require('readline-sync');
         console.log('\n' + '--------INICIANDO APLICAÇÃO----------'.black.bgWhite + '\n');
         while (true) {
             console.log('--------APLICAÇÃO--------'.black.bgWhite);
-            view.viewOperacoes();
+            let tableOperations = view.viewOperacoes();
+            console.log(tableOperations.toString());
             var indiceTipoOperacao = readLineSync.question('Informe a operacao: ');
             //view.selectOperacoes(operacaoVar);
             switch (indiceTipoOperacao) {
                 case "1":
                     console.log('*****Fecth and Persistencia*****'.black.bgWhite);
-                    view.viewEntidades();
+                    let tableP = view.viewEntidades();
+                    console.log(tableP.toString());
                     var entidade = readLineSync.question('INFORME O TIPO DE OBJETO: ');
                     retornOperations = await persistenciaFromEntidade(view, entidade);
                     break;
                 case "2":
                     console.log('***Get Data****'.black.bgWhite);
-                    view.viewEntidades();
+                    let tableG = view.viewEntidades();
+                    console.log(tableG.toString());
                     var entidade = readLineSync.question('INFORME O TIPO DE OBJETO: ');
                     await getObject(view, entidade);
                     break;

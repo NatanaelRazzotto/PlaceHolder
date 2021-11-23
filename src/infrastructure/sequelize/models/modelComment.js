@@ -8,7 +8,6 @@ const ModelComment = database.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            //autoIncrement: true,
         },
         postId: {
             type: DataTypes.INTEGER,

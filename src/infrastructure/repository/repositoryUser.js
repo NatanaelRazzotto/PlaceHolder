@@ -1,10 +1,13 @@
 const { ModelUser } = require('../sequelize/models/modelUser');
 
 class RepositoryUser {
-
+  constructor(){
+   // await ModelUser.sync();
+  }
   async create(user) {
     await ModelUser.sync();
-    const validate = await this.findByPkUser(user);    
+    const validate = await this.findByPkUser(user); 
+    
     if ((validate != null)) {
       const update =  await this.updateByIdUser(user,validate);
       return update;
@@ -17,7 +20,9 @@ class RepositoryUser {
   }
 
   async findByPkUser(userObject) {
+    //await ModelUser.sync();
     const User = await ModelUser.findByPk(userObject.id);
+   // const User = await ModelUser.findOne({ where: { id: userObject.id } });
     return User;
 }
 

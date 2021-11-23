@@ -10,20 +10,28 @@ class FetchUserUseCase {
 
   async fetchRequest({ url, max, generate = true }) {
     const request = [];
+    const requestURL = [];
     let urlNew = '';
     while (max > 0) {
       if (generate) {
-        urlNew = UrlService.preparURL(url, max);
+        urlNew = UrlService.preparURL(url, max);       
       }
       else {
         urlNew = UrlService.preparURLIndentity(url, max);
-      }
 
-      const promisesNew = this.requestService.request(urlNew);
-      request.push(promisesNew);
+      }
+      requestURL.push(urlNew);
       max--;
     }
+    const test = [...new Set(requestURL)];
+
+    test.forEach(element => {
+      const promisesNew = this.requestService.request(element);
+      request.push(promisesNew);
+    });
+
     const users = await Promise.all(request);
+
     return users;
   }
 }
