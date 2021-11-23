@@ -134,7 +134,7 @@ describe('VIEW - Entry Point APP', () => {
     });
     
     it('viewentidadesPersist', async () => {
-        let result = view.entidadesPersist();
+        let result = view.viewentidadesPersist();
         console.log(result);
 
         for (let index = 0; index < 3; index++) {
