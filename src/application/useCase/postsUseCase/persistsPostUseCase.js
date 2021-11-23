@@ -4,7 +4,6 @@ const { PersistsCommentsUseCase } = require('../../useCase/commentsUseCase/persi
 
 class PersistsPostUseCase {
     constructor(Dependencias) {
-        //this.requestService = requestService;
         this.createPostsUseCase = new CreatePostsUseCase(Dependencias);
         this.fetchPostsUseCase = new FetchPostUseCase(Dependencias);
         this.persistsCommentsUseCase = new PersistsCommentsUseCase(Dependencias);
@@ -42,7 +41,6 @@ class PersistsPostUseCase {
             updatedAt: populado.updatedAt,
             createdAt: populado.createdAt
         };
-        //populado.depentes = await this.persistsDependentes(populado);
         return postDTO;
     }
 
@@ -54,7 +52,6 @@ class PersistsPostUseCase {
         const dependentes = {
             Comments: await this.persistsCommentsUseCase.execute(data)
         }
-        //const Comments = await this.persistsCommentsUseCase.execute(data);
         return dependentes;
     }
 

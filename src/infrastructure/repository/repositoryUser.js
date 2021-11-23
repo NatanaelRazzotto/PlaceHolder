@@ -20,9 +20,7 @@ class RepositoryUser {
   }
 
   async findByPkUser(userObject) {
-    //await ModelUser.sync();
     const User = await ModelUser.findByPk(userObject.id);
-   // const User = await ModelUser.findOne({ where: { id: userObject.id } });
     return User;
 }
 

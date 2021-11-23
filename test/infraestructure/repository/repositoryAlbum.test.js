@@ -1,13 +1,11 @@
 const { RepositoryAlbum } = require('../../../src/infrastructure/repository/repositoryAlbum');
-//const { RepositoryUser } = require('../../../src/infrastructure/repository/repositoryUser');
+
 const database = require('../../../src/infrastructure/sequelize/db');
 const { ModelAlbum } = require('../../../src/infrastructure/sequelize/models/modelAlbum');
 require('dotenv').config();
 
 describe('Repository Album', () => {
-    /*let Dependencias = {
-        repositoryUser: new RepositoryUser()
-    }*/
+ 
     let repositoryAlbum;
     beforeEach(() => {
         repositoryAlbum = new RepositoryAlbum();

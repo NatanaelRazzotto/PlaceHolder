@@ -4,7 +4,6 @@ const { PersistsPhotosUseCase } = require('../../useCase/photosUseCase/persistsP
 
 class PersistsAlbumUseCase {
     constructor(Dependencias) {
-        //this.requestService = requestService;
         this.createAlbumUseCase = new CreateAlbumUseCase(Dependencias);
         this.fetchAlbumsUseCase = new FetchAlbumsUseCase(Dependencias);
         this.persistsPhotosUseCase = new PersistsPhotosUseCase(Dependencias);
@@ -40,7 +39,6 @@ class PersistsAlbumUseCase {
             updatedAt: populado.updatedAt,
             createdAt: populado.createdAt
         };
-        //populado.depentes = await this.persistsDependentes(populado);
         return albumDTO;
     }
 
@@ -52,7 +50,6 @@ class PersistsAlbumUseCase {
         const dependentes = {
             pesistPhoto: await this.persistsPhotosUseCase.execute(data)
         }
-        // const pesistPhoto = await this.persistsPhotosUseCase.execute(data);
         return dependentes;
     }
 

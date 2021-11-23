@@ -132,6 +132,17 @@ describe('VIEW - Entry Point APP', () => {
             expect(arrayDTO[1]).toEqual(expect.any(String));
         }
     });
+    
+    it('viewentidadesPersist', async () => {
+        let result = view.entidadesPersist();
+        console.log(result);
+
+        for (let index = 0; index < 3; index++) {
+            let arrayDTO = result[index];
+            expect(arrayDTO[0]).toEqual(expect.any(Number));
+            expect(arrayDTO[1]).toEqual(expect.any(String));
+        }
+    });
 
     it('tableUser', async () => {
         const user = {
@@ -315,6 +326,19 @@ describe('VIEW - Entry Point APP', () => {
         let result = view.tablesAlbums(album);
         console.log(result);
         expect(result).toEqual(true);
+
+    });
+    it('tablesAlbums', async () => {
+        const album = {
+            id: 17,
+            userId: 2,
+            title: 'aut minima voluptatem ut velit',
+            createdAt: '2021-11-17T00:46:54.000Z',
+            updatedAt: '2021-11-17T00:46:54.000Z'
+        };
+        let result = view.tablesAlbums(album);
+        console.log(result);
+        expect(result).toEqual(false);
 
     });
 
@@ -697,6 +721,20 @@ describe('VIEW - Entry Point APP', () => {
         }
         catch (e) {
             console.error(e);
+        }
+    });
+    it('tablesPostsDTO - Valide Comments - Erro', async () => {
+        try {
+            const albumItem = [{
+                albumID: undefined,
+            }]
+
+            let result = view.tablesAlbumsDTO('Test', albumItem);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            expect(e.message).toBe('Um erro na consulta tablesAlbumsDTO');
         }
     });
 

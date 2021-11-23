@@ -44,7 +44,6 @@ class RepositoryPost {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findPost', err.stack);//
@@ -58,7 +57,6 @@ class RepositoryPost {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findAllPostFromUser', err.stack);//
@@ -68,7 +66,6 @@ class RepositoryPost {
 
     async deleteByIdPost(postObject) {
         const post = await ModelPost.findByPk(postObject.id);
-        //console.log(user)
         if (post != null) {
             const received = post.destroy();
             return received;

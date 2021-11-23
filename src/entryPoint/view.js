@@ -7,44 +7,49 @@ class View {
     constructor() {
         this.controller = new Controller();
         this.operacoes = ['-Fecth and Persistencia-', '-Get Data-', '-SAIR-'];
-        this.entidades = ['-USER-', '-ANDRESS-', '-COMPANY-', '-POST-', '-COMMENT', '-ALBUM-', '-PHOTOS', '-TODOS-', '-SAIR-'];
+        this.entidadesPersist = ['-USER-', '-ANDRESS-', '-COMPANY-', '-POST-', '-COMMENT', '-ALBUM-', '-PHOTOS', '-TODOS-', '-SAIR-'];
+        this.entidades = ['-USER-', '-POST-', '-COMMENT', '-ALBUM-', '-PHOTOS', '-TODOS-', '-SAIR-'];
     }
     viewOperacoes() {
         console.log('  OPERAÇÕES DISPONIVEÍS  '.black.bgWhite);
-
         var table = new Table({
             style: { head: ['yellow'] },
             head: ['INDICE', 'OPERAÇÕES'],
             colWidths: [8, 30]
         });
-
         for (let index = 0; index < this.operacoes.length; index++) {
             let a = index + 1;
             table.push([a, this.operacoes[index]]);
         }
-
         return table;
-
-
-
     }
-    viewEntidades() {
 
+    viewentidadesPersist() {
         console.log('  ESCOLHA O OBJETO  '.black.bgWhite);
-
         var table = new Table({
             style: { head: ['yellow'] },
             head: ['INDICE', 'OBJETO'],
             colWidths: [8, 30]
         });
+        for (let index = 0; index < this.entidadesPersist.length; index++) {
+            let a = index + 1;
+            table.push([a, this.entidadesPersist[index]]);
+        }
+        return table;
+    }
 
+    viewEntidades() {
+        console.log('  ESCOLHA O OBJETO  '.black.bgWhite);
+        var table = new Table({
+            style: { head: ['yellow'] },
+            head: ['INDICE', 'OBJETO'],
+            colWidths: [8, 30]
+        });
         for (let index = 0; index < this.entidades.length; index++) {
             let a = index + 1;
             table.push([a, this.entidades[index]]);
         }
-
         return table;
-
     }
     tablesUsersDTO(operacao, users) {
         try {
@@ -133,54 +138,36 @@ class View {
 
     tablesPostsDTO(operacao, posts) {
         var test = false;
-        try {
             var valida = Array.isArray(posts)
             if (valida) {
                 posts.forEach(element => {
                     var table = this.bindTablePostDTO(operacao, element);//tablePostDTO
                     console.log(table.toString());
 
-                    //var tableDependente = this.tableCommentDTO('Dependente', element.dependentes.Comments)
                     var tableDependente = this.tableCommentsDependentes(element.dependentes.Comments)
                     if (tableDependente != null) {
-                        console.log(tableDependente.toString());
-                        // test = true;
+                        console.log(tableDependente.toString());                      
                     }
-                    /* else {
-                         //  console.log('aaaa')
-                         test = false;
-                     }*/
                 });
                 test = true;
             }
             else {
-                // console.log('++++')
                 test = false;
             }
-        }
-        catch (e) {
-            throw new Error('Um erro no populamento tablesPostsDTO', e.stack);//
-        }
         return test;
-
     }
 
     bindTablePostDTO(operacao, post) {
-
-        // posts.forEach(element => {
         var table = new Table({
             style: { head: ['green'] },
-            head: [operacao, 'ID', 'UserID', 'Title', 'CreateAt', 'UpdateAt'],// head: ['TH 1 label', 'TH 2 label']
+            head: [operacao, 'ID', 'UserID', 'Title', 'CreateAt', 'UpdateAt'],
             colWidths: [13, 5, 10, 29, 29, 29]
         });
         table.push(this.formatLinePost(post));
         return table;
-        //console.log(table.toString());
-        //  this.tableCommentDTO('Dependente', post.dependentes.Comments)
-        // });
 
     }
-    tablesPosts(posts) {//
+    tablesPosts(posts) {
         var valida = Array.isArray(posts);
         if (valida) {
             console.log('\n' + 'GET POSTS'.green);
@@ -211,21 +198,17 @@ class View {
     tableCommentDTO(operacao, comments) {
         var table = new Table({
             style: { head: ['cyan'] },
-            head: [operacao, 'ID', 'PostID', 'Name', 'CreateAt', 'UpdateAt'],// head: ['TH 1 label', 'TH 2 label']
+            head: [operacao, 'ID', 'PostID', 'Name', 'CreateAt', 'UpdateAt'],
             colWidths: [13, 5, 10, 29, 29, 29]
         });
 
         comments.forEach(element => {
             table.push(this.formatLineComment(element));
         });
-
-        // console.log(table.toString());
         return table;
-
     }
     tableCommentsDependentes(comments) {
         var valida = Array.isArray(comments);
-        /// console.log("adddd")
         if (valida) {
             var IDs = '';
             var table = new Table({
@@ -233,7 +216,6 @@ class View {
             });
             console.log('\n' + 'DEPENDENTES PERSISTIDOS DO POST'.cyan);
             comments.forEach(element => {
-                // console.log(element.commentID);
                 if (!IDs) {
                     IDs = element.commentID.toString();
                 }
@@ -250,7 +232,6 @@ class View {
             }
             return table;
         } else {
-            // console.log("rtrtrt")
             return null;
         }
     }
@@ -289,17 +270,13 @@ class View {
             var valida = Array.isArray(albums)
             if (valida) {
                 albums.forEach(element => {
-                    var table = this.bindTableAlbumDTO(operacao, element);//tablePostDTO
+                    var table = this.bindTableAlbumDTO(operacao, element);
                     console.log(table.toString());
                     var tableDependente = this.tablePhotosDependentes(element.dependentes.pesistPhoto)
                     if (tableDependente != null) {
                         console.log(tableDependente.toString());
-                        // test = true;
                     }
-                    /* else {
-                         //  console.log('aaaa')
-                         test = false;
-                     }*/
+
                 });
                 test = true;
             }
@@ -308,7 +285,7 @@ class View {
             }
         }
         catch (e) {
-            throw new Error('Um erro na consulta tablesAlbumsDTO', e.stack);//
+            throw new Error('Um erro na consulta tablesAlbumsDTO', e.stack);
         }
         return test;
     }
@@ -321,7 +298,7 @@ class View {
         table.push(this.formatLineAlbum(album));
         return table;
     }
-    tablesAlbums(albums) {//
+    tablesAlbums(albums) {
         var valida = Array.isArray(albums);
         if (valida) {
             console.log('\n' + 'GET ALBUMS'.magenta);
@@ -363,7 +340,6 @@ class View {
     }
     tablePhotosDependentes(photos) {
         var valida = Array.isArray(photos);
-        /// console.log("adddd")
         if (valida) {
             var IDs = '';
             var table = new Table({
@@ -439,7 +415,7 @@ class View {
     tablesTodos(todos) {
         var valida = Array.isArray(todos);
         if (valida) {
-            console.log('\n' + 'GET PHOTOS'.red);
+            console.log('\n' + 'GET TODOS'.red);
             todos.forEach(todo => {
                 let todoElement = this.bindTableTodos(todo);
                 console.log(todoElement.toString());
@@ -559,7 +535,6 @@ class View {
             console.log('*****-OK-*****'.black.bgMagenta);
             let populado = this.tablesAlbumsDTO('Persist', result)
             return populado
-
         }
         else {
             console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgMagenta);
@@ -568,7 +543,6 @@ class View {
     }
 
     async persistenciaPhotosDependences(photos) {
-
         if (Number.isInteger(photos.id)) {
             console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgBlue);
             const result = await this.controller.persistsDataPhotosDependences(photos);
@@ -576,7 +550,6 @@ class View {
             var table = this.tablePhotosDTO('Persist', result)
             console.log(table.toString());
             return true;
-
         }
         else {
             console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgBlue);
@@ -585,7 +558,6 @@ class View {
     }
 
     async persistenciaTodosDependences(todos) {
-
         if (Number.isInteger(todos.id)) {
             console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgRed);
             const result = await this.controller.persistsDataTodosDependences(todos);
@@ -597,7 +569,6 @@ class View {
             console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgRed);
             return false;
         }
-
     }
 
     ////

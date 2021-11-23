@@ -46,8 +46,6 @@ describe('PostUserUseCase', () => {
     const received = await createUserUseCase.execute(data);
     console.log(received);
     expect(received).toEqual({
-      //expect.arrayContaining([
-      //expect.objectContaining({
       id: expect.any(Number),
       name: 'Leanne Graham',
       email: 'Sincere@april.biz',
@@ -57,8 +55,6 @@ describe('PostUserUseCase', () => {
       companyId: expect.any(Number),
       updatedAt: expect.any(Date),
       createdAt: expect.any(Date),
-      //})
-      //])
     })
   });
 

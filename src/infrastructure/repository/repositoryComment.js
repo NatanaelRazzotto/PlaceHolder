@@ -15,15 +15,12 @@ class RepositoryComment {
         const post = await this.repositoryPost.findPost(searchPost);
         if ((post != null)) {
             const validate = await this.findByPkComment(comment);
-           // const validate = await this.findComment(comment);
             if ((validate != null)) {
-               // console.log("já exite o registro");
                 const update =  await this.updateByIdComment(comment,validate);
                 return update;
             }
             else {
-                //console.log("não exite registro");
-                
+               
                 const received = await ModelComment.create(comment);
                 return received.dataValues;
             }
@@ -46,7 +43,6 @@ class RepositoryComment {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findComment', err.stack);//
@@ -60,7 +56,6 @@ class RepositoryComment {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findAlCommentFromPost', err.stack);//
@@ -70,8 +65,6 @@ class RepositoryComment {
 
     async deleteByIdComment(commentObject) {
         const comment = await this.findByPkComment(commentObject);
-       // const comment = await ModelComment.findByPk(commentObject.id);
-        //console.log(user)
         if (comment != null) {
             const received = comment.destroy();
             return received;

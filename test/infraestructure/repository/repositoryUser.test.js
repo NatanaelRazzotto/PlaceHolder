@@ -1,4 +1,4 @@
-const { RepositoryUser } = require('../../../src/infrastructure/repository/repositoryUser');//test\Repository\repositoryUser\repositoryUser.test.js
+const { RepositoryUser } = require('../../../src/infrastructure/repository/repositoryUser');
 const database = require('../../../src/infrastructure/sequelize/db');
 require('dotenv').config();
 

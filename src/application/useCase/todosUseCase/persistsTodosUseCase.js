@@ -4,7 +4,6 @@ const { FetchTodosUseCase } = require('./fetchTodosUseCase');
 
 class PersistsTodosUseCase {
     constructor(Dependencias) {
-        //this.requestService = requestService;
         this.createTodosUseCase = new CreateTodosUseCase(Dependencias);
         this.fetchTodosUseCase = new FetchTodosUseCase(Dependencias);
     }

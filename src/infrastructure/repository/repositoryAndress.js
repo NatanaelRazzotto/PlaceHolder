@@ -50,7 +50,6 @@ class RepositoryAddress {
 
     async deleteByIdAddress(addressObject) {
         const address = await ModelAddress.findByPk(addressObject.addressId);
-        //console.log(user)
         if (address != null) {
             const received = address.destroy();
             return received;

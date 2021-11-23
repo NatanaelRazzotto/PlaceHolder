@@ -3,7 +3,6 @@ const { FetchCommentsUseCase } = require('./fetchCommentsUseCase');
 
 class PersistsCommentsUseCase {
     constructor(Dependencias) {
-        //this.requestService = requestService;
         this.createCommentsUseCase = new CreateCommentsUseCase(Dependencias);
         this.fetchCommentsUseCase = new FetchCommentsUseCase(Dependencias);
     }

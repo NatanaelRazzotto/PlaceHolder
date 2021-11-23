@@ -6,7 +6,6 @@ const { PersistsTodosUseCase } = require('../../useCase/todosUseCase/persistsTod
 
 class PersistsUserUseCase {
     constructor(Dependencias) {
-        //this.requestService = requestService;
         this.createUserUseCase = new CreateUserUseCase(Dependencias);
         this.fetchUserUseCase = new FetchUserUseCase(Dependencias)
         this.persistsPostUseCase = new PersistsPostUseCase(Dependencias);
@@ -46,7 +45,6 @@ class PersistsUserUseCase {
             updatedAt: populado.updatedAt,
             createdAt: populado.createdAt
         };
-        //  populado.dependentes = await this.persistsDependentes(populado);
 
         return userDTO;
     }

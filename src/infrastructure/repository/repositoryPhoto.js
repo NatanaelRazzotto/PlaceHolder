@@ -17,12 +17,10 @@ class RepositoryPhoto {
         if ((album != null)) {
             const validate = await this.findByPkPhoto(photo);
             if ((validate != null)) {
-                //console.log("já exite o registro");
                 const update =  await this.updateByIdPhoto(photo,validate);
                 return update;
             }
             else {
-                //console.log("não exite registro");
                 const received = await ModelPhoto.create(photo);
                 return received.dataValues;
             }
@@ -45,7 +43,6 @@ class RepositoryPhoto {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findPhoto', err.stack);//
@@ -59,7 +56,6 @@ class RepositoryPhoto {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findAllPhotoFromAlbum', err.stack);//
@@ -69,7 +65,6 @@ class RepositoryPhoto {
 
     async deleteByIdPhoto(photoObject) {
         const photo = await ModelPhoto.findByPk(photoObject.id);
-        //console.log(user)
         if (photo != null) {
             const received = photo.destroy();
             return received;

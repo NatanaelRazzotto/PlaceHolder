@@ -3,7 +3,6 @@ const { FetchPhotosUseCase } = require('./fetchPhotosUseCase');
 
 class PersistsPhotosUseCase {
     constructor(Dependencias) {
-        //this.requestService = requestService;
         this.createPhotosUseCase = new CreatePhotosUseCase(Dependencias);
         this.fetchPhotosUseCase = new FetchPhotosUseCase(Dependencias);
     }

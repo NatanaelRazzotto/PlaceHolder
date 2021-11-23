@@ -14,9 +14,7 @@ class PostAndressUseCase {
         return andressPersistido;
     }
 
-    preparObject({ street, suite, city, zipcode, geo }) {// geo: { lat }, geo: { lng }
-        //console.log("ffff " + geo.lat)
-        //  console.log("dsdsaddsffdgfdgfdg " + geo.lng)
+    preparObject({ street, suite, city, zipcode, geo }) {
         const objectAndress = new Andress(0, street, suite, city, zipcode, geo.lat, geo.lng);
         /*const Object = {
             street: dataAdress.street,

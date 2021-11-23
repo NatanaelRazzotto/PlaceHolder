@@ -26,7 +26,6 @@ class RepositoryCompany {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findCompany', err.stack);//
@@ -41,7 +40,6 @@ class RepositoryCompany {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findCompanyID', err.stack);//
@@ -51,7 +49,6 @@ class RepositoryCompany {
 
     async deleteByIdCompany(companyObject) {
         const company = await ModelCompany.findByPk(companyObject.companyId);
-        //console.log(user)
         if (company != null) {
             const received = company.destroy();
             return received;

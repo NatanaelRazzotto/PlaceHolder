@@ -2,7 +2,6 @@ const { RandomNumberService } = require('./randomNumberService');
 
 class UrlService {
   static preparURL(url, limite) {
-    // console.log(' limite ' + limite);
     if (Number.isInteger(limite)) {
       return `${url}/${RandomNumberService.generate(limite)}`;
     } else {
@@ -20,7 +19,7 @@ class UrlService {
     if (Number.isInteger(urlIndice)) {
       return `${urlFecth}/${urlIndice}/${urlFilter}`;
     } else {
-      throw new Error('Indice não é um número');
+      throw new Error('Parametros invalidos');
     }
   }
 }

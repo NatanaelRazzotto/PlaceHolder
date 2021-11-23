@@ -15,23 +15,12 @@ class CreateUserUseCase {
         return await this.createUser(dataUsers);
     }
 
-    // async preparPostCreate(dataUsers) {
-    //     const request = [];
-    //     for (let index = 0; index < dataUsers.length; index++) {
-    //         let populado = this.createUser(dataUsers[index])
-    //         request.push(populado);
-    //     }
-    //     return request;
-    // }
     async createUser(dataUsers) {
         const userPersistido = await this.preparObject(dataUsers);
         const populado = await this.repositoryUser.create(userPersistido);
         return populado;
     }
-    async preparObject({ id, name, address, email, phone, website, company }) {//{ id, name, address: address, email, phone, website, company }
-        // console.log("asasas " + dataUsers.address.street)
-        //  console.log('teste');
-        //  console.log(address);
+    async preparObject({ id, name, address, email, phone, website, company }) {
         let andressPopulate = await this.postAndressUseCase.execute(address);
         let companyPopulate = await this.postCompanyUseCase.execute(company)
         const objectUser = new User(id, name, email, andressPopulate.addressId, phone, website, companyPopulate.companyId);

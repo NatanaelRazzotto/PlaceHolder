@@ -8,12 +8,11 @@ const readLineSync = require('readline-sync');
         let retornOperations = true;
 
         console.log('\n' + '--------INICIANDO APLICAÇÃO----------'.black.bgWhite + '\n');
-        while (true) {
+        while (operacional) {
             console.log('--------APLICAÇÃO--------'.black.bgWhite);
             let tableOperations = view.viewOperacoes();
             console.log(tableOperations.toString());
             var indiceTipoOperacao = readLineSync.question('Informe a operacao: ');
-            //view.selectOperacoes(operacaoVar);
             switch (indiceTipoOperacao) {
                 case "1":
                     console.log('*****Fecth and Persistencia*****'.black.bgWhite);
@@ -24,7 +23,7 @@ const readLineSync = require('readline-sync');
                     break;
                 case "2":
                     console.log('***Get Data****'.black.bgWhite);
-                    let tableG = view.viewEntidades();
+                    let tableG = view.viewentidadesPersist();
                     console.log(tableG.toString());
                     var entidade = readLineSync.question('INFORME O TIPO DE OBJETO: ');
                     await getObject(view, entidade);
@@ -38,7 +37,7 @@ const readLineSync = require('readline-sync');
             }
 
             if (retornOperations) {
-                console.log('!!!APLICACAO ENCERRADA COM SUCESSO!!!!!');
+                console.log('!!!PROCESSO ENCERRADO!!!!!');
             }
             else {
                 console.log('!!!APLICACAO NÃO FOI ENCERRADA COM SUCESSO!!!!!');
@@ -46,6 +45,7 @@ const readLineSync = require('readline-sync');
         }
     } catch (error) {
         console.error(error.message);
+        console.log('!!!APLICACAO NÃO FOI ENCERRADA COM SUCESSO!!!!!');
     }
 })();
 
@@ -58,7 +58,6 @@ async function persistenciaFromEntidade(view, indiceTipoOperacao) {
                 generate: gerar == 'S' ? true : false,
                 maxIndice: parseInt(readLineSync.question('Informe o numero maximo:'))
             };
-            //console.log(user)
             return await view.persistenciaUsersDependences(user);
 
         case "2":
@@ -153,7 +152,6 @@ async function getObject(view, indiceTipoOperacao) {
             const todos = {
                 id: parseInt(readLineSync.question('Informe o id do Usuário referente ao TODOS:'))
             };
-            //getDataTodosDependences
             return await view.getDataTodosDependences(todos);
 
         case "9":

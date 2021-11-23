@@ -9,16 +9,8 @@ class FetchPostUseCase {
   }
 
   async fetchRequestForParameter({ urlFecth, urlIndice, urlFilter }) {
-    //  const requestPost = [];
-    //  while (indicelimite > 0) {
     const newURL = UrlService.preparURLEspecific(urlFecth, urlIndice, urlFilter);
     const request = await this.requestService.request(newURL);
-    //   requestPost.push(promisesNew);
-    //     indicelimite--;
-    //}
-
-    // const posts = await Promise.;
-
     return request;
   }
 
@@ -35,8 +27,5 @@ class FetchPostUseCase {
 
     return posts;
   }
-
 }
-
-
 module.exports = { FetchPostUseCase };

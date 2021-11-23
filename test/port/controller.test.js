@@ -32,7 +32,7 @@ describe('Controller', () => {
             console.error(error);
         }
     }, 20000);
-    it('Persistencia de Dados Usuário - VALIDA MAXIMI', async () => {
+    it('Persistencia de Dados Usuário - VALIDA MAXIMO', async () => {
         try {
             const user = {
                 maxIndice: 15,
@@ -185,7 +185,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error(error);
         }
-    }, 1000);
+    }, 20000);
 
     it('Persistencia de Dados Todos - Teste de Erro', async () => {
         try {
@@ -196,7 +196,7 @@ describe('Controller', () => {
         } catch (error) {
             expect(error.message).toBe('Um erro na persistencia (persistsDataTodosDependences)');
         }
-    }, 2000);
+    }, 20000);
 
     it('GET de Dados Todos', async () => {
         try {
@@ -255,7 +255,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error(error);
         }
-    }, 2000);
+    }, 20000);
 
     it('Persistencia de Dados Posts - Teste de Erro', async () => {
         try {
@@ -325,7 +325,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error(error);
         }
-    }, 2000);
+    }, 20000);
 
     it('Persistencia de Dados Photos - Teste de Erro', async () => {
         try {
@@ -336,7 +336,7 @@ describe('Controller', () => {
         } catch (error) {
             expect(error.message).toBe('Um erro na persistencia (persistsDataPhotosDependences)');
         }
-    }, 2000);
+    }, 20000);
 
     it('GET de Dados Photos', async () => {
         try {
@@ -395,7 +395,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error(error);
         }
-    }, 1000);
+    }, 20000);
 
     it('Persistencia de Dados Comment - Teste de Erro', async () => {
         try {
@@ -406,7 +406,7 @@ describe('Controller', () => {
         } catch (error) {
             expect(error.message).toBe('Um erro na persistencia (persistsDataCommentsDependences)');
         }
-    }, 2000);
+    }, 20000);
 
     it('GET de Dados Comment', async () => {
         try {
@@ -465,7 +465,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error(error);
         }
-    }, 3000);
+    }, 20000);
 
     it('Persistencia de Dados Album - Teste de Erro', async () => {
         try {
@@ -476,7 +476,7 @@ describe('Controller', () => {
         } catch (error) {
             expect(error.message).toBe('Um erro na persistencia (persistsDataAlbumDependences)');
         }
-    }, 1000);
+    }, 20000);
 
     it('GET de Dados Album', async () => {
         try {

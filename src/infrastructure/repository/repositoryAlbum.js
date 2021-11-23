@@ -15,13 +15,11 @@ class RepositoryAlbum {
         const user = await this.repositoryUser.findUser(searchUser);
         if ((user != null)) {
             const validate = await this.findByPkAlbum(album);
-            if ((validate != null)) {//validate[0]
-                //console.log("já exite o registro");
+            if ((validate != null)) {
                 const update =  await this.updateByIdAlbum(album,validate);
                 return update;
             }
             else {
-                //console.log("não exite registro");
                 const received = await ModelAlbum.create(album);
                 return received.dataValues;
             }
@@ -43,7 +41,6 @@ class RepositoryAlbum {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findAlbum', err.stack);//
@@ -58,7 +55,6 @@ class RepositoryAlbum {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (errorResult) {
             throw new Error('Um erro na consulta findAlbumFromUser', errorResult.stack);//
@@ -68,7 +64,6 @@ class RepositoryAlbum {
 
     async deleteByIdAlbum(albumObject) {
         const album = await ModelAlbum.findByPk(albumObject.id);
-        //console.log(user)
         if (album != null) {
             const received = album.destroy();
             return received;
