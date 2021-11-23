@@ -33,7 +33,7 @@ describe('persistsAlbumUseCase', () => {
                 })]));
         console.log(receivedData.depentes);
 
-    }, 4000)
+    }, 20000)
     it('persistsAlbum - Pesiste Album e Fotos', async () => {
         const album = {
             userId: 1,

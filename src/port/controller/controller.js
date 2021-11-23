@@ -49,13 +49,19 @@ class Controller {
     async persistsDataUsersDependences(search) {
         try {
             const persistsUserUseCase = new PersistsUserUseCase(this.Dependencias);
-
-            const data = {
-                max: search.maxIndice,
-                generate: search.generate
-            };
-            const userPersists = await persistsUserUseCase.execute(data);
-            return userPersists;
+            if ((search.maxIndice > 0)&&(search.maxIndice <= 10))
+            {
+                const data = {
+                    max: search.maxIndice,
+                    generate: search.generate
+                };
+                const userPersists = await persistsUserUseCase.execute(data);
+                return userPersists;
+            }
+            else
+            {
+                return null;
+            }
         }
         catch (e) {
             throw new Error('Um erro na persistencia (persistsDataUsersDependences)', e.stack);//

@@ -111,6 +111,28 @@ describe('VIEW - Entry Point APP', () => {
         expect(result.Todo[4]).toEqual(todoItem.createdAt);
     });
 
+    it('viewOperacoes', async () => {
+        let result = view.viewOperacoes();
+        console.log(result);
+
+        for (let index = 0; index < 3; index++) {
+            let arrayDTO = result[index];
+            expect(arrayDTO[0]).toEqual(expect.any(Number));
+            expect(arrayDTO[1]).toEqual(expect.any(String));
+        }
+    });
+
+    it('viewEntidades', async () => {
+        let result = view.viewEntidades();
+        console.log(result);
+
+        for (let index = 0; index < 3; index++) {
+            let arrayDTO = result[index];
+            expect(arrayDTO[0]).toEqual(expect.any(Number));
+            expect(arrayDTO[1]).toEqual(expect.any(String));
+        }
+    });
+
     it('tableUser', async () => {
         const user = {
             id: 2,
@@ -944,6 +966,21 @@ describe('VIEW - Entry Point APP', () => {
         }
     }, 2000);
 
+    it('persistenciaUsersDependences - Valida Maximo', async () => {
+        try {
+            const user = {
+                maxIndice: 15,
+                generate: true
+            };
+            let result = await view.persistenciaUsersDependences(user);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
     //
     it('persistenciaPostsDependences', async () => {
         try {
@@ -1119,10 +1156,38 @@ describe('VIEW - Entry Point APP', () => {
         }
     }, 2000);
 
+    it('getDataUserDependences - Indice invalido', async () => {
+        try {
+            const user = {
+                id: 55555
+            };
+            let result = await view.getDataUserDependences(user);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
     it('getDataAndressDependences', async () => {
         try {
             const anddress = {
                 id: 1
+            };
+            let result = await view.getDataAndressDependences(anddress);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataAndressDependences - Indice invalido', async () => {
+        try {
+            const anddress = {
+                id: 55555
             };
             let result = await view.getDataAndressDependences(anddress);
             console.log(result)
@@ -1151,6 +1216,20 @@ describe('VIEW - Entry Point APP', () => {
         try {
             const anddress = {
                 id: 1
+            };
+            let result = await view.getDataCompanyDependences(anddress);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataCompanyDependences - Indice invalido', async () => {
+        try {
+            const anddress = {
+                id: 55555
             };
             let result = await view.getDataCompanyDependences(anddress);
             console.log(result)

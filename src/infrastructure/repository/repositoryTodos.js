@@ -14,14 +14,11 @@ class RepositoryTodos {
         const user = await this.repositoryUser.findUser(searchUser);
         if ((user != null)) {
             const validate = await this.findByPkTodo(todos);
-          //  const validate = await this.findTodos(todos);
             if ((validate != null)) {
-                //console.log("já exite o registro");
                 const update =  await this.updateByIdTodo(todos,validate);
                 return update;
             }
             else {
-                //console.log("não exite registro");
                 const received = await ModelTodos.create(todos);
                 return received.dataValues;
             }
@@ -44,7 +41,6 @@ class RepositoryTodos {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findTodos', err.stack);//
@@ -58,7 +54,6 @@ class RepositoryTodos {
             },
             raw: true
         }).then(function (result) {
-            // console.log(" test + " + result);
             return result;
         }).catch(function (err) {
             throw new Error('Um erro na consulta findAllTodosFromUser', err.stack);//
@@ -68,7 +63,6 @@ class RepositoryTodos {
 
     async deleteByIdTodo(todoObject) {
         const todo = await ModelTodos.findByPk(todoObject.id);
-        //console.log(user)
         if (todo != null) {
             const received = todo.destroy();
             return received;
@@ -84,8 +78,6 @@ class RepositoryTodos {
 
     async updateByIdTodo(todoObject,todoToChange) {       
 
-        console.log(todoObject)
-        console.log(todoToChange)
         Object.entries(todoObject).forEach(([key, value]) => {
             todoToChange[key] = value;
         });

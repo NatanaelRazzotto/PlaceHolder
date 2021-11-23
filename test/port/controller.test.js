@@ -32,6 +32,19 @@ describe('Controller', () => {
             console.error(error);
         }
     }, 20000);
+    it('Persistencia de Dados Usuário - VALIDA MAXIMI', async () => {
+        try {
+            const user = {
+                maxIndice: 15,
+                generate: true
+            };
+            const received = await controller.persistsDataUsersDependences(user);
+            console.log(received);
+            expect(received).toEqual(null)
+        } catch (error) {
+            console.error(error);
+        }
+    }, 2000);
     it('Persistencia de Dados Usuário - Teste de Erro', async () => {
         try {
             const user = undefined;

@@ -3,18 +3,14 @@ const { ModelUser } = require('../sequelize/models/modelUser');
 class RepositoryUser {
 
   async create(user) {
-    // console.log(user);
     await ModelUser.sync();
     const validate = await this.findByPkUser(user);    
-    //console.log(validate[0])
     if ((validate != null)) {
-      //console.log("já exite o registro");
       const update =  await this.updateByIdUser(user,validate);
       return update;
 
     }
     else {
-      //console.log("não exite registro");
       const received = await ModelUser.create(user);
       return received.dataValues;
     }
@@ -32,7 +28,6 @@ class RepositoryUser {
       },
       raw: true
     }).then(function (result) {
-      // console.log(" test + " + result);
       return result;
     }).catch(function (err) {
       throw new Error('Um erro na consulta findUser', err.stack);//
@@ -42,7 +37,6 @@ class RepositoryUser {
 
   async deleteByIdUser(userObject) {
     const user = await ModelUser.findByPk(userObject.id);
-    //console.log(user)
     if (user != null) {
       const received = user.destroy();
       return received;

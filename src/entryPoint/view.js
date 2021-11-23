@@ -23,7 +23,9 @@ class View {
             table.push([a, this.operacoes[index]]);
         }
 
-        console.log(table.toString());
+        return table;
+
+
 
     }
     viewEntidades() {
@@ -41,7 +43,7 @@ class View {
             table.push([a, this.entidades[index]]);
         }
 
-        console.log(table.toString());
+        return table;
 
     }
     tablesUsersDTO(operacao, users) {
@@ -49,8 +51,7 @@ class View {
             var valida = Array.isArray(users)
             if (valida) {
                 users.forEach(element => {
-                    console.log(element)
-                    console.log('PERSISTENCE USERS'.red); // outputs green text
+                    console.log('PERSISTENCE USERS'.red); 
                     var table = this.bindTableUserDTO(operacao, element);
                     console.log(table.toString());
                     this.tablesPostsDTO('Dependente', element.dependentes.pesistPost);
@@ -503,58 +504,65 @@ class View {
 
     async persistenciaUsersDependences(user) {
         if (Number.isInteger(user.maxIndice)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****');
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
             const result = await this.controller.persistsDataUsersDependences(user);
-            console.log('*****-OK-*****');
-            let populado = this.tablesUsersDTO('Persist', result);
-            return populado;
+            if (result != null){
+                console.log('*****-OK-*****'.black.bgYellow);
+                let populado = this.tablesUsersDTO('Persist', result);
+                return populado;
+            }
+            else
+            {
+                console.log('\n' + '*****-NÃO HA REGISTROS PARA ESTE INDICE-*****'.black.bgYellow);
+                return false;
+            }
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgYellow);
             return false;
         }
     }
 
     async persistenciaPostsDependences(post) {
         if (Number.isInteger(post.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****');
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgGreen);
             const result = await this.controller.persistsDataPostsDependences(post);
-            console.log('*****-OK-*****');
+            console.log('*****-OK-*****'.black.bgGreen);
             let populado = this.tablesPostsDTO('Persist', result);
             return populado;
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgGreen);
             return false;
         }
     }
 
     async persistenciaCommentsDependences(comment) {
         if (Number.isInteger(comment.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****');
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgCyan);
             const result = await this.controller.persistsDataCommentsDependences(comment);
-            console.log('*****-OK-*****');
+            console.log('*****-OK-*****'.black.bgCyan);
             let table = this.tableCommentDTO('Persist', result);
             console.log(table.toString());
             return true;
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgCyan);
             return false;
         }
     }
 
     async persistenciaAlbumDependences(album) {
         if (Number.isInteger(album.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****');
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgMagenta);
             const result = await this.controller.persistsDataAlbumDependences(album);
-            console.log('*****-OK-*****');
+            console.log('*****-OK-*****'.black.bgMagenta);
             let populado = this.tablesAlbumsDTO('Persist', result)
             return populado
 
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgMagenta);
             return false;
         }
     }
@@ -562,16 +570,16 @@ class View {
     async persistenciaPhotosDependences(photos) {
 
         if (Number.isInteger(photos.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****');
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgBlue);
             const result = await this.controller.persistsDataPhotosDependences(photos);
-            console.log('*****-OK-*****');
+            console.log('*****-OK-*****'.black.bgBlue);
             var table = this.tablePhotosDTO('Persist', result)
             console.log(table.toString());
             return true;
 
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgBlue);
             return false;
         }
     }
@@ -579,14 +587,14 @@ class View {
     async persistenciaTodosDependences(todos) {
 
         if (Number.isInteger(todos.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****');
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgRed);
             const result = await this.controller.persistsDataTodosDependences(todos);
             var table = this.tableTodosDTO('Persist', result)
             console.log(table.toString());
             return true;
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! '.black.bgRed);
             return false;
         }
 
@@ -596,123 +604,135 @@ class View {
 
     async getDataUserDependences(user) {
         if (Number.isInteger(user.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
+            console.log('\n' + '*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
             const result = await this.controller.getDataUserDependences(user);
-            console.log('*****-OK-*****'.black.bgYellow);
-            const tableResult = this.tableUser(result);
-            console.log(tableResult.toString());
+            if (result != null){
+                console.log('\n' + '*****-OK-*****'.black.bgYellow);
+                const tableResult = this.tableUser(result);
+                console.log(tableResult.toString());
+            }
+            else
+            {
+                console.log('\n' + '*****-NÃO HA REGISTROS PARA ESTE INDICE-*****'.black.bgYellow);
+            }
             return true;
 
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' + '**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
 
     async getDataAndressDependences(andress) {
         if (Number.isInteger(andress.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
+            console.log('\n' + '*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
             const result = await this.controller.getDataAndressDependences(andress);
-            console.log(result)
-            console.log('*****-OK-*****'.black.bgYellow);
-            const tableResult = this.tableAddress(result);
-            console.log(tableResult.toString());
+            if (result != null){
+                console.log('\n' + '*****-OK-*****'.black.bgYellow);
+                const tableResult = this.tableAddress(result);
+                console.log(tableResult.toString());
+            }
+            else
+            {
+                console.log('\n' + '*****-NÃO HA REGISTROS PARA ESTE INDICE-*****'.black.bgYellow);
+            }
             return true;
-
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' + '**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
     async getDataCompanyDependences(company) {
         if (Number.isInteger(company.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
+            console.log('\n' +'*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
             const result = await this.controller.getDataCompanyDependences(company);
-            console.log(result)
-            console.log('*****-OK-*****'.black.bgYellow);
-            const tableResult = this.tableCompany(result);
-            console.log(tableResult.toString());
+            if (result != null){
+                console.log('\n' +'*****-OK-*****'.black.bgYellow);
+                const tableResult = this.tableCompany(result);
+                console.log(tableResult.toString());
+            }
+            else{
+                console.log('\n' + '*****-NÃO HA REGISTROS PARA ESTE INDICE-*****'.black.bgYellow);
+            }
             return true;
-
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' +'**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
 
     async getDataPostsDependences(post) {
         if (Number.isInteger(post.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgGreen);
+            let tableResult = true;
+            console.log('\n' +'*****-REALIZANDO PRECESSAMENTO-*****'.black.bgGreen);
             const result = await this.controller.getDataPostsDependences(post);
-            console.log('*****-OK-*****');
-            const tableResult = this.tablesPosts(result);
+            console.log('\n' +'*****-OK-*****'.black.bgGreen);
+            tableResult = this.tablesPosts(result);
             return tableResult;
-
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' +'**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
 
-
     async getDataCommentsDependences(comment) {
         if (Number.isInteger(comment.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgCyan);
+            let tableResult = true
+            console.log('\n' +'*****-REALIZANDO PRECESSAMENTO-*****'.black.bgCyan);
             const result = await this.controller.getDataCommentsDependences(comment);
-            console.log('*****-OK-*****'.black.bgCyan);
-            const tableResult = this.tablesComments(result);
+            console.log('\n' +'*****-OK-*****'.black.bgCyan);
+            tableResult = this.tablesComments(result);            
             return tableResult;
-
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' +'**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
 
     async getDataAlbumDependences(album) {
         if (Number.isInteger(album.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgMagenta);
+            console.log('\n' +'*****-REALIZANDO PRECESSAMENTO-*****'.black.bgMagenta);
             const result = await this.controller.getDataAlbumDependences(album);
-            console.log('*****-OK-*****'.black.bgMagenta);
+            console.log('\n' +'*****-OK-*****'.black.bgMagenta);
             const tableResult = this.tablesAlbums(result);
             return tableResult;
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' +'**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
 
     async getDataPhotosDependences(photos) {
         if (Number.isInteger(photos.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgBlue);
+            console.log('\n' +'*****-REALIZANDO PRECESSAMENTO-*****'.black.bgBlue);
             const result = await this.controller.getDataPhotosDependences(photos);
-            console.log('*****-OK-*****'.black.bgBlue);
+            console.log('\n' +'*****-OK-*****'.black.bgBlue);
             const tableResult = this.tablesPhotos(result);
             return tableResult;
 
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' +'**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
 
     async getDataTodosDependences(todos) {
         if (Number.isInteger(todos.id)) {
-            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgRed);
+            console.log('\n' +'*****-REALIZANDO PRECESSAMENTO-*****'.black.bgRed);
             const result = await this.controller.getDataTodosDependences(todos);
-            console.log('*****-OK-*****'.black.bgRed);
+            console.log('\n' +'*****-OK-*****'.black.bgRed);
             const tableResult = this.tablesTodos(result);
             return tableResult;
         }
         else {
-            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            console.log('\n' +'**** VALOR DE ENTRADA NÃO É VALIDO! ');
             return false;
         }
     }
