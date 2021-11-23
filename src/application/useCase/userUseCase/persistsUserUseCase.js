@@ -23,6 +23,7 @@ class PersistsUserUseCase {
         const data = {
             url: 'https://jsonplaceholder.typicode.com/users',
             max: maxData.max,
+            generate: maxData.generate
         };
         const fetchUsers = await this.fetchUserUseCase.execute(data);
         for (const element of fetchUsers) {

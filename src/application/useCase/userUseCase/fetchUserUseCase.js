@@ -8,10 +8,17 @@ class FetchUserUseCase {
     return await this.fetchRequest(data);
   }
 
-  async fetchRequest({ url, max }) {
+  async fetchRequest({ url, max, generate = true }) {
     const request = [];
+    let urlNew = '';
     while (max > 0) {
-      const urlNew = UrlService.preparURL(url, max);
+      if (generate) {
+        urlNew = UrlService.preparURL(url, max);
+      }
+      else {
+        urlNew = UrlService.preparURLIndentity(url, max);
+      }
+
       const promisesNew = this.requestService.request(urlNew);
       request.push(promisesNew);
       max--;

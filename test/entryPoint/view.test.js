@@ -857,7 +857,22 @@ describe('VIEW - Entry Point APP', () => {
     it('persistenciaUsersDependences', async () => {
         try {
             const user = {
-                maxIndice: 2
+                maxIndice: 2,
+                generate: true
+            };
+            let result = await view.persistenciaUsersDependences(user);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 11000);
+    it('persistenciaUsersDependences Sequencial', async () => {
+        try {
+            const user = {
+                maxIndice: 2,
+                generate: false
             };
             let result = await view.persistenciaUsersDependences(user);
             console.log(result)
@@ -871,7 +886,8 @@ describe('VIEW - Entry Point APP', () => {
     it('persistenciaUsersDependences - Valida Numero', async () => {
         try {
             const user = {
-                maxIndice: 'dois'
+                maxIndice: 'dois',
+                generate: true
             };
             let result = await view.persistenciaUsersDependences(user);
             console.log(result)

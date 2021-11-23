@@ -9,7 +9,8 @@ describe('Controller', () => {
     it('Persistencia de Dados Usuário', async () => {
         try {
             const user = {
-                maxIndice: 3
+                maxIndice: 3,
+                generate: true
             };
             const received = await controller.persistsDataUsersDependences(user);
             console.log(received);
@@ -30,7 +31,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error(error);
         }
-    }, 8000);
+    }, 20000);
     it('Persistencia de Dados Usuário - Teste de Erro', async () => {
         try {
             const user = undefined;
@@ -324,6 +325,41 @@ describe('Controller', () => {
             expect(error.message).toBe('Um erro na persistencia (persistsDataPhotosDependences)');
         }
     }, 2000);
+
+    it('GET de Dados Photos', async () => {
+        try {
+            const photo = {
+                id: 1,
+            };
+            const received = await controller.getDataPhotosDependences(photo);
+            console.log(received);
+            expect(received).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        albumId: expect.any(Number),
+                        id: expect.any(Number),
+                        title: expect.any(String),
+                        url: expect.any(String),
+                        thumbnailUrl: expect.any(String),
+                        updatedAt: expect.any(Date),
+                        createdAt: expect.any(Date),
+                    })
+                ])
+            )
+
+        } catch (error) {
+            console.error(error);
+        }
+    }, 2000);
+    it('GET de Dados Photo - Teste de Erro', async () => {
+        try {
+            const photo = undefined;
+            const received = await controller.getDataPhotosDependences(photo);
+            console.log(received);
+        } catch (error) {
+            expect(error.message).toBe('Um erro no GET (getDataPhotosDependences)');
+        }
+    }, 2000);
     //
 
     it('Persistencia de Dados Comment', async () => {
@@ -357,6 +393,41 @@ describe('Controller', () => {
 
         } catch (error) {
             expect(error.message).toBe('Um erro na persistencia (persistsDataCommentsDependences)');
+        }
+    }, 2000);
+
+    it('GET de Dados Comment', async () => {
+        try {
+            const comment = {
+                id: 1,
+            };
+            const received = await controller.getDataCommentsDependences(comment);
+            console.log(received);
+            expect(received).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        postId: expect.any(Number),
+                        id: expect.any(Number),
+                        name: expect.any(String),
+                        email: expect.any(String),
+                        body: expect.any(String),
+                        updatedAt: expect.any(Date),
+                        createdAt: expect.any(Date),
+                    })
+                ])
+            )
+
+        } catch (error) {
+            console.error(error);
+        }
+    }, 2000);
+    it('GET de Dados Comment - Teste de Erro', async () => {
+        try {
+            const comment = undefined;
+            const received = await controller.getDataCommentsDependences(comment);
+            console.log(received);
+        } catch (error) {
+            expect(error.message).toBe('Um erro no GET (getDataCommentsDependences)');
         }
     }, 2000);
     //
@@ -395,12 +466,37 @@ describe('Controller', () => {
         }
     }, 1000);
 
-    it('Get dados Album', async () => {
-        const data = {
-            id: 1
-        };
-        const received = await controller.getDataAlbumDependences(data);
-        console.log(received);
-    });
+    it('GET de Dados Album', async () => {
+        try {
+            const album = {
+                id: 1,
+            };
+            const received = await controller.getDataAlbumDependences(album);
+            console.log(received);
+            expect(received).toEqual(
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        userId: expect.any(Number),
+                        id: expect.any(Number),
+                        title: expect.any(String),
+                        updatedAt: expect.any(Date),
+                        createdAt: expect.any(Date),
+                    })
+                ])
+            )
+
+        } catch (error) {
+            console.error(error);
+        }
+    }, 2000);
+    it('GET de Dados Album - Teste de Erro', async () => {
+        try {
+            const album = undefined;
+            const received = await controller.getDataAlbumDependences(album);
+            console.log(received);
+        } catch (error) {
+            expect(error.message).toBe('Um erro no GET (getDataAlbumDependences)');
+        }
+    }, 2000);
 
 })

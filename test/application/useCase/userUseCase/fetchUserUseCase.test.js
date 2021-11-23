@@ -19,31 +19,47 @@ describe('FetchUserUseCase', () => {
     expect(received).toBeTruthy();
   });
 
-  describe('FetchRequest', () => {
-    it('FetchRequest 10', async () => {
-      const data = {
-        url: 'https://jsonplaceholder.typicode.com/users',
-        max: 10,
-      };
-      const received = await fetchUserUseCase.fetchRequest(data);
-      console.log(received);
-      expect(received).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            id: expect.any(Number),
-          }),
-        ])
-      );
-    });
-
-    it('FetchRequest ZERO', async () => {
-      const data = {
-        url: 'https://jsonplaceholder.typicode.com/users',
-        max: 0,
-      };
-      const received = await fetchUserUseCase.fetchRequest(data);
-      console.log(received);
-      expect(received).toEqual(expect.arrayContaining([]));
-    });
+  it('FetchRequest 10', async () => {
+    const data = {
+      url: 'https://jsonplaceholder.typicode.com/users',
+      max: 10,
+    };
+    const received = await fetchUserUseCase.fetchRequest(data);
+    console.log(received);
+    expect(received).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(Number),
+        }),
+      ])
+    );
   });
+
+  it('FetchRequest 2 sequencial', async () => {
+    const data = {
+      url: 'https://jsonplaceholder.typicode.com/users',
+      max: 2,
+      generate: false
+    };
+    const received = await fetchUserUseCase.fetchRequest(data);
+    console.log(received);
+    expect(received).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(Number),
+        }),
+      ])
+    );
+  });
+
+  it('FetchRequest ZERO', async () => {
+    const data = {
+      url: 'https://jsonplaceholder.typicode.com/users',
+      max: 0,
+    };
+    const received = await fetchUserUseCase.fetchRequest(data);
+    console.log(received);
+    expect(received).toEqual(expect.arrayContaining([]));
+  });
+
 });

@@ -50,9 +50,12 @@ async function persistenciaFromEntidade(view, indiceTipoOperacao) {
     switch (indiceTipoOperacao) {
         case "1":
             console.log('*****-1-USER-*****'.black.bgYellow);
+            let gerar = readLineSync.question('TIPO DE OPERACAO [S] Gerar ou [N]Sequencial :').toUpperCase();
             const user = {
+                generate: gerar == 'S' ? true : false,
                 maxIndice: parseInt(readLineSync.question('Informe o numero maximo:'))
             };
+            //console.log(user)
             return await view.persistenciaUsersDependences(user);
 
         case "2":

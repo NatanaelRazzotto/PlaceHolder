@@ -28,7 +28,8 @@ describe('persistsUserUseCase', () => {
 
   it('Execute - persistir user', async () => {
     const data = {
-      max: 4,
+      max: 3,
+      generate: false
     };
     const received = await persistsUserUseCase.execute(data);
     console.log(received);

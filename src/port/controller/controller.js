@@ -51,7 +51,8 @@ class Controller {
             const persistsUserUseCase = new PersistsUserUseCase(this.Dependencias);
 
             const data = {
-                max: search.maxIndice
+                max: search.maxIndice,
+                generate: search.generate
             };
             const userPersists = await persistsUserUseCase.execute(data);
             return userPersists;
@@ -170,12 +171,16 @@ class Controller {
 
     }
     async getDataPhotosDependences(search) {
-        const getPhotoUseCase = new GetPhotoUseCase(this.Dependencias);
-        const data = {
-            albumId: search.id
-        };
-        const albumPersists = await getPhotoUseCase.execute(data);
-        return albumPersists;
+        try {
+            const getPhotoUseCase = new GetPhotoUseCase(this.Dependencias);
+            const data = {
+                albumId: search.id
+            };
+            const photoPersists = await getPhotoUseCase.execute(data);
+            return photoPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getDataPhotosDependences)', e.stack);//
+        }
     }
     // #endregion
     // #region Album Operacoes 
@@ -193,12 +198,16 @@ class Controller {
         }
     }
     async getDataCommentsDependences(search) {
-        const getCommentUseCase = new GetCommentUseCase(this.Dependencias);
-        const data = {
-            postId: search.id
-        };
-        const albumPersists = await getCommentUseCase.execute(data);
-        return albumPersists;
+        try {
+            const getCommentUseCase = new GetCommentUseCase(this.Dependencias);
+            const data = {
+                postId: search.id
+            };
+            const commentPersists = await getCommentUseCase.execute(data);
+            return commentPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getDataCommentsDependences)', e.stack);//
+        }
     }
     // #endregion
     // #region Album Operacoes 
@@ -216,12 +225,16 @@ class Controller {
         }
     }
     async getDataAlbumDependences(search) {
-        const getAlbumUseCase = new GetAlbumUseCase(this.Dependencias);
-        const data = {
-            userId: search.id
-        };
-        const albumPersists = await getAlbumUseCase.execute(data);
-        return albumPersists;
+        try {
+            const getAlbumUseCase = new GetAlbumUseCase(this.Dependencias);
+            const data = {
+                userId: search.id
+            };
+            const albumPersists = await getAlbumUseCase.execute(data);
+            return albumPersists;
+        } catch (e) {
+            throw new Error('Um erro no GET (getDataAlbumDependences)', e.stack);//
+        }
     }
     // #endregion
 

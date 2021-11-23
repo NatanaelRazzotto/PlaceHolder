@@ -53,9 +53,9 @@ class View {
                     console.log('PERSISTENCE USERS'.red); // outputs green text
                     var table = this.bindTableUserDTO(operacao, element);
                     console.log(table.toString());
-                    this.tablesPostsDTO('Dependente', users[0].dependentes.pesistPost);
-                    this.tablesAlbumsDTO('Dependente', users[0].dependentes.pesistAlbum);
-                    this.tableTodosDTO('Dependente', users[0].dependentes.pesistTodos);
+                    this.tablesPostsDTO('Dependente', element.dependentes.pesistPost);
+                    /*this.tablesAlbumsDTO('Dependente', users[0].dependentes.pesistAlbum);
+                    this.tableTodosDTO('Dependente', users[0].dependentes.pesistTodos);*/
                 });
                 return true;
             }
