@@ -8,7 +8,7 @@ class GetAndressUseCase {
         return await this.getRegisterInDB(dataAdress);
     }
     async getRegisterInDB(dataAdress) {
-        const andressPersistido = await this.repositoryAddress.findAndress(dataAdress);
+        const andressPersistido = await this.repositoryAddress.findAndressID(dataAdress);
         return andressPersistido;
     }
 }

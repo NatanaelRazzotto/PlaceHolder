@@ -31,6 +31,21 @@ class RepositoryCompany {
         return Company;
     }
 
+    async findCompanyID(companyObject) {
+        const Company = await ModelCompany.findOne({
+            where: {
+                companyId: companyObject.companyId
+            },
+            raw: true
+        }).then(function (result) {
+            // console.log(" test + " + result);
+            return result;
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findCompanyID', err.stack);//
+        })
+        return Company;
+    }
+
 }
 
 module.exports = { RepositoryCompany };

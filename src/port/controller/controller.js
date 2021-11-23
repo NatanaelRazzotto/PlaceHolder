@@ -78,8 +78,7 @@ class Controller {
         try {
             const getAndressUseCase = new GetAndressUseCase(this.Dependencias);
             const data = {
-                lat: search.lat,
-                lng: search.lng,
+                addressId: search.id,
             };
             const andressPersists = await getAndressUseCase.execute(data);
             return andressPersists;
@@ -87,16 +86,16 @@ class Controller {
             throw new Error('Um erro no GET (getDataAndressDependences)', e.stack);//
         }
     }
-    async getCompanyDependences(search) {
+    async getDataCompanyDependences(search) {
         try {
             const getCompanyUseCase = new GetCompanyUseCase(this.Dependencias);
             const data = {
-                name: search.name,
+                companyId: search.id,
             };
             const companyPersists = await getCompanyUseCase.execute(data);
             return companyPersists;
         } catch (e) {
-            throw new Error('Um erro no GET (getCompanyDependences)', e.stack);//
+            throw new Error('Um erro no GET (getDataCompanyDependences)', e.stack);//
         }
     }
     // #endregion

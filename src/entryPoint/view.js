@@ -7,7 +7,7 @@ class View {
     constructor() {
         this.controller = new Controller();
         this.operacoes = ['-Fecth and Persistencia-', '-Get Data-', '-SAIR-'];
-        this.entidades = ['-USER-', '-POST-', '-COMMENT', '-ALBUM-', '-PHOTOS', '-TODOS-', '-SAIR-'];
+        this.entidades = ['-USER-', '-ANDRESS-', '-COMPANY-', '-POST-', '-COMMENT', '-ALBUM-', '-PHOTOS', '-TODOS-', '-SAIR-'];
     }
     viewOperacoes() {
         console.log('  OPERAÇÕES DISPONIVEÍS  '.black.bgWhite);
@@ -91,6 +91,40 @@ class View {
             { 'AddressId': users.addressId.toString() },
             { 'CreatedAt': users.createdAt.toString() },
             { 'UpdatedAt': users.updatedAt.toString() },
+        );
+        return table;
+    }
+
+    tableAddress(tableAddress) {
+        console.log('\n' + 'GET ADDRESS'.yellow);
+        var table = new Table({
+            style: { head: ['yellow'] }
+        });
+        table.push(
+            { 'ID': tableAddress.addressId.toString() },
+            { 'Street': tableAddress.street.toString() },
+            { 'Suite': tableAddress.suite.toString() },
+            { 'City': tableAddress.city.toString() },
+            { 'Zipcode': tableAddress.zipcode.toString() },
+            { 'Lat': tableAddress.lat.toString() },
+            { 'Lng': tableAddress.lng.toString() },
+            { 'CreatedAt': tableAddress.createdAt.toString() },
+            { 'UpdatedAt': tableAddress.updatedAt.toString() },
+        );
+        return table;
+    }
+    tableCompany(tableCompany) {
+        console.log('\n' + 'GET COMPANY'.yellow);
+        var table = new Table({
+            style: { head: ['yellow'] }
+        });
+        table.push(
+            { 'ID': tableCompany.companyId.toString() },
+            { 'Name': tableCompany.name.toString() },
+            { 'CatchPhrase': tableCompany.catchPhrase.toString() },
+            { 'Bs': tableCompany.bs.toString() },
+            { 'CreatedAt': tableCompany.createdAt.toString() },
+            { 'UpdatedAt': tableCompany.updatedAt.toString() },
         );
         return table;
     }
@@ -565,6 +599,39 @@ class View {
             const result = await this.controller.getDataUserDependences(user);
             console.log('*****-OK-*****'.black.bgYellow);
             const tableResult = this.tableUser(result);
+            console.log(tableResult.toString());
+            return true;
+
+        }
+        else {
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            return false;
+        }
+    }
+
+    async getDataAndressDependences(andress) {
+        if (Number.isInteger(andress.id)) {
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
+            const result = await this.controller.getDataAndressDependences(andress);
+            console.log(result)
+            console.log('*****-OK-*****'.black.bgYellow);
+            const tableResult = this.tableAddress(result);
+            console.log(tableResult.toString());
+            return true;
+
+        }
+        else {
+            console.log('**** VALOR DE ENTRADA NÃO É VALIDO! ');
+            return false;
+        }
+    }
+    async getDataCompanyDependences(company) {
+        if (Number.isInteger(company.id)) {
+            console.log('*****-REALIZANDO PRECESSAMENTO-*****'.black.bgYellow);
+            const result = await this.controller.getDataCompanyDependences(company);
+            console.log(result)
+            console.log('*****-OK-*****'.black.bgYellow);
+            const tableResult = this.tableCompany(result);
             console.log(tableResult.toString());
             return true;
 

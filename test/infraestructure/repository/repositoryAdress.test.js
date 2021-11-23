@@ -102,4 +102,35 @@ describe('Repository Andress', () => {
             expect(error.message).toBe('Um erro na consulta findAndress');
         }
     });
+
+    it('findAndressID', async () => {
+        const Andress = {
+            addressId: 1,
+        };
+        try {
+            const received = await repositoryAddress.findAndressID(Andress);
+            console.log(received);
+            expect(received).toEqual({
+                addressId: 1,
+                street: "Kulas Light",
+                suite: "Apt. 556",
+                city: "Gwenborough",
+                zipcode: "92998-3874",
+                lat: "-37.3159",
+                lng: "81.1496",
+                updatedAt: expect.any(Date),
+                createdAt: expect.any(Date),
+            });
+        } catch (error) {
+            console.error(error.message);
+        }
+    });
+    it('findAndressID - ERROR', async () => {
+        const Andress = {}
+        try {
+            await repositoryAddress.findAndressID(Andress);
+        } catch (error) {
+            expect(error.message).toBe('Um erro na consulta findAndressID');
+        }
+    });
 })

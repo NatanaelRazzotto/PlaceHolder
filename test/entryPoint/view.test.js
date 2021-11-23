@@ -137,6 +137,52 @@ describe('VIEW - Entry Point APP', () => {
 
     });
 
+    it('tableAddress', async () => {
+        const address = {
+            addressId: 2,
+            street: 'Victor Plains',
+            suite: 'Suite 879',
+            city: 'Wisokyburgh',
+            zipcode: '90566-7771',
+            lat: '-43.9509',
+            lng: '-34.4618',
+            createdAt: '2021-11-17T00:33:15.000Z',
+            updatedAt: '2021-11-17T00:33:15.000Z'
+        }
+        let result = view.tableAddress(address);
+        console.log(result);
+        expect(result[0].ID).toEqual(address.addressId.toString());
+        expect(result[1].Street).toEqual(address.street.toString());
+        expect(result[2].Suite).toEqual(address.suite.toString());
+        expect(result[3].City).toEqual(address.city.toString());
+        expect(result[4].Zipcode).toEqual(address.zipcode.toString());
+        expect(result[5].Lat).toEqual(address.lat.toString());
+        expect(result[6].Lng).toEqual(address.lng.toString());
+        expect(result[7].CreatedAt).toEqual(address.createdAt.toString());
+        expect(result[8].UpdatedAt).toEqual(address.updatedAt.toString());
+
+    });
+
+    it('tableCompany', async () => {
+        const company = {
+            companyId: 2,
+            name: 'Deckow-Crist',
+            catchPhrase: 'Proactive didactic contingency',
+            bs: 'synergize scalable supply-chains',
+            createdAt: '2021-11-17T00:33:15.000Z',
+            updatedAt: '2021-11-17T00:33:15.000Z'
+        }
+        let result = view.tableCompany(company);
+        console.log(result);
+        expect(result[0].ID).toEqual(company.companyId.toString());
+        expect(result[1].Name).toEqual(company.name.toString());
+        expect(result[2].CatchPhrase).toEqual(company.catchPhrase.toString());
+        expect(result[3].Bs).toEqual(company.bs.toString());
+        expect(result[4].CreatedAt).toEqual(company.createdAt.toString());
+        expect(result[5].UpdatedAt).toEqual(company.updatedAt.toString());
+
+    });
+
     it('bindtablePost', async () => {
         const posts = {
             id: 17,
@@ -1065,6 +1111,62 @@ describe('VIEW - Entry Point APP', () => {
                 id: 'dois'
             };
             let result = await view.getDataUserDependences(user);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    it('getDataAndressDependences', async () => {
+        try {
+            const anddress = {
+                id: 1
+            };
+            let result = await view.getDataAndressDependences(anddress);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataAndressDependences - Valida Numero', async () => {
+        try {
+            const user = {
+                id: 'dois'
+            };
+            let result = await view.getDataAndressDependences(user);
+            console.log(result)
+            expect(result).toEqual(false);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 2000);
+
+    it('getDataCompanyDependences', async () => {
+        try {
+            const anddress = {
+                id: 1
+            };
+            let result = await view.getDataCompanyDependences(anddress);
+            console.log(result)
+            expect(result).toEqual(true);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }, 3000);
+
+    it('getDataCompanyDependences - Valida Numero', async () => {
+        try {
+            const user = {
+                id: 'dois'
+            };
+            let result = await view.getDataCompanyDependences(user);
             console.log(result)
             expect(result).toEqual(false);
         }

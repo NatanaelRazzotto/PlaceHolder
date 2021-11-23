@@ -8,7 +8,7 @@ class GetCompanyUseCase {
         return await this.getRegisterInDB(dataCompany);
     }
     async getRegisterInDB(dataCompany) {
-        const companyPersistido = await this.repositoryCompany.findCompany(dataCompany);
+        const companyPersistido = await this.repositoryCompany.findCompanyID(dataCompany);
         return companyPersistido;
     }
 }

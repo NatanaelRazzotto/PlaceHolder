@@ -85,8 +85,7 @@ describe('Controller', () => {
     it('GET de Dados Andress', async () => {
         try {
             const andress = {
-                lat: -37.3159,
-                lng: 81.1496,
+                id: 1,
             };
             const received = await controller.getDataAndressDependences(andress);
             console.log(received);
@@ -122,9 +121,9 @@ describe('Controller', () => {
     it('GET de Dados Company', async () => {
         try {
             const company = {
-                name: 'Romaguera-Crona',
+                id: 1,
             };
-            const received = await controller.getCompanyDependences(company);
+            const received = await controller.getDataCompanyDependences(company);
             console.log(received);
             expect(received).toEqual(
                 expect.objectContaining({
@@ -144,11 +143,11 @@ describe('Controller', () => {
     it('GET de Dados Company - Teste de Erro', async () => {
         try {
             const company = undefined;
-            const received = await controller.getCompanyDependences(company);
+            const received = await controller.getDataCompanyDependences(company);
             console.log(received);
 
         } catch (error) {
-            expect(error.message).toBe('Um erro no GET (getCompanyDependences)');
+            expect(error.message).toBe('Um erro no GET (getDataCompanyDependences)');
         }
     }, 2000);
     //

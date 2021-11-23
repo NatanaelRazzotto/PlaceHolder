@@ -34,6 +34,20 @@ class RepositoryAddress {
         return Address;
     }
 
+    async findAndressID(addressObject) {
+        const Address = await ModelAddress.findOne({
+            where: {
+                addressId: addressObject.addressId,
+            },
+            raw: true
+        }).then(function (result) {
+            return result;
+        }).catch(function (err) {
+            throw new Error('Um erro na consulta findAndressID', err.stack);//
+        })
+        return Address;
+    }
+
 }
 
 module.exports = { RepositoryAddress };

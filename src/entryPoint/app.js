@@ -107,42 +107,54 @@ async function getObject(view, indiceTipoOperacao) {
             };
             return await view.getDataUserDependences(user);
         case "2":
-            console.log('***-2-POST-****'.black.bgGreen);
+            console.log('*****-2-ANDRESS-*****'.black.bgYellow);
+            const anddress = {
+                id: parseInt(readLineSync.question('INFORME O INDICE DE PESQUISA:'))
+            };
+            return await view.getDataAndressDependences(anddress);
+        case "3":
+            console.log('*****-3-COMPANY-*****'.black.bgYellow);
+            const company = {
+                id: parseInt(readLineSync.question('INFORME O INDICE DE PESQUISA:'))
+            };
+            return await view.getDataCompanyDependences(company);
+        case "4":
+            console.log('***-4-POST-****'.black.bgGreen);
             const post = {
                 id: parseInt(readLineSync.question('INFORME O INDICE DE PESQUISA:'))
             };
             return await view.getDataPostsDependences(post);
-        case "3":
-            console.log('***-3-COMMENT-****'.black.bgCyan);
+        case "5":
+            console.log('***-5-COMMENT-****'.black.bgCyan);
             const comment = {
                 id: parseInt(readLineSync.question('Informe o id do Post referente ao COMMENT:'))
             };
             return await view.getDataCommentsDependences(comment);
 
-        case "4":
-            console.log('***-4-ALBUM-****'.black.bgMagenta);
+        case "6":
+            console.log('***-6-ALBUM-****'.black.bgMagenta);
             const album = {
                 id: parseInt(readLineSync.question('Informe o id do Usuário referente ao ALBUM:'))
             };
             return await view.getDataAlbumDependences(album);
 
-        case "5":
-            console.log('***-5-PHOTOS-****'.black.bgBlue);
+        case "7":
+            console.log('***-7-PHOTOS-****'.black.bgBlue);
             const photos = {
                 id: parseInt(readLineSync.question('Informe o id do Album referente ao PHOTOS:'))
             };
             return await view.getDataPhotosDependences(photos);
 
-        case "6":
-            console.log('***-6-TODOS-****'.black.bgRed);
+        case "8":
+            console.log('***-8-TODOS-****'.black.bgRed);
             const todos = {
                 id: parseInt(readLineSync.question('Informe o id do Usuário referente ao TODOS:'))
             };
             //getDataTodosDependences
             return await view.getDataTodosDependences(todos);
 
-        case "5":
-            console.log('***-5-SAIR-****');
+        case "9":
+            console.log('***-9-SAIR-****');
             break;
         default:
             console.log("Operação Invalida!");
