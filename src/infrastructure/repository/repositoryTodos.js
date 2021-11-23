@@ -59,6 +59,17 @@ class RepositoryTodos {
         return Todos;
     }
 
+    async deleteByIdTodo(todoObject) {
+        const todo = await ModelUser.findByPk(todoObject.id);
+        //console.log(user)
+        if (todo != null) {
+            const received = todo.destroy();
+            return received;
+        }
+        return null;
+    }
+
+
 }
 
 module.exports = { RepositoryTodos };

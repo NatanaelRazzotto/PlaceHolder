@@ -33,6 +33,16 @@ class RepositoryUser {
     })
     return User;
   }
+
+  async deleteByIdUser(userObject) {
+    const user = await ModelUser.findByPk(userObject.id);
+    //console.log(user)
+    if (user != null) {
+      const received = user.destroy();
+      return received;
+    }
+    return null;
+  }
 }
 
 module.exports = { RepositoryUser };
